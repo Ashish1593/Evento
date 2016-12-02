@@ -2,6 +2,8 @@ package com.examples.android.evento;
 
 
 //import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 //import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -12,7 +14,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.Random;
 
 /**
  * Created by ankit on 30/11/16.
@@ -27,18 +33,20 @@ public class EventsFragment extends Fragment {
     private String name;
     private String date;
     private String place;
+    private String url;
 
 
     // temporary string to show the parsed response
     private String jsonResponse;
 
-    public static EventsFragment newInstance (String name, String place, String date) {
+    public static EventsFragment newInstance (String name, String place, String date,String url) {
 
         EventsFragment eventsFragment = new EventsFragment();
         Bundle bundle = new Bundle();
         bundle.putString("Name",name);
         bundle.putString("Place",place);
         bundle.putString("Date",date);
+        bundle.putString("URL",url);
 
         eventsFragment.setArguments(bundle);
         return eventsFragment;
@@ -55,6 +63,7 @@ public class EventsFragment extends Fragment {
                 name  = getArguments().getString("Name");
                 place  = getArguments().getString("Place");
                 date = getArguments().getString("Date");
+                url = getArguments().getString("URL");
     }
 
 
@@ -73,6 +82,27 @@ public class EventsFragment extends Fragment {
         evName.setText(name);
         evDate.setText(date);
         evPlace.setText(place);
+
+        LinearLayout linkArea = (LinearLayout) rootView.findViewById(R.id.openlink);
+
+        linkArea.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v){
+                Intent myWebLink = new Intent (Intent.ACTION_VIEW);
+                myWebLink.setData(Uri.parse(url));
+                startActivity(myWebLink);
+            }
+        });
+
+        Random r = new Random();
+        int randomNumber = r.nextInt(10 - 1) + 1;
+
+        ImageView image = (ImageView) rootView.findViewById(R.id.imgRandom);
+        String imageName = "image_" + randomNumber;
+       int  image_ID = getResources().getIdentifier(imageName, "drawable", getActivity().getPackageName());
+
+        image.setBackgroundResource(image_ID);
+
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");

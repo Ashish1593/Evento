@@ -32,7 +32,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public  Fragment getItem(int Position) {
 
-       return  EventsFragment.newInstance(details.get(Position).getEventname(),details.get(Position).getEventplace(),details.get(Position).getEventdate());
+       return  EventsFragment.newInstance(details.get(Position).getEventname(),details.get(Position).getEventplace(),details.get(Position).getEventdate(),details.get(Position).getEventURL());
 
     }
 

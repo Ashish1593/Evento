@@ -11,12 +11,13 @@ public class EventDetails extends ArrayList<EventDetails> {
     private String eventname;
     private String eventplace;
     private String eventdate;
-
-    public EventDetails(String eventName , String eventPlace,String eventDate)
+    private String eventurl;
+    public EventDetails(String eventName , String eventPlace,String eventDate,String eventURL)
     {
         eventname = eventName;
         eventplace= eventPlace;
         eventdate = eventDate;
+        eventurl = eventURL;
    }
 
 
@@ -33,5 +34,7 @@ public class EventDetails extends ArrayList<EventDetails> {
     }
 
 
-
+    public String getEventURL(){
+    return  eventurl;
+}
 }

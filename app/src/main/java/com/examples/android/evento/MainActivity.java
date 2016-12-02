@@ -1,5 +1,7 @@
 package com.examples.android.evento;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import org.json.JSONObject;
 import android.app.ProgressDialog;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,11 +52,8 @@ public class MainActivity extends AppCompatActivity {
         private static String TAG = MainActivity.class.getSimpleName();
  // json object response url
         private String urlJsonObj = "https://talkfunnel.com/json";
-        // json array response url
-        private String urlJsonArry = "https://talkfunnel.com/json";
-    private TextView eventName;
-    private TextView eventPlace;
-    private  TextView eventDate;
+
+
     private ArrayList<EventDetails> details ;
 
 
@@ -74,9 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
             setContentView(R.layout.activity_main);
-            eventName = (TextView) findViewById(R.id.textView_eventName);
-            eventDate = (TextView) findViewById(R.id.textView_date);
-            eventPlace = (TextView) findViewById(R.id.textView_place);
+
 //
 //     ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);
 //            ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -85,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
 //
 //            viewPager.setPageTransformer(true, new CubeOutTransformer());
 
+
+//            LinearLayout linkArea = (LinearLayout) findViewById(R.id.openlink);
+//            linkArea.setOnClickListener(new View.OnClickListener() {
+//                public void onClick(View v) {
+//                    Intent myWebLink = new Intent(android.content.Intent.ACTION_VIEW);
+//                    myWebLink.setData(Uri.parse("http://www.talkfunnel.com"));
+//                    startActivity(myWebLink);
+//                }
+//            });
 
             pDialog = new ProgressDialog(this);
             pDialog.setMessage("Please wait...");
@@ -123,8 +130,9 @@ public class MainActivity extends AppCompatActivity {
                         String name = events.getString("title");
                         String location = events.getString("datelocation");
                         String date = events.getString("start");
+                        String URL = events.getString("url");
 
-                      EventDetails edetails = new EventDetails(name,location,date);
+                      EventDetails edetails = new EventDetails(name,location,date,URL);
 
                         details.add(edetails);
 
@@ -155,10 +163,10 @@ public class MainActivity extends AppCompatActivity {
                 //viewPager.setPageTransformer(true, new DepthPageTransformer());
                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
                // viewPager.setPageTransformer(true, new CubeInTransformer());
-              //  viewPager.setPageTransformer(true, new RotateDownTransformer());
+                viewPager.setPageTransformer(true, new RotateDownTransformer());
                // viewPager.setPageTransformer(true, new StackTransformer());
                // viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
-           viewPager.setPageTransformer(true, new CubeOutTransformer());
+          // viewPager.setPageTransformer(true, new CubeOutTransformer());
                 hidepDialog();
        }
 

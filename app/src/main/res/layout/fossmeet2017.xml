@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/fossmeet"
+        android:scaleType="fitXY"
+        />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Get Direction"
+        android:gravity="center"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="12dp"
+        />
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapViewFossMeet"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <TextView
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:text="About Foss Meet"
+    android:gravity="center"
+    android:layout_marginTop="22dp"
+    android:layout_marginBottom="12dp"
+
+    />
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@string/aboutFossmeet"
+        android:textColor="#000000"
+        android:textAlignment="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Propose Session"
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff"
+        android:background="#FF4500"
+
+        />
+</LinearLayout>
+</ScrollView>

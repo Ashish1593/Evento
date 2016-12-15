@@ -1,6 +1,16 @@
 <resources>
-    <string name="app_name">Evento</string>
+    <string name="app_name">TalkFunnel</string>
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="aboutDNSandDNSSEC">Why does it take some time to propagate your DNS changes? Why did the world move to Ipv6? How to secure your systems from DNS vulnerabilities? By the end of this course, you will have a strong foundation on how DNS works and you can start boring your friends by talking all about it.</string>
+    <string name="whyattend">At the end of this course, participants will be familiar with the Domain Name System and Security Extensions to the Domain Name System (DNSSEC). The course is taught “hands-on” in a virtualized FreeBSD environment using the BIND, NSD and Unbound name server implementations. Participants will configure authoritative and recursive domain name servers and will learn to analyse and debug common misconfigurations and bugs. Who knows, this could be your way to a DNS admin job!</string>
+    <string name="whoisitfor">Participants should be familiar with Unix-style operating systems. The course is taught on FreeBSD but the environment will be familiar to people with a systems administration background on Linux or Solaris. The virtualized lab environment is hosted on a server in Germany.</string>
+    <string name="title_activity_maps">Map</string>
+    <string name= "about50p">Change is in the air. After e-comm, newer ways of buying and selling are opening up through new products targeting a more open banking sector, courtesy the RBI. People\'s phones haven\'t replaced their wallets, but big money\'s being wagered on that happening within the next few years . You\'d still have to navigate a maze of regulations, and at least one SLA. There\'s opportunity here - and risk. It pays to have a good understanding of how it all works before committing to a new technology, product, or partner. That\'s why HasGeek is organizing a new conference on the payments landscape, aiming to bridge the gap between developers and business, merchants and consumers, and banks and regulators. Come, learn and share.</string>
+    <string name = "aboutFossmeet">FOSSMeet is an annual event on Free and Open source software, conducted at National Institute of Technology, Calicut. Started with a vision to create a culture of innovation, evolution and open standards, the meet intends to support the FOSS community and the dissemination of FOSS ideology through hands-on sessions, discussions and lectures. Nothing better to get you introduced to the world of FOSS.</string>
+<string name ="aboutPycon">PyCon, the gathering for the community using and developing the open-source Python programming language. This is the first year of the PyCon Pune where the community will meet for two days of talks and working on upstream projects in two days of dev sprint.</string>
 </resources>

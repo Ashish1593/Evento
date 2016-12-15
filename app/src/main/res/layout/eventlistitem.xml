@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:gravity="center"
+android:padding="2dp"
+android:layout_margin="5dp"
+android:layout_gravity="center"
+android:scaleType="fitXY"
+
+android:background="#D7DFDF">
+
+    <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:scaleType="fitXY">
+    <TextView
+    android:id="@+id/textView_eventName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginBottom="25dp"
+    android:gravity="center"
+    tools:text="Event Name"
+    android:textColor="#000000"
+    android:textSize="15sp"
+    android:textStyle="bold"/>
+
+     <TextView
+    android:id="@+id/textView_place"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="25dp"
+    tools:text="Event Place"
+    android:gravity="center"
+    android:textColor="#000000"
+    android:textSize="15sp"
+    android:textStyle="bold" />
+     <TextView
+    android:id="@+id/textView_date"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    tools:text="Event Date"
+    android:textColor="#000000"
+    android:gravity="center"
+    android:layout_marginBottom="25dp"
+    android:textSize="15sp"
+    android:textStyle="bold" />
+</LinearLayout>
+</FrameLayout>

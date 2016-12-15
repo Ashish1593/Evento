@@ -1,11 +1,14 @@
 package com.examples.android.evento;
 
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 //import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -59,6 +62,30 @@ public class Event50p extends Fragment {
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });
+
+        Button buy50pTickets = (Button) view.findViewById(R.id.Buy50pTickets);
+        buy50pTickets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+                final String URI = "https://50p.in/2017/";
+                intent.launchUrl(getActivity(), Uri.parse(URI));
+
+            }
+        });
+
+        Button  propose50Psession = (Button) view.findViewById(R.id.propose50pSession);
+        propose50Psession.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+                final String URI = "https://50p.talkfunnel.com/2017/new";
+                intent.launchUrl(getActivity(), Uri.parse(URI));
+
+            }
+        });
+
+
         return view;
     }
     @Override

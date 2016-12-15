@@ -2,11 +2,14 @@ package com.examples.android.evento;
 
 //import android.app.Fragment;
 
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -50,7 +53,7 @@ public class EventPycon extends Fragment{
                 googleMap = mMap;
 
                 // For showing a move to my location button
-             googleMap.setMyLocationEnabled(true);
+            // googleMap.setMyLocationEnabled(true);
 
                 // For dropping a marker at a point on the Map
                 LatLng sydney = new LatLng(-34, 151);
@@ -59,6 +62,18 @@ public class EventPycon extends Fragment{
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            }
+        });
+
+
+        Button buyPyconTicket = (Button) view.findViewById(R.id.BuyPyconTickets);
+       buyPyconTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+                final String URI = "https://pune.pycon.org/registration/";
+                intent.launchUrl(getActivity(), Uri.parse(URI));
+
             }
         });
         return  view;

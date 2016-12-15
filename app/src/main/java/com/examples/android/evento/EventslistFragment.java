@@ -116,18 +116,6 @@ public class EventslistFragment extends Fragment {
 //            }
 //        });
 
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Intent myWebLink = new Intent (Intent.ACTION_VIEW);
-                myWebLink.setData(Uri.parse(url));
-                startActivity(myWebLink);
-
-
-            }
-        });
 //        Random r = new Random();
 //        int randomNumber = r.nextInt(10 - 1) + 1;
 //
@@ -138,9 +126,9 @@ public class EventslistFragment extends Fragment {
 //        image.setBackgroundResource(image_ID);
 
 
-        pDialog = new ProgressDialog(getActivity());
-        pDialog.setMessage("Please wait...");
-        pDialog.setCancelable(false);
+//        pDialog = new ProgressDialog(getActivity());
+//        pDialog.setMessage("Please wait...");
+//        pDialog.setCancelable(false);
 
 //
 //      //  final WebView webView = (WebView) rootView.findViewById(R.id.webView);

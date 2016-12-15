@@ -2,11 +2,14 @@ package com.examples.android.evento;
 
 //import android.app.Fragment;
 
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -72,6 +75,19 @@ public class WorkshoponDNSandDNSSEC extends Fragment{
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });
+
+
+        Button  buyDnsTIckets = (Button) view.findViewById(R.id.BuyDNSTicket);
+        buyDnsTIckets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+                final String URI = "https://dnssec.hasgeek.com/";
+                intent.launchUrl(getActivity(), Uri.parse(URI));
+
+            }
+        });
+
         return view;
     }
     @Override

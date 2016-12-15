@@ -1,14 +1,21 @@
 package com.examples.android.evento;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,10 +26,10 @@ import java.util.List;
  */
 
     public class GridViewAdapter extends BaseAdapter {
-    private Context mcontext;
+    private Activity mcontext;
     private final List<Fragment> mFragments = new ArrayList<Fragment>();
     private ArrayList<EventDetails> details;
-    public GridViewAdapter(Context c, ArrayList<EventDetails> details) {
+    public GridViewAdapter(Activity c, ArrayList<EventDetails> details) {
         mcontext = c;
         this.details = details;
     }
@@ -53,7 +60,7 @@ import java.util.List;
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         View grid;
         LayoutInflater inflater = (LayoutInflater) mcontext
@@ -61,7 +68,7 @@ import java.util.List;
 
         if (convertView == null) {
 
-            grid = new View(mcontext);
+           // grid = new View(mcontext);
             grid = inflater.inflate(R.layout.eventlistitem, null);
 
             TextView evName = (TextView) grid.findViewById(R.id.textView_eventName);
@@ -71,6 +78,19 @@ import java.util.List;
             evName.setText(details.get(position).getEventname());
             evPlace.setText(details.get(position).getEventplace());
             evDate.setText(details.get(position).getEventdate());
+
+
+            LinearLayout openEvents = (LinearLayout) grid.findViewById(R.id.openEvent);
+
+            openEvents.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+                    final String URI = details.get(position).getEventURL();
+                    intent.launchUrl(mcontext, Uri.parse(URI));
+
+                }
+            });
 
         } else {
             grid = (View) convertView;

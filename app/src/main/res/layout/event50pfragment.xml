@@ -53,6 +53,7 @@
         android:layout_width="match_parent">
 
         <Button
+            android:id="@+id/Buy50pTickets"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Buy Tickets"
@@ -63,6 +64,7 @@
 
 
         <Button
+            android:id="@+id/propose50pSession"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Propose Talk"

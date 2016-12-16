@@ -29,6 +29,7 @@ import java.util.List;
     private Activity mcontext;
     private final List<Fragment> mFragments = new ArrayList<Fragment>();
     private ArrayList<EventDetails> details;
+
     public GridViewAdapter(Activity c, ArrayList<EventDetails> details) {
         mcontext = c;
         this.details = details;

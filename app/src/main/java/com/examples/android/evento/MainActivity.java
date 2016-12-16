@@ -109,8 +109,7 @@ Context context;
 
          makeJsonObjectRequest();
 
-
-               }
+ }
 //        /**
 //         * Method to make json object request where json response starts wtih {
 //         * */

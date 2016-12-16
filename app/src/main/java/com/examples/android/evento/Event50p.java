@@ -1,15 +1,19 @@
 package com.examples.android.evento;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 //import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -41,8 +45,11 @@ import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 public class Event50p extends Fragment {
     MapView mMapView;
     private GoogleMap googleMap;
-    private String urlJsonObj = "https://pyconpune.talkfunnel.com/2017/json";
-    private ArrayList details50p;
+    private String urlJsonObj = "https://50p.talkfunnel.com/2017/json";
+    private ArrayList<Details50p> details50p;
+    private ProgressDialog pDialog;
+    private RecyclerView myRecyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup Container, Bundle savedInstanceState){
 
@@ -101,6 +108,13 @@ public class Event50p extends Fragment {
         });
 
 
+        myRecyclerView =(RecyclerView) view.findViewById(R.id.CardView50p);
+        LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
+        myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        myRecyclerView.setLayoutManager(myLayoutManager);
+
+        makeJsonObjectRequest();
         return view;
     }
     @Override
@@ -127,84 +141,112 @@ public class Event50p extends Fragment {
         mMapView.onLowMemory();
     }
 
+    private void makeJsonObjectRequest() {
 
+
+
+       // showpDialog();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                urlJsonObj, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+             //   Log.d(TAG,response.toString());
+                try {
+                    //  Parsing json object response
+                    //response will be a json object
+                    JSONArray proposals50pArray = response.getJSONArray("proposals");
+                    details50p = new ArrayList<Details50p>();
+                    for(int i=0;i<proposals50pArray.length();i++) {
+                        JSONObject talks50p = proposals50pArray.getJSONObject(i);
+
+                        String speakerName = talks50p.getString("fullname");
+                        String talkTitle = talks50p.getString("title");
+                        String talkURL = talks50p.getString("url");
+
+                        Details50p proprsal50pDetails = new Details50p (speakerName,talkTitle,talkURL);
+
+                        details50p.add(proprsal50pDetails);
+
+
+
+
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(),
+                            "Error: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
 //
-//    private void makeJsonObjectRequest() {
+                myRecyclerView.setAdapter(new RecylerViewadapter(details50p));
+
+//                ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);
+//               ViewPager viewPager = (ViewPager) findViewById(viewpager);
 //
-//        showpDialog();
-//
-//        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-//                urlJsonObj, null, new Response.Listener<JSONObject>() {
-//
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d(TAG, response.toString());
-//                try {
-//                    //  Parsing json object response
-//                    //response will be a json object
-//                    JSONArray talksDetails = response.getJSONArray("proposals");
-//                    Details50p = new ArrayList<>();
-//                    for(int i=0;i<talksDetails.length();i++) {
-//                        JSONObject events = talksDetails.getJSONObject(i);
-//                        String name = events.getString("title");
-//                        String location = events.getString("datelocation");
-//                        String date = events.getString("start");
-//                        String URL = events.getString("url");
-//
-//                        EventDetails edetails = new EventDetails(name,location,date,URL);
-//
-//                        details.add(edetails);
-//
-//
-//
-//                    }
-//
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getActivity().getApplicationContext(),
-//                            "Error: " + e.getMessage(),
-//                            Toast.LENGTH_LONG).show();
-//                }
-//
-//                hidepDialog();
-//            }
-//
-//        }, new Response.ErrorListener() {
-//
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d(TAG, "Error: " + error.getMessage());
-//                Toast.makeText(getActivity().getApplicationContext(),
-//                        error.getMessage(), Toast.LENGTH_SHORT).show();
-//                // hide the progress dialog
-//                hidepDialog();
-//            }
-//        });
-//
-//        // Adding request to request queue
-//        AppController.getInstance().addToRequestQueue(jsonObjReq);
-//    }
-//
-//
-//
-//    /**
-//     * Method to make json array request where response starts with [
-//     */
-//
-//
-//    private void showpDialog() {
-//        if (!pDialog.isShowing())
-//            pDialog.show();
-//    }
-//
-//    private void hidepDialog() {
-//        if (pDialog.isShowing())
-//            pDialog.dismiss();
-//    }
-//
-//
+//               viewPager.setAdapter(pagerAdapter);
+
+//               // viewPager.setPageTransformer(true, new RotateUpTransformer());
+                //viewPager.setPageTransformer(true, new AccordionTransformer());
+                //viewPager.setPageTransformer(true, new ScaleInOutTransformer());
+                //viewPager.setPageTransformer(true, new ZoomInTransformer());
+                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
+                // viewPager.setPageTransformer(true, new FlipVerticalTransformer());
+                // viewPager.setPageTransformer(true, new TabletTransformer());
+                //viewPager.setPageTransformer(true, new DepthPageTransformer());
+                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
+                // viewPager.setPageTransformer(true, new CubeInTransformer());
+                //    viewPager.setPageTransformer(true, new RotateDownTransformer());
+                // viewPager.setPageTransformer(true, new StackTransformer());
+                // viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
+                // viewPager.setPageTransformer(true, new CubeOutTransformer());
+
+
+
+             //   hidepDialog();
+            }
+
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getActivity().getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                // hide the progress dialog
+
+              //  hidepDialog();
+            }
+        });
+
+
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
+    }
+
+
+
+    /**
+     * Method to make json array request where response starts with [
+     */
+
+
+    public void showpDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    public void hidepDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
+
+
 
 
 }

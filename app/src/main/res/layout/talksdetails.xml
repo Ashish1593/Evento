@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="https://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="4dp"
+    android:layout_gravity="center">
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -20,5 +29,6 @@
         android:text="Speaker Name"
         android:layout_gravity="center_horizontal"
         android:textSize="25sp"
-        android:id="@+id/speakername"/>
+        android:id="@+id/speaker"/>
 </LinearLayout>
+</android.support.v7.widget.CardView>

@@ -8,16 +8,17 @@ android:padding="2dp"
 android:layout_margin="5dp"
 android:layout_gravity="center"
 android:scaleType="fitXY"
-
-android:background="#D7DFDF">
+android:elevation="9dp"
+android:background="#F7DC6F">
 
     <LinearLayout
-        android:id="@+id/openEvent"
+    android:id="@+id/openEvent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
     android:scaleType="fitXY">
+
     <TextView
     android:id="@+id/textView_eventName"
     android:layout_width="wrap_content"

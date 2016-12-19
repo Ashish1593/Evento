@@ -1,16 +1,23 @@
 package com.examples.android.evento;
 
 //import android.app.Fragment;
-
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+import android.widget.Toast;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -19,6 +26,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 /**
  * Created by ankit on 11/12/16.
@@ -27,6 +41,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class EventFossMeet extends Fragment {
     MapView mMapView;
     private GoogleMap googleMap;
+    private String urlJsonObj = "https://fossmeet-nitc.talkfunnel.com/2017/json";
+    private ArrayList<TalkDetails> detailsFossMeet;
+    private ProgressDialog pDialog;
+    private RecyclerView myRecyclerView;
 
 
     @Override
@@ -35,7 +53,7 @@ public class EventFossMeet extends Fragment {
 
         mMapView = (MapView) view.findViewById(R.id.mapViewFossMeet);
 
-        mMapView.onCreate(savedInstanceState);
+        mMapView.onCreate(null);
 
         mMapView.onResume();
 
@@ -53,13 +71,13 @@ public class EventFossMeet extends Fragment {
 
                 // For showing a move to my location button
                 //googleMap.setMyLocationEnabled(true);
-
+                //11.3217° N, 75.9342° E
                 // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+                LatLng NITCalicut = new LatLng(11.3217, 75.9342);
+                googleMap.addMarker(new MarkerOptions().position(NITCalicut).title("NIT").snippet("National Institute Of Technology Calicut"));
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(NITCalicut).zoom(16).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });
@@ -76,6 +94,18 @@ public class EventFossMeet extends Fragment {
             }
         });
 
+
+
+        myRecyclerView =(RecyclerView) view.findViewById(R.id.CardViewFossMeet);
+        LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
+        myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        myRecyclerView.setLayoutManager(myLayoutManager);
+
+        makeJsonObjectRequest();
+
+
+        makeJsonObjectRequest();
 
         return view;
     }
@@ -102,4 +132,114 @@ public class EventFossMeet extends Fragment {
         super.onLowMemory();
         mMapView.onLowMemory();
     }
+
+    private void makeJsonObjectRequest() {
+
+
+
+        // showpDialog();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                urlJsonObj, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                //   Log.d(TAG,response.toString());
+                try {
+                    //  Parsing json object response
+                    //response will be a json object
+                    JSONArray proposals50pArray = response.getJSONArray("proposals");
+                    detailsFossMeet = new ArrayList<TalkDetails>();
+                    for(int i=0;i<proposals50pArray.length();i++) {
+                        JSONObject talksFossmeet = proposals50pArray.getJSONObject(i);
+
+                        String speakerName = talksFossmeet.getString("fullname");
+                        String talkTitle = talksFossmeet.getString("title");
+                        String talkURL = talksFossmeet.getString("url");
+
+                        TalkDetails proprsalFossMeetDetails = new TalkDetails(speakerName,talkTitle,talkURL);
+
+                        detailsFossMeet.add(proprsalFossMeetDetails);
+
+
+
+
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(),
+                            "Error: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
+//
+                myRecyclerView.setAdapter(new RecylerViewadapter(getActivity(),detailsFossMeet));
+
+//                ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);
+//               ViewPager viewPager = (ViewPager) findViewById(viewpager);
+//
+//               viewPager.setAdapter(pagerAdapter);
+
+//               // viewPager.setPageTransformer(true, new RotateUpTransformer());
+                //viewPager.setPageTransformer(true, new AccordionTransformer());
+                //viewPager.setPageTransformer(true, new ScaleInOutTransformer());
+                //viewPager.setPageTransformer(true, new ZoomInTransformer());
+                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
+                // viewPager.setPageTransformer(true, new FlipVerticalTransformer());
+                // viewPager.setPageTransformer(true, new TabletTransformer());
+                //viewPager.setPageTransformer(true, new DepthPageTransformer());
+                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
+                // viewPager.setPageTransformer(true, new CubeInTransformer());
+                //    viewPager.setPageTransformer(true, new RotateDownTransformer());
+                // viewPager.setPageTransformer(true, new StackTransformer());
+                // viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
+                // viewPager.setPageTransformer(true, new CubeOutTransformer());
+
+
+
+                //   hidepDialog();
+            }
+
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                Toast.makeText(getActivity().getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                // hide the progress dialog
+
+                //  hidepDialog();
+            }
+        });
+
+
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
+    }
+
+
+
+    /**
+     * Method to make json array request where response starts with [
+     */
+
+
+    public void showpDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    public void hidepDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
+
+
+
+
+
 }

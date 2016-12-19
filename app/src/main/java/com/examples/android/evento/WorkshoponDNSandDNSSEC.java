@@ -37,7 +37,7 @@ public class WorkshoponDNSandDNSSEC extends Fragment{
 
         mMapView = (MapView) view.findViewById(R.id.mapViewDns);
 
-        mMapView.onCreate(savedInstanceState);
+        mMapView.onCreate(null);
 
         mMapView.onResume();
 

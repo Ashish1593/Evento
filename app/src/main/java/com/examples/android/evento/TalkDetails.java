@@ -6,13 +6,13 @@ import java.util.ArrayList;
  * Created by ankit on 16/12/16.
  */
 
-public class Details50p extends ArrayList<Details50p> {
+public class TalkDetails extends ArrayList<TalkDetails> {
 
     private String speakerName;
     private String talkTitle;
     private String talkURL;
 
-    public Details50p(String speakerName,String talkTitle,String talkURL) {
+    public TalkDetails(String speakerName, String talkTitle, String talkURL) {
 
         this.speakerName =speakerName;
         this.talkTitle=talkTitle;
@@ -27,7 +27,7 @@ public class Details50p extends ArrayList<Details50p> {
         return talkTitle;
     }
 
-    public String gettalkURL(){
+    public String getTalkURL(){
         return talkURL;
     }
 }

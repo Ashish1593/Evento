@@ -8,12 +8,10 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -46,7 +44,7 @@ public class Event50p extends Fragment {
     MapView mMapView;
     private GoogleMap googleMap;
     private String urlJsonObj = "https://50p.talkfunnel.com/2017/json";
-    private ArrayList<Details50p> details50p;
+    private ArrayList<TalkDetails> details50p;
     private ProgressDialog pDialog;
     private RecyclerView myRecyclerView;
 
@@ -56,7 +54,7 @@ public class Event50p extends Fragment {
         View view = inflater.inflate(R.layout.event50pfragment,Container,false);
         mMapView = (MapView) view.findViewById(R.id.mapView50p);
 
-        mMapView.onCreate(savedInstanceState);
+        mMapView.onCreate(null);
 
         mMapView.onResume();
 
@@ -74,13 +72,13 @@ public class Event50p extends Fragment {
 
                 // For showing a move to my location button
                  // googleMap.setMyLocationEnabled(true);
-
+               // 12.8917° N, 77.5852° E
                 // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+                LatLng MLRConventionCenter = new LatLng(12.8917,77.5852);
+                googleMap.addMarker(new MarkerOptions().position(MLRConventionCenter).title("MLR CONVENTON Center").snippet("M L R CONVENTION CENtER J P NAGAR"));
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(MLRConventionCenter).zoom(16).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });
@@ -113,6 +111,7 @@ public class Event50p extends Fragment {
         myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
         myRecyclerView.setLayoutManager(myLayoutManager);
+
 
         makeJsonObjectRequest();
         return view;
@@ -157,7 +156,7 @@ public class Event50p extends Fragment {
                     //  Parsing json object response
                     //response will be a json object
                     JSONArray proposals50pArray = response.getJSONArray("proposals");
-                    details50p = new ArrayList<Details50p>();
+                    details50p = new ArrayList<TalkDetails>();
                     for(int i=0;i<proposals50pArray.length();i++) {
                         JSONObject talks50p = proposals50pArray.getJSONObject(i);
 
@@ -165,7 +164,7 @@ public class Event50p extends Fragment {
                         String talkTitle = talks50p.getString("title");
                         String talkURL = talks50p.getString("url");
 
-                        Details50p proprsal50pDetails = new Details50p (speakerName,talkTitle,talkURL);
+                        TalkDetails proprsal50pDetails = new TalkDetails(speakerName,talkTitle,talkURL);
 
                         details50p.add(proprsal50pDetails);
 
@@ -183,7 +182,7 @@ public class Event50p extends Fragment {
                             Toast.LENGTH_LONG).show();
                 }
 //
-                myRecyclerView.setAdapter(new RecylerViewadapter(details50p));
+                myRecyclerView.setAdapter(new RecylerViewadapter(getActivity(),details50p));
 
 //                ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);
 //               ViewPager viewPager = (ViewPager) findViewById(viewpager);

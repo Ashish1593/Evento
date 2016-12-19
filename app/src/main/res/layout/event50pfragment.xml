@@ -46,6 +46,25 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Proposed Talks"
+        android:gravity="center"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="12dp"
+        />
+    <android.support.v7.widget.RecyclerView
+    android:id="@+id/CardView50p"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="12dp"
+
+        />
+
     <LinearLayout
         android:layout_height="wrap_content"
 
@@ -62,10 +81,7 @@
             android:background="#FF4500"
             />
 
-        <android.support.v7.widget.RecyclerView
-        android:id="@+id/CardView50p"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
+
 
 
         <Button

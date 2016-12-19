@@ -2,7 +2,9 @@ package com.examples.android.evento;
 
 //import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -29,6 +31,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import java.util.ArrayList;
 
+
 import static com.examples.android.evento.R.id.viewpager;
 import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         private static String TAG = MainActivity.class.getSimpleName();
  // json object response url
         private String urlJsonObj = "https://talkfunnel.com/json";
+    private final int SPLASH_DISPLAY_LENGTH = 3000;
 
 Context context;
     public ArrayList<EventDetails> details ;
@@ -61,6 +65,8 @@ Context context;
 
             setContentView(R.layout.activity_main);
 
+
+
             Fragment workshoponDNSandDNSSEC = new WorkshoponDNSandDNSSEC();
             Fragment event50p = new Event50p();
             Fragment eventFossMeet = new EventFossMeet();
@@ -81,6 +87,8 @@ Context context;
             ViewPager viewPager = (ViewPager) findViewById(viewpager);
 
              viewPager.setAdapter(pagerAdapter);
+
+
 
 //
 //     ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);

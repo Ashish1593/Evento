@@ -1,8 +1,9 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     tools:context=".WorkshoponDNSandDNSSEC">
 
 <LinearLayout
@@ -73,6 +74,57 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="About Instructor"
+        android:gravity="center"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="12dp"
+        />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:elevation="12dp"
+        android:id="@+id/view2"
+        app:cardCornerRadius="100dp"
+        android:layout_centerHorizontal="true"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9"
+        android:layout_gravity="center"
+        >
+        <ImageView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/imageView1"
+            android:src="@drawable/instructordns"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+        </ImageView>
+    </android.support.v7.widget.CardView>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Philip Paeps (“Trouble”)"
+        android:gravity="center"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="12dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/aboutInstructor"
+        android:textColor="#000000"
+        android:textAlignment="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Who is it for"
         android:gravity="center"
         android:layout_marginTop="22dp"
@@ -95,6 +147,7 @@
         android:text="BuyTicket"
         android:textColor="#ffffff"
         android:background="#FF4500"
+        android:layout_marginTop="12dp"
 
     />
 </LinearLayout>

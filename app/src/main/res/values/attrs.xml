@@ -7,6 +7,8 @@
     <declare-styleable name="ButtonBarContainerTheme">
         <attr name="metaButtonBarStyle" format="reference" />
         <attr name="metaButtonBarButtonStyle" format="reference" />
+        <attr name="colorPrimary" format="color" />
+        <attr name="colorPrimaryDark"  format="color"/>
     </declare-styleable>
 
 </resources>

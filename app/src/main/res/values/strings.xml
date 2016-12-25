@@ -3,7 +3,7 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-
+    <string name="user_name">Pawan Deshpnde</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="aboutDNSandDNSSEC">Why does it take some time to propagate your DNS changes? Why did the world move to Ipv6? How to secure your systems from DNS vulnerabilities? By the end of this course, you will have a strong foundation on how DNS works and you can start boring your friends by talking all about it.</string>

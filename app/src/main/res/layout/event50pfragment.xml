@@ -1,99 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:src="@drawable/event50p"
-        android:scaleType="fitXY"/>
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="Get Direction"
-        android:gravity="center"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="12dp"
-        />
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView50p"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="About 50p"
-        android:gravity="center"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="12dp"
-        />
-
-
-    <TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/about50p"
-    android:textColor="#000000"
-    android:textAlignment="center"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Proposed Talks"
-        android:gravity="center"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="12dp"
-        />
-    <android.support.v7.widget.RecyclerView
-    android:id="@+id/CardView50p"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="12dp"
-
-        />
-
     <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        android:orientation="horizontal"
-        android:layout_width="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/event50p" />
 
-        <Button
-            android:id="@+id/Buy50pTickets"
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Buy Tickets"
-            android:layout_weight="1"
-            android:textColor="#ffffff"
-            android:background="#FF4500"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="22dp"
+            android:text="About 50p"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:lineSpacingExtra="5dp"
+            android:text="@string/about50p"
+
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="22dp"
+            android:text="Proposed Talks"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/CardView50p"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
             />
 
-
-
-
-        <Button
-            android:id="@+id/propose50pSession"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Propose Talk"
-            android:layout_weight="1"
-            android:textColor="#ffffff"
-            android:background="#FF4500"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="22dp"
+            android:text="Get Direction"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
-            />
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView50p"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/Buy50pTickets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FF4500"
+                android:text="Buy Tickets"
+                android:textColor="#ffffff" />
+
+
+            <Button
+                android:id="@+id/propose50pSession"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FF4500"
+                android:text="Propose Talk"
+                android:textColor="#ffffff"
+
+                />
         </LinearLayout>
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>

@@ -14,24 +14,15 @@
         android:src="@drawable/pycon"
         android:scaleType="fitXY"
         />
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="Get Direction"
-        android:gravity="center"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="12dp"
-        />
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapViewPycon"
-        android:layout_width="match_parent"
-        android:layout_height="200dp" />
+
 
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="Why Attend"
-        android:gravity="center"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="22dp"
         android:layout_marginBottom="12dp"
         />
@@ -41,14 +32,25 @@
         android:layout_width="wrap_content"
         android:text="@string/aboutPycon"
         android:textColor="#000000"
-        android:textAlignment="center"
+        android:textSize="18sp"
+        android:lineSpacingExtra="5dp"
+
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="22dp"
         android:layout_marginBottom="12dp"
 
         />
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Proposed Talks"
+        android:layout_marginLeft="10dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="12dp"
+        />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/CardViewPycon"
         android:layout_width="match_parent"
@@ -58,6 +60,22 @@
         android:layout_marginBottom="12dp"
 
         />
+
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Get Direction"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="12dp"
+        />
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapViewPycon"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
 
     <Button
 

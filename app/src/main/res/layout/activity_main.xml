@@ -1,21 +1,444 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:clickable="true">
 
-    tools:context="com.examples.android.evento.MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        tools:context="com.examples.android.evento.MainActivity">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="#ffffff"/>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+
+        android:id="@+id/left_drawer"
+        android:layout_width="400dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+
+        android:orientation="vertical"
+android:background="#90000000"
+        android:paddingTop="80dp"
+>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+
             >
-        </android.support.v4.view.ViewPager>
+
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:background="?android:selectableItemBackground"
+                android:orientation="vertical"
+           android:id="@+id/hasgeektv"
+                android:onClick="hasgeektv"
+                >
+
+
+                <ImageButton
+                    android:id="@+id/imageViewhasgeektv"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/hasgeektv"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
+                    android:clickable="true"
+                    android:onClick="hasgeektv"
+                    />
+
+                <TextView
+                    android:id="@+id/textViewhasgeektv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Hasgeek TV"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:clickable="true"
+                    android:onClick="hasgeektv"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/talkfunnel"
+                android:onClick="talkfunnel">
+
+                <ImageButton
+                    android:onClick="talkfunnel"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/talkfunnel"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:onClick="talkfunnel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="TalkFunnel"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/hasjob"
+                android:onClick="hasjob"
+                >
+
+                <ImageButton
+                    android:onClick="hasjob"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/hasgeeekjobs"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:onClick="hasjob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="HasJob"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/hasgeek"
+                android:onClick="hasgeek"
+
+                >
+
+                <ImageButton
+
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/hasgeek"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
+                    android:onClick="hasgeek"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="HasGeek"
+                    android:textColor="#ffffff"
+                    android:onClick="hasgeek"
+                    />
+
+            </LinearLayout>
+            </LinearLayout>
 
 
 
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="0dp"
+
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+
+            >
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onDiscussionClick"
+                android:background="?android:selectableItemBackground"
+                android:orientation="vertical">
 
 
+                <ImageButton
+
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:padding="10dp"
+                    android:onClick="onDiscussionClick"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/discussions"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
+                    android:id="@+id/discussions"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Discussions"
+                    android:onClick="onDiscussionClick"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/announcements"
+
+                >
+
+                <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/announcements"
+                    android:text=""
+
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Announcements"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:onClick="liveStream"
+                >
+
+                <ImageButton
+
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/livestream"
+                    android:text=""
+                    android:onClick="liveStream"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
+                    android:id="@+id/livestream"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="LiveStream"
+                    android:onClick="liveStream"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/foodcourt"
+
+                >
+
+                <ImageButton
+
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/foodcourt"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Food Court"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="17dp"
+        android:orientation="horizontal"
+
+
+        >
+
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+           android:layout_marginTop="0dp"
+            android:layout_marginLeft="18dp"
+            android:onClick="qrcodescanner"
+            android:background="?android:selectableItemBackground"
+            android:orientation="vertical"
+            android:id="@+id/scanBadges">
+             <ImageButton
+
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/background"
+                android:padding="10dp"
+                android:scaleType="fitXY"
+                android:paddingLeft="1dp"
+                android:src="@drawable/scanbadge1"
+                android:text=""
+                 android:onClick="qrcodescanner"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Scan QR Code"
+                android:onClick="qrcodescanner"
+                android:textAlignment="center"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:gravity="bottom"
+
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Made by"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:onClick="aboutGeekskool"
+            android:layout_gravity="center_horizontal"/>
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:src="@drawable/geekskool"
+            android:scaleType="fitXY"
+            android:onClick="aboutGeekskool"
+            android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="GeekSkool"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:onClick="aboutGeekskool"
+            android:layout_gravity="center_horizontal"/>
+
+
+       </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+</android.support.v4.widget.DrawerLayout>

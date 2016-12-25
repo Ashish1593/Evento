@@ -2,14 +2,26 @@ package com.examples.android.evento;
 
 //import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.graphics.Palette;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -19,7 +31,10 @@ import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,10 +48,12 @@ import java.util.ArrayList;
 
 
 import static com.examples.android.evento.R.id.viewpager;
+import static com.google.android.gms.analytics.internal.zzy.v;
 import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 
 
 public class MainActivity extends AppCompatActivity {
+    private CollapsingToolbarLayout collapsingToolbarLayout = null;
     GridView grid;
         private static String TAG = MainActivity.class.getSimpleName();
  // json object response url
@@ -63,34 +80,53 @@ Context context;
             this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-            setContentView(R.layout.activity_main);
+             setContentView(R.layout.activity_main);
 
+///////////////////////////////////////////////////////
+//            Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+//            setSupportActionBar(toolbar);
+//            ActionBar actionBar = getSupportActionBar();
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//
+//            collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+//            collapsingToolbarLayout.setTitle(getResources().getString(R.string.user_name));
+//
+//            dynamicToolbarColor();
+//            toolbarTextAppernce();
+////////////////////////////////////////////////////
 
 
             Fragment workshoponDNSandDNSSEC = new WorkshoponDNSandDNSSEC();
+           // Fragment Events_two_fragments = new Events_two_fragments();
             Fragment event50p = new Event50p();
             Fragment eventFossMeet = new EventFossMeet();
             Fragment eventPycon=new EventPycon();
-           // Fragment seeallevents = new SeeAllEvents();
-            Fragment eventslistFragment = new EventslistFragment();
+          //Fragment seeallevents = new SeeAllEvents();
+           Fragment eventslistFragment = new EventslistFragment();
 
 
 
 
           ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-            pagerAdapter.addFragment(workshoponDNSandDNSSEC);
+         pagerAdapter.addFragment(workshoponDNSandDNSSEC);
+            //pagerAdapter.addFragment(Events_two_fragments);
             pagerAdapter.addFragment(event50p);
             pagerAdapter.addFragment(eventPycon);
             pagerAdapter.addFragment(eventFossMeet);
             pagerAdapter.addFragment(eventslistFragment);
-          //  pagerAdapter.addFragment(seeallevents);
+           //pagerAdapter.addFragment(seeallevents);
             ViewPager viewPager = (ViewPager) findViewById(viewpager);
 
              viewPager.setAdapter(pagerAdapter);
 
 
 
-//
+
+
+
+
+
+////////////////////////////////////////
 //     ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);
 //            ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 //
@@ -108,6 +144,8 @@ Context context;
 //                }
 //            });
 
+//////////////////////////////////////////////////
+
             pDialog = new ProgressDialog(this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
@@ -117,7 +155,138 @@ Context context;
 
          makeJsonObjectRequest();
 
- }
+
+        }
+
+    public void hasgeektv(View view ) {
+
+        final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+        final String URI = "https://hasgeek.tv/";
+        intent.launchUrl(MainActivity.this, Uri.parse(URI));
+
+    }
+
+
+    public void talkfunnel(View view ) {
+
+        final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+        final String URI = "https://talkfunnel.com/";
+        intent.launchUrl(MainActivity.this, Uri.parse(URI));
+
+    }
+
+
+
+    public void hasjob(View view ) {
+
+        final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+        final String URI = "https://hasjob.co/";
+        intent.launchUrl(MainActivity.this, Uri.parse(URI));
+
+    }
+
+
+    public void hasgeek(View view ) {
+
+        final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+        final String URI = "https://hasgeek.com/";
+        intent.launchUrl(MainActivity.this, Uri.parse(URI));
+
+    }
+
+
+    public void liveStream(View view ) {
+
+        final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+        final String URI = "http://www.ustream.tv/channel/hasgeek";
+        intent.launchUrl(MainActivity.this, Uri.parse(URI));
+
+    }
+
+
+    public void qrcodescanner(View view ) {
+
+        Intent intent = new Intent(view.getContext(), BarcodeScanner.class);
+        startActivity(intent);
+
+    }
+
+
+
+    public void aboutGeekskool(View view ) {
+
+        final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+        final String URI = "http://www.geekskool.com/";
+        intent.launchUrl(MainActivity.this, Uri.parse(URI));
+
+    }
+
+
+            public void onDiscussionClick(View view) {
+
+                            new AlertDialog.Builder(this)
+                                    .setTitle("Join the discussion!")
+                                    .setMessage("Are you on the Friends of HasGeek Slack team? Follow the discussion on the our channel")
+                                    .setCancelable(true)
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                            String uri ;
+                                            if (isPackageInstalled(SLACK_ANDROID_PACKAGE_NAME, getPackageManager()))
+                                                   uri = "slack://channel?team=T04TX4KJG&id=C04TX6S4Y";
+                                            else
+                                                uri = "https://friendsofhasgeek.slack.com/messages/droidcon/";
+
+                                                   Intent i = new Intent(Intent.ACTION_VIEW);
+                                            i.setData(Uri.parse(uri));
+                                            startActivity(i);
+                                        }
+                               })
+                                    .setNegativeButton("No, send me an invite", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                           CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder()
+                                                            .setToolbarColor(ContextCompat.getColor(MainActivity.this, R.color.colorPrimary));
+
+                                                    CustomTabsIntent customTabsIntent = builder.build();
+                                            customTabsIntent.launchUrl(MainActivity.this, Uri.parse("https://friends.hasgeek.com/"));
+                                        }
+                               })
+                                    .create().show();
+
+                        }
+
+
+
+
+    public static final String SLACK_ANDROID_PACKAGE_NAME = "com.Slack";
+
+                public static boolean isPackageInstalled(String targetPackage, PackageManager packageManager){
+                try {
+                        PackageInfo info=packageManager.getPackageInfo(targetPackage, PackageManager.GET_META_DATA);
+                    } catch (PackageManager.NameNotFoundException e) {
+                        return false;
+                    }
+                return true;
+            }
+
+
+
+//////////////////////////////////////
+//
+//            @Override
+//            public void onGenerated(Palette palette) {
+//               collapsingToolbarLayout .setContentScrimColor(palette.getMutedColor(R.attrs.colorPrimary));
+//                collapsingToolbarLayout.setStatusBarScrimColor(palette.getMutedColor(R.attrs.colorPrimaryDark));
+//            }
+//        });
+//    }
+//
+//    private void toolbarTextAppernce() {
+//        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsedappbar);
+//        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedappbar);
+//    }
+/////////////////////////////////////
 //        /**
 //         * Method to make json object request where json response starts wtih {
 //         * */
@@ -218,6 +387,8 @@ Context context;
 //            pDialog.dismiss();
 //    }
 
+
+
     private void makeJsonObjectRequest() {
 
         showpDialog();
@@ -278,6 +449,7 @@ Context context;
                 // viewPager.setPageTransformer(true, new StackTransformer());
                 // viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
                 // viewPager.setPageTransformer(true, new CubeOutTransformer());
+
                 hidepDialog();
             }
 

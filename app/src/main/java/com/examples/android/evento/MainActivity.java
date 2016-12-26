@@ -6,21 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.graphics.Palette;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,10 +25,7 @@ import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,14 +39,12 @@ import java.util.ArrayList;
 
 
 import static com.examples.android.evento.R.id.viewpager;
-import static com.google.android.gms.analytics.internal.zzy.v;
-import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 
 
 public class MainActivity extends AppCompatActivity {
     private CollapsingToolbarLayout collapsingToolbarLayout = null;
     GridView grid;
-        private static String TAG = MainActivity.class.getSimpleName();
+     private static String TAG = MainActivity.class.getSimpleName();
  // json object response url
         private String urlJsonObj = "https://talkfunnel.com/json";
     private final int SPLASH_DISPLAY_LENGTH = 3000;
@@ -82,7 +71,7 @@ Context context;
 
              setContentView(R.layout.activity_main);
 
-///////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
 //            Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
 //            setSupportActionBar(toolbar);
 //            ActionBar actionBar = getSupportActionBar();
@@ -93,7 +82,7 @@ Context context;
 //
 //            dynamicToolbarColor();
 //            toolbarTextAppernce();
-////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 
 
             Fragment workshoponDNSandDNSSEC = new WorkshoponDNSandDNSSEC();
@@ -207,6 +196,12 @@ Context context;
     public void qrcodescanner(View view ) {
 
         Intent intent = new Intent(view.getContext(), BarcodeScanner.class);
+        startActivity(intent);
+
+    }
+    public void announcements(View view ) {
+
+        Intent intent = new Intent(view.getContext(), AnnouncementsActivity.class);
         startActivity(intent);
 
     }
@@ -331,13 +326,13 @@ Context context;
 //                            "Error: " + e.getMessage(),
 //                            Toast.LENGTH_LONG).show();
 //                }
-////
-////                ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);
-////               ViewPager viewPager = (ViewPager) findViewById(viewpager);
-////
-////               viewPager.setAdapter(pagerAdapter);
 //
-////               // viewPager.setPageTransformer(true, new RotateUpTransformer());
+//                ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);
+//               ViewPager viewPager = (ViewPager) findViewById(viewpager);
+//
+//               viewPager.setAdapter(pagerAdapter);
+//
+//              // viewPager.setPageTransformer(true, new RotateUpTransformer());
 //                //viewPager.setPageTransformer(true, new AccordionTransformer());
 //                //viewPager.setPageTransformer(true, new ScaleInOutTransformer());
 //                //viewPager.setPageTransformer(true, new ZoomInTransformer());

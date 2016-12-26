@@ -45,6 +45,7 @@
         android:text="Proposed Talks"
         android:layout_marginLeft="10dp"
         android:textSize="25sp"
+        android:id="@+id/clicktoseefossmeetproposedtalks"
         android:textStyle="bold"
         android:layout_marginTop="22dp"
         android:layout_marginBottom="12dp"
@@ -87,5 +88,12 @@
         android:background="#FF4500"
 
         />
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/proposedTalksFossMeet"-->
+        <!--/>-->
 </LinearLayout>
+
+
 </ScrollView>

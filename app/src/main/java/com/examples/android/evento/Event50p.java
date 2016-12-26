@@ -2,16 +2,21 @@ package com.examples.android.evento;
 
 import android.app.ProgressDialog;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 //import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -19,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.games.event.Event;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -40,13 +46,15 @@ import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
  * Created by ankit on 9/12/16.
  */
 
-public class Event50p extends Fragment {
+public class Event50p extends Fragment  {
     MapView mMapView;
     private GoogleMap googleMap;
     private String urlJsonObj = "https://50p.talkfunnel.com/2017/json";
     private ArrayList<TalkDetails> details50p;
     private ProgressDialog pDialog;
     private RecyclerView myRecyclerView;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup Container, Bundle savedInstanceState){
@@ -106,14 +114,48 @@ public class Event50p extends Fragment {
         });
 
 
+
+
+
+
+
+
+
+
         myRecyclerView =(RecyclerView) view.findViewById(R.id.CardView50p);
-        LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
-        myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+       LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
+         myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        myRecyclerView.setLayoutManager(myLayoutManager);
 
+
+
+     //  myRecyclerView = (RecyclerView)view.findViewById(R.id.card_recycler_view);
+  //     myRecyclerView.setHasFixedSize(true);
+//    RecyclerView.LayoutManager myLayoutManager = new GridLayoutManager(getActivity(),2);
+//
+       myRecyclerView.setLayoutManager(myLayoutManager);
 
         makeJsonObjectRequest();
+
+//        final TextView clickToSeeAllEvents = (TextView) view.findViewById(R.id.clicktosee50pproposedtalks);
+//
+//
+//        clickToSeeAllEvents.setOnClickListener(new View.OnClickListener(){
+//
+//            public  void onClick (View view){
+//                Fragment fragment = new TalksDetailViewFragment();
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.proposedTalks50p,fragment);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+//                clickToSeeAllEvents.setVisibility(View.GONE);
+//
+//            }
+//        });
+
+
+
         return view;
     }
     @Override
@@ -181,32 +223,9 @@ public class Event50p extends Fragment {
                             "Error: " + e.getMessage(),
                             Toast.LENGTH_LONG).show();
                 }
-//
-                myRecyclerView.setAdapter(new RecylerViewadapter(getActivity(),details50p));
 
-//                ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);
-//               ViewPager viewPager = (ViewPager) findViewById(viewpager);
-//
-//               viewPager.setAdapter(pagerAdapter);
+            myRecyclerView.setAdapter(new RecylerViewadapter(getActivity(),details50p));
 
-//               // viewPager.setPageTransformer(true, new RotateUpTransformer());
-                //viewPager.setPageTransformer(true, new AccordionTransformer());
-                //viewPager.setPageTransformer(true, new ScaleInOutTransformer());
-                //viewPager.setPageTransformer(true, new ZoomInTransformer());
-                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
-                // viewPager.setPageTransformer(true, new FlipVerticalTransformer());
-                // viewPager.setPageTransformer(true, new TabletTransformer());
-                //viewPager.setPageTransformer(true, new DepthPageTransformer());
-                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
-                // viewPager.setPageTransformer(true, new CubeInTransformer());
-                //    viewPager.setPageTransformer(true, new RotateDownTransformer());
-                // viewPager.setPageTransformer(true, new StackTransformer());
-                // viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
-                // viewPager.setPageTransformer(true, new CubeOutTransformer());
-
-
-
-             //   hidepDialog();
             }
 
         }, new Response.ErrorListener() {

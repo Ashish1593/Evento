@@ -253,10 +253,11 @@ android:background="#90000000"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:id="@+id/announcements"
-
+                android:onClick="announcements"
                 >
 
                 <ImageButton
+                    android:onClick="announcements"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
@@ -270,6 +271,7 @@ android:background="#90000000"
                     android:textSize="25sp" />
 
                 <TextView
+                    android:onClick="announcements"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

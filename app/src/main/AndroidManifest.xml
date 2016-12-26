@@ -44,6 +44,9 @@
         <activity
             android:name=".BarcodeScanner"
             android:theme="@style/FullscreenTheme"/>
+        <activity
+            android:name=".AnnouncementsActivity"
+            android:theme="@style/FullscreenTheme"/>
 
         <activity android:name=".SplashScreen"
             android:theme="@style/FullscreenTheme"

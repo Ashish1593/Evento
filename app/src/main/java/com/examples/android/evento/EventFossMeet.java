@@ -6,12 +6,16 @@ import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -97,15 +101,35 @@ public class EventFossMeet extends Fragment {
 
 
         myRecyclerView =(RecyclerView) view.findViewById(R.id.CardViewFossMeet);
-        LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
-        myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
+       // myRecyclerView =(RecyclerView) view.findViewById(R.id.card_recycler_view);
+       // RecyclerView.LayoutManager myLayoutManager = new GridLayoutManager(getActivity(),2);
+       myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
         myRecyclerView.setLayoutManager(myLayoutManager);
 
+
+
+//        final TextView clickToSeeAllEvents = (TextView) view.findViewById(R.id.clicktoseefossmeetproposedtalks);
+//
+//
+//        clickToSeeAllEvents.setOnClickListener(new View.OnClickListener(){
+//
+//            public  void onClick (View view){
+//                Fragment fragment = new EventslistFragment();
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.proposedTalksFossMeet,fragment);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+//                clickToSeeAllEvents.setVisibility(View.GONE);
+//
+//            }
+//        });
+
         makeJsonObjectRequest();
 
 
-        makeJsonObjectRequest();
 
         return view;
     }

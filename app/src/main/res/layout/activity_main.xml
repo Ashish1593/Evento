@@ -316,16 +316,18 @@ android:background="#90000000"
 
 
             <LinearLayout
+                android:onClick="foodcourt"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:id="@+id/foodcourt"
 
+
                 >
 
                 <ImageButton
-
+                    android:onClick="foodcourt"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
@@ -338,6 +340,7 @@ android:background="#90000000"
                     android:textSize="25sp" />
 
                 <TextView
+                    android:onClick="foodcourt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -394,6 +397,43 @@ android:background="#90000000"
                 android:layout_gravity="center"
                 android:text="Scan QR Code"
                 android:onClick="qrcodescanner"
+                android:textAlignment="center"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="18dp"
+            android:onClick="connecttonetwork"
+            android:background="?android:selectableItemBackground"
+            android:orientation="vertical"
+            android:id="@+id/connecttonetwork">
+            <ImageButton
+
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/background"
+                android:padding="10dp"
+                android:scaleType="fitXY"
+                android:paddingLeft="1dp"
+                android:src="@drawable/wifi1"
+                android:text=""
+                android:onClick="connecttonetwork"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Connect To hasgeek newtwork"
+                android:onClick="connecttonetwork"
                 android:textAlignment="center"
                 android:textColor="#ffffff" />
 

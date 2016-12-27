@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.examples.android.evento.FoodCourt">
+    tools:context="com.examples.android.evento.FoodCourtActivity">
 
 
     <android.support.design.widget.AppBarLayout
@@ -14,12 +14,12 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/activity_foodcourt_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/activity_foodcourt_toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="?attr/colorPrimary"-->
+            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
         <android.support.design.widget.TabLayout
             android:id="@+id/activity_foodcourt_tablayout"
             android:layout_width="match_parent"

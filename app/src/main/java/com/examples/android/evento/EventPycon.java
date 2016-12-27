@@ -206,29 +206,7 @@ public class EventPycon extends Fragment{
 //
                 myRecyclerView.setAdapter(new RecylerViewadapter(getActivity(),detailsPycon));
 
-//                ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);
-//               ViewPager viewPager = (ViewPager) findViewById(viewpager);
 //
-//               viewPager.setAdapter(pagerAdapter);
-
-//               // viewPager.setPageTransformer(true, new RotateUpTransformer());
-                //viewPager.setPageTransformer(true, new AccordionTransformer());
-                //viewPager.setPageTransformer(true, new ScaleInOutTransformer());
-                //viewPager.setPageTransformer(true, new ZoomInTransformer());
-                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
-                // viewPager.setPageTransformer(true, new FlipVerticalTransformer());
-                // viewPager.setPageTransformer(true, new TabletTransformer());
-                //viewPager.setPageTransformer(true, new DepthPageTransformer());
-                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
-                // viewPager.setPageTransformer(true, new CubeInTransformer());
-                //    viewPager.setPageTransformer(true, new RotateDownTransformer());
-                // viewPager.setPageTransformer(true, new StackTransformer());
-                // viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
-                // viewPager.setPageTransformer(true, new CubeOutTransformer());
-
-
-
-                //   hidepDialog();
             }
 
         }, new Response.ErrorListener() {

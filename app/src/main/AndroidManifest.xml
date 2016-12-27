@@ -13,6 +13,14 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
 
     <application
         android:name=".AppController"
@@ -45,7 +53,14 @@
             android:name=".BarcodeScanner"
             android:theme="@style/FullscreenTheme"/>
         <activity
+            android:name=".OpenWifi"
+            android:theme="@style/FullscreenTheme"/>
+
+        <activity
             android:name=".AnnouncementsActivity"
+            android:theme="@style/FullscreenTheme"/>
+        <activity
+            android:name=".FoodCourtActivity"
             android:theme="@style/FullscreenTheme"/>
 
         <activity android:name=".SplashScreen"

@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
@@ -35,6 +37,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 
@@ -50,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     private final int SPLASH_DISPLAY_LENGTH = 3000;
 
 Context context;
+
+    String networkSSID = "test";
+    String networkPass = "pass";
     public ArrayList<EventDetails> details ;
 
 
@@ -199,12 +205,28 @@ Context context;
         startActivity(intent);
 
     }
+
+
+    public void foodcourt(View view ) {
+
+        Intent intent = new Intent(view.getContext(), FoodCourtActivity.class);
+        startActivity(intent);
+
+    }
+    public void connecttonetwork(View view ) {
+
+        Intent intent = new Intent(view.getContext(),OpenWifi.class);
+        startActivity(intent);
+
+    }
+
     public void announcements(View view ) {
 
         Intent intent = new Intent(view.getContext(), AnnouncementsActivity.class);
         startActivity(intent);
 
     }
+
 
 
 
@@ -215,6 +237,8 @@ Context context;
         intent.launchUrl(MainActivity.this, Uri.parse(URI));
 
     }
+
+
 
 
             public void onDiscussionClick(View view) {
@@ -264,6 +288,9 @@ Context context;
                     }
                 return true;
             }
+
+
+
 
 
 

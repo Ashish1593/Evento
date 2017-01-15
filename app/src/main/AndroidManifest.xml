@@ -32,7 +32,7 @@
         <meta-data android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyBdYn9jGiZkHwFqInHt3bgYkiFNArDL8Ws"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SeeALLEventsActivity"
+            android:name=".activity.SeeALLEventsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
@@ -50,20 +50,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BarcodeScanner"
+            android:name=".activity.BarcodeScanner"
             android:theme="@style/FullscreenTheme"/>
         <activity
-            android:name=".OpenWifi"
+            android:name=".activity.OpenWifi"
             android:theme="@style/FullscreenTheme"/>
 
         <activity
-            android:name=".AnnouncementsActivity"
+            android:name=".activity.AnnouncementsActivity"
             android:theme="@style/FullscreenTheme"/>
         <activity
-            android:name=".FoodCourtActivity"
+            android:name=".activity.FoodCourtActivity"
             android:theme="@style/FullscreenTheme"/>
 
-        <activity android:name=".SplashScreen"
+        <activity android:name=".activity.SplashScreen"
             android:theme="@style/FullscreenTheme"
            >
             <intent-filter>

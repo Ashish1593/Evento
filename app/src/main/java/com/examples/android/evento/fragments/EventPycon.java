@@ -1,7 +1,5 @@
 package com.examples.android.evento.fragments;
 
-//import android.app.Fragment;
-
 import android.app.ProgressDialog;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
@@ -14,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -32,14 +29,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
-import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
+import static com.google.android.gms.plus.PlusOneDummyView.TAG;
+//import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 /**
  * Created by ankit on 11/12/16.
@@ -59,13 +55,10 @@ public class EventPycon extends Fragment{
     {
         View view = inflater.inflate(R.layout.pycon2017,container,false);
         mMapView = (MapView) view.findViewById(R.id.mapViewPycon);
-
-       mMapView.onCreate(null);
-
+        mMapView.onCreate(null);
         mMapView.onResume();
 
-
-        try {
+       try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
             e.printStackTrace();

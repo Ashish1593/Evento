@@ -38,7 +38,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
+import static com.google.android.gms.plus.PlusOneDummyView.TAG;
+
+//import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 /**
  * Created by ankit on 9/12/16.
@@ -184,7 +186,7 @@ public class Event50p extends Fragment  {
 
 
 
-       // showpDialog();
+      // showpDialog();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 urlJsonObj, null, new Response.Listener<JSONObject>() {
@@ -224,6 +226,7 @@ public class Event50p extends Fragment  {
 
             myRecyclerView.setAdapter(new RecylerViewadapter(getActivity(),details50p));
 
+              //  hidepDialog();
             }
 
         }, new Response.ErrorListener() {

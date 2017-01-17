@@ -43,6 +43,7 @@ import com.examples.android.evento.fragments.EventslistFragment;
 import com.examples.android.evento.R;
 import com.examples.android.evento.adapters.ViewPagerAdapter;
 import com.examples.android.evento.fragments.WorkshoponDNSandDNSSEC;
+import com.facebook.accountkit.AccountKit;
 
 import java.util.ArrayList;
 
@@ -76,6 +77,7 @@ Context context;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            AccountKit.initialize(getApplicationContext());
             this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
             this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

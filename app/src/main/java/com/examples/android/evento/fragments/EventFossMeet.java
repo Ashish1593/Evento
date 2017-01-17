@@ -33,10 +33,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
-import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
+import static com.google.android.gms.plus.PlusOneDummyView.TAG;
+//import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 /**
  * Created by ankit on 11/12/16.

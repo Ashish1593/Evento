@@ -8,10 +8,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Author: @karthikb351
- * Project: android
- */
 
 public class FoodCourtVendor {
 

@@ -34,7 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.examples.android.evento.AppController;
+import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.fragments.Event50p;
 import com.examples.android.evento.model.EventDetails;
 import com.examples.android.evento.fragments.EventFossMeet;
@@ -209,7 +209,7 @@ Context context;
 
     public void qrcodescanner(View view ) {
 
-        Intent intent = new Intent(view.getContext(), BarcodeScanner.class);
+        Intent intent = new Intent(view.getContext(), QRcodeScanner.class);
         startActivity(intent);
 
     }
@@ -493,7 +493,9 @@ Context context;
                 // hide the progress dialog
                 hidepDialog();
             }
-        });
+        }
+
+        );
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq);

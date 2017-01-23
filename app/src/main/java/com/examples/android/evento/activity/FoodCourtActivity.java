@@ -24,7 +24,7 @@
     import com.examples.android.evento.model.FoodCourtVendorItem;
     import com.examples.android.evento.adapters.FoodCourtVendorRecyclerViewAdapter;
     import com.examples.android.evento.model.FoodCourtVendorSection;
-    import com.examples.android.evento.ItemInteractionListener;
+    import com.examples.android.evento.interfacelistener.ItemInteractionListener;
     import com.examples.android.evento.model.Metadata;
     import com.examples.android.evento.R;
     import com.google.gson.Gson;
@@ -90,14 +90,6 @@ public TabLayout tabLayout;
 
 
 
-
-
-        ////////////////////////////////////////////////////////
-
-
-
-
-/////////////////////////////////////////////////////////////////////////
     }
 
         private void requestJsonObject(){
@@ -110,7 +102,7 @@ public TabLayout tabLayout;
                     GsonBuilder builder = new GsonBuilder();
                     Gson mGson = builder.create();
                     //List<Metadata> posts = new ArrayList<Metadata>();
-                    //posts = Arrays.asList(mGson.fromJson(response, Metadata.class));
+                   // posts = Arrays.asList(mGson.fromJson(response, Metadata.class));
                     Metadata metadata = mGson.fromJson(response, Metadata.class);
 
                     FoodCourtVendorPagerAdapter foodCourtVendorPagerAdapter = new FoodCourtVendorPagerAdapter(FoodCourtActivity.this, metadata.getFoodCourtVendors());
@@ -118,6 +110,7 @@ public TabLayout tabLayout;
                     viewPager.setAdapter(foodCourtVendorPagerAdapter);
                     tabLayout.setupWithViewPager(viewPager);
                 }
+
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {

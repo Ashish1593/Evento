@@ -18,7 +18,8 @@ import android.widget.TextView;
 //import com.hasgeek.funnel.helpers.utils.TimeUtils;
 //import com.hasgeek.funnel.model.FoodCourtVendorItem;
 //import com.hasgeek.funnel.model.Session;
-import com.examples.android.evento.ItemInteractionListener;
+
+import com.examples.android.evento.interfacelistener.ItemInteractionListener;
 import com.examples.android.evento.R;
 import com.examples.android.evento.model.FoodCourtVendorItem;
 import com.truizlop.sectionedrecyclerview.SimpleSectionedAdapter;

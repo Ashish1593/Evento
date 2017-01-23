@@ -19,7 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.examples.android.evento.AppController;
+import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
 import com.examples.android.evento.model.TalkDetails;
 import com.examples.android.evento.adapters.RecylerViewadapter;
@@ -114,20 +114,9 @@ public class Event50p extends Fragment  {
         });
 
 
-
-
-
-
-
-
-
-
         myRecyclerView =(RecyclerView) view.findViewById(R.id.CardView50p);
        LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
          myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-
-
 
      //  myRecyclerView = (RecyclerView)view.findViewById(R.id.card_recycler_view);
   //     myRecyclerView.setHasFixedSize(true);

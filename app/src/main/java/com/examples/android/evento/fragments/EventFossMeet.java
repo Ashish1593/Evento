@@ -18,7 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.examples.android.evento.AppController;
+import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
 import com.examples.android.evento.model.TalkDetails;
 import com.examples.android.evento.adapters.RecylerViewadapter;

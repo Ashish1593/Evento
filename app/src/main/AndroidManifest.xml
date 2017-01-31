@@ -85,6 +85,9 @@
         <activity
             android:name=".activity.FoodCourtActivity"
             android:theme="@style/FullscreenTheme"/>
+        <activity android:name=".schedule.ScheduleActivity"
+            android:theme="@style/FullscreenTheme"
+           /> >
 
         <activity android:name=".activity.SplashScreen"
             android:theme="@style/FullscreenTheme"

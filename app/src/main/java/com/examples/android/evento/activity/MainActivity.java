@@ -56,14 +56,14 @@ public class MainActivity extends AppCompatActivity {
     GridView grid;
      private static String TAG = MainActivity.class.getSimpleName();
  // json object response url
-        private String urlJsonObj = "https://talkfunnel.com/json";
-    private final int SPLASH_DISPLAY_LENGTH = 3000;
+     private String urlJsonObj = "https://talkfunnel.com/json";
+     private final int SPLASH_DISPLAY_LENGTH = 3000;
 
-Context context;
+    Context context;
 
     String networkSSID = "test";
     String networkPass = "pass";
-    public ArrayList<EventDetails> details ;
+    //public ArrayList<EventDetails> details ;
 
 
     // Progress dialog
@@ -99,7 +99,7 @@ Context context;
 //////////////////////////////////////////////////////////
 
 
-            Fragment workshoponDNSandDNSSEC = new WorkshoponDNSandDNSSEC();
+         //   Fragment workshoponDNSandDNSSEC = new WorkshoponDNSandDNSSEC();
            // Fragment Events_two_fragments = new Events_two_fragments();
             Fragment event50p = new Event50p();
             Fragment eventFossMeet = new EventFossMeet();
@@ -110,17 +110,16 @@ Context context;
 
 
 
-          ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-         pagerAdapter.addFragment(workshoponDNSandDNSSEC);
+            ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+            // pagerAdapter.addFragment(workshoponDNSandDNSSEC);
             //pagerAdapter.addFragment(Events_two_fragments);
             pagerAdapter.addFragment(event50p);
             pagerAdapter.addFragment(eventPycon);
             pagerAdapter.addFragment(eventFossMeet);
             pagerAdapter.addFragment(eventslistFragment);
-           //pagerAdapter.addFragment(seeallevents);
+            //pagerAdapter.addFragment(seeallevents);
             ViewPager viewPager = (ViewPager) findViewById(viewpager);
-
-             viewPager.setAdapter(pagerAdapter);
+            viewPager.setAdapter(pagerAdapter);
 
 
 
@@ -153,10 +152,7 @@ Context context;
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
 
-
-
-
-         makeJsonObjectRequest();
+            //makeJsonObjectRequest();
 
 
         }
@@ -201,7 +197,8 @@ Context context;
     public void liveStream(View view ) {
 
         final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-        final String URI = "http://www.ustream.tv/channel/hasgeek";
+       // final String URI = "http://www.ustream.tv/channel/hasgeek";
+      final String URI=  "https://www.youtube.com/watch?v=8YZZZwcckE8";
         intent.launchUrl(MainActivity.this, Uri.parse(URI));
 
     }
@@ -262,8 +259,8 @@ Context context;
                                             if (isPackageInstalled(SLACK_ANDROID_PACKAGE_NAME, getPackageManager()))
                                                    uri = "slack://channel?team=T04TX4KJG&id=C04TX6S4Y";
                                             else
-                                                uri = "https://friendsofhasgeek.slack.com/messages/droidcon/";
-
+                                               // uri = "https://friendsofhasgeek.slack.com/messages/droidcon/";
+                                            uri= "https://friendsofhasgeek.slack.com/messages/50p/";
                                                    Intent i = new Intent(Intent.ACTION_VIEW);
                                             i.setData(Uri.parse(uri));
                                             startActivity(i);
@@ -416,108 +413,113 @@ Context context;
 //        if (pDialog.isShowing())
 //            pDialog.dismiss();
 //    }
+////////////////////////////////////////////////////////////////////
 
-
-
-    private void makeJsonObjectRequest() {
-
-        showpDialog();
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                urlJsonObj, null, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d(TAG, response.toString());
-                try {
-                    //  Parsing json object response
-                    //response will be a json object
-                    JSONArray eventsArray = response.getJSONArray("spaces");
-                    details = new ArrayList<EventDetails>();
-                    for(int i=0;i<eventsArray.length();i++) {
-                        JSONObject events = eventsArray.getJSONObject(i);
-                        String name = events.getString("title");
-                        String location = events.getString("datelocation");
-                        String date = events.getString("start");
-                        String URL = events.getString("url");
-
-                        EventDetails edetails = new EventDetails(name,location,date,URL);
-
-                        details.add(edetails);
-
-
-
-                    }
-
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),
-                            "Error: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                }
 //
-
-
-//                ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);
-//               ViewPager viewPager = (ViewPager) findViewById(viewpager);
+//    private void makeJsonObjectRequest() {
 //
-//               viewPager.setAdapter(pagerAdapter);
-
-//               // viewPager.setPageTransformer(true, new RotateUpTransformer());
-                //viewPager.setPageTransformer(true, new AccordionTransformer());
-                //viewPager.setPageTransformer(true, new ScaleInOutTransformer());
-                //viewPager.setPageTransformer(true, new ZoomInTransformer());
-                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
-                // viewPager.setPageTransformer(true, new FlipVerticalTransformer());
-                // viewPager.setPageTransformer(true, new TabletTransformer());
-                //viewPager.setPageTransformer(true, new DepthPageTransformer());
-                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
-                // viewPager.setPageTransformer(true, new CubeInTransformer());
-                //    viewPager.setPageTransformer(true, new RotateDownTransformer());
-                // viewPager.setPageTransformer(true, new StackTransformer());
-                // viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
-                // viewPager.setPageTransformer(true, new CubeOutTransformer());
-
-                hidepDialog();
-            }
-
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
-                // hide the progress dialog
-                hidepDialog();
-            }
-        }
-
-        );
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq);
-    }
-
-
-
-    /**
-     * Method to make json array request where response starts with [
-     */
-
-
-    private void showpDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
-    }
-
-    private void hidepDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
-    }
-
+//        showpDialog();
+//
+//        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+//                urlJsonObj, null, new Response.Listener<JSONObject>() {
+//
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                Log.d(TAG, response.toString());
+//                try {
+//                    //  Parsing json object response
+//                    //response will be a json object
+//                    JSONArray eventsArray = response.getJSONArray("spaces");
+//                    details = new ArrayList<EventDetails>();
+//                    if(eventsArray.length()>0) {
+//                        for (int i = 0; i < eventsArray.length(); i++) {
+//                            JSONObject events = eventsArray.getJSONObject(i);
+//                            String name = events.getString("title");
+//                            String location = events.getString("datelocation");
+//                            String date = events.getString("start");
+//                            String URL = events.getString("url");
+//
+//                            EventDetails edetails = new EventDetails(name, location, date, URL);
+//
+//                            details.add(edetails);
+//                        }
+//                    } else
+//                        {
+//                            Toast.makeText(MainActivity.this, "This is my Toast message!", Toast.LENGTH_LONG).show();
+//                        }
+//
+//
+//
+//
+//
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(getApplicationContext(),
+//                            "Error: " + e.getMessage(),
+//                            Toast.LENGTH_LONG).show();
+//                }
+////
+//
+//
+////                ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);
+////               ViewPager viewPager = (ViewPager) findViewById(viewpager);
+////
+////               viewPager.setAdapter(pagerAdapter);
+//
+////               // viewPager.setPageTransformer(true, new RotateUpTransformer());
+//                //viewPager.setPageTransformer(true, new AccordionTransformer());
+//                //viewPager.setPageTransformer(true, new ScaleInOutTransformer());
+//                //viewPager.setPageTransformer(true, new ZoomInTransformer());
+//                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
+//                // viewPager.setPageTransformer(true, new FlipVerticalTransformer());
+//                // viewPager.setPageTransformer(true, new TabletTransformer());
+//                //viewPager.setPageTransformer(true, new DepthPageTransformer());
+//                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
+//                // viewPager.setPageTransformer(true, new CubeInTransformer());
+//                //    viewPager.setPageTransformer(true, new RotateDownTransformer());
+//                // viewPager.setPageTransformer(true, new StackTransformer());
+//                // viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
+//                // viewPager.setPageTransformer(true, new CubeOutTransformer());
+//
+//                hidepDialog();
+//            }
+//
+//        }, new Response.ErrorListener() {
+//
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                VolleyLog.d(TAG, "Error: " + error.getMessage());
+//                Toast.makeText(getApplicationContext(),
+//                        error.getMessage(), Toast.LENGTH_SHORT).show();
+//                // hide the progress dialog
+//                hidepDialog();
+//            }
+//        }
+//
+//        );
+//
+//        // Adding request to request queue
+//        AppController.getInstance().addToRequestQueue(jsonObjReq);
+//    }
+//
+//
+//
+//    /**
+//     * Method to make json array request where response starts with [
+//     */
+//
+//
+//    private void showpDialog() {
+//        if (!pDialog.isShowing())
+//            pDialog.show();
+//    }
+//
+//    private void hidepDialog() {
+//        if (pDialog.isShowing())
+//            pDialog.dismiss();
+//    }
+//
 
 
 

@@ -1,6 +1,7 @@
 package com.examples.android.evento.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
@@ -19,10 +20,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.examples.android.evento.activity.QRcodeScanner;
 import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
 import com.examples.android.evento.model.TalkDetails;
 import com.examples.android.evento.adapters.RecylerViewadapter;
+import com.examples.android.evento.schedule.ScheduleActivity;
+import com.examples.android.evento.schedule.Session;
+import com.examples.android.evento.schedule.SessionsAdapter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -31,12 +36,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 
@@ -54,7 +63,7 @@ public class Event50p extends Fragment  {
     private ProgressDialog pDialog;
     private RecyclerView myRecyclerView;
 
-
+    private SessionsAdapter sessionsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup Container, Bundle savedInstanceState){
@@ -102,13 +111,21 @@ public class Event50p extends Fragment  {
             }
         });
 
-        Button  propose50Psession = (Button) view.findViewById(R.id.propose50pSession);
-        propose50Psession.setOnClickListener(new View.OnClickListener() {
+        Button  ViewSchedule = (Button) view.findViewById(R.id.viewschedule);
+        ViewSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-                final String URI = "https://50p.talkfunnel.com/2017/new";
-                intent.launchUrl(getActivity(), Uri.parse(URI));
+//                final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+//                final String URI = "https://50p.talkfunnel.com/2017/schedule";
+//                intent.launchUrl(getActivity(), Uri.parse(URI));
+
+
+
+                    Intent intent = new Intent(v.getContext(), ScheduleActivity.class);
+                    startActivity(intent);
+
+
+
 
             }
         });
@@ -123,6 +140,16 @@ public class Event50p extends Fragment  {
 //    RecyclerView.LayoutManager myLayoutManager = new GridLayoutManager(getActivity(),2);
 //
        myRecyclerView.setLayoutManager(myLayoutManager);
+
+
+
+
+
+
+
+
+
+
 
         makeJsonObjectRequest();
 
@@ -200,9 +227,9 @@ public class Event50p extends Fragment  {
                         details50p.add(proprsal50pDetails);
 
 
-
-
                     }
+
+
 
 
 
@@ -224,7 +251,7 @@ public class Event50p extends Fragment  {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                        "no network", Toast.LENGTH_SHORT).show();
                 // hide the progress dialog
 
               //  hidepDialog();
@@ -253,8 +280,5 @@ public class Event50p extends Fragment  {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
-
-
-
 
 }

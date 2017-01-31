@@ -45,6 +45,7 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
     }
 
 
+
     public void onbuttonClick( View view){
 
 
@@ -57,6 +58,8 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
             setContentView(mScannerView);
             mScannerView.setResultHandler(this);
             mScannerView.startCamera();
+
+
         }
 
         else {
@@ -75,7 +78,26 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
 
 
         }
+
+
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mScannerView = new ZXingScannerView(this);
+        setContentView(mScannerView);
+        mScannerView.setResultHandler(this);
+        mScannerView.startCamera();
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mScannerView.stopCamera();
+    }
+
 
 
 
@@ -151,7 +173,7 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
 
 
 
-                    //   mScannerView.resumeCameraPreview(MainActivity.this);
+                    //  mScannerView.resumeCameraPreview(QRcodeScanner.this);
 
                 }
 

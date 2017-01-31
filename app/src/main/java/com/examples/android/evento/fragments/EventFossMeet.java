@@ -232,7 +232,7 @@ public class EventFossMeet extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Toast.makeText(getActivity().getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                        "no network", Toast.LENGTH_SHORT).show();
                 // hide the progress dialog
 
                 //  hidepDialog();

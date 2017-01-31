@@ -78,6 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp" />
 
+
     <Button
 
         android:id="@+id/BuyPyconTickets"
@@ -87,7 +88,10 @@
         android:layout_marginTop="20dp"
         android:textColor="#ffffff"
         android:background="#FF4500"
+
+        android:clickable="true"
         />
+
     <!--<FrameLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->

@@ -74,9 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
     void loginFailed() {
         Toast.makeText(LoginActivity.this, "Oops, something went wrong", Toast.LENGTH_SHORT).show();
-        // Answers.getInstance().logLogin(new LoginEvent()
-        //      .putMethod("Browser")
-        //     .putSuccess(false));
+
         finish();
     }
 

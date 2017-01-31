@@ -55,10 +55,7 @@ public RecylerViewadapter(Activity c,ArrayList<TalkDetails> detailsEventTalk){
 
             }
         });
-
-
-
-    }
+  }
 @Override
     public int getItemCount(){
     return detailsEventTalk.size();

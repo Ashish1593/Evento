@@ -26,11 +26,11 @@ import java.util.ArrayList;
 
 /**
  * Created by ankit on 25/12/16.
- */
+ **/
 
 public class AnnouncementsActivity extends AppCompatActivity {
     private static String TAG = AnnouncementsActivity.class.getSimpleName();
-public String announcementsURL = "http://hasgeek.github.io/api/space/84/metadata";
+public String announcementsURL = "http://hasgeek.github.io/api/space/97/metadata";
    private RecyclerView announcementRecyclerView;
     public ArrayList<Announcements> announcementsArraylist ;
 @Override
@@ -77,26 +77,25 @@ protected void onCreate(Bundle savedInstanceState)
                         String title = announcementsJsonContent.getString("title");
                         String description = announcementsJsonContent.getString("description");
 
-                      //  String URL = announcementsJsonContent.getString("url");
+                        String url = announcementsJsonContent.getString("url");
 
+                        if(url!=null) {
+                            Announcements announcementsdetails = new Announcements(title, description, url);
+                            announcementsArraylist.add(announcementsdetails);
+                        }
+else{
+                            Announcements announcementsdetails = new Announcements(title, description);
+                        announcementsArraylist.add(announcementsdetails);}
 
-                        Announcements announcementsdetails = new Announcements(title,description);
+ }
 
-                        announcementsArraylist.add(announcementsdetails);
-
-
-
-                    }
-
-
-
-                } catch (JSONException e) {
+  } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(),
                             "Error: " + e.getMessage(),
                             Toast.LENGTH_LONG).show();
                 }
-//
+
 
                 announcementRecyclerView.setAdapter(new RecyclerViewAdapterAnnouncements(AnnouncementsActivity.this,announcementsArraylist));
 
@@ -109,12 +108,13 @@ protected void onCreate(Bundle savedInstanceState)
               //  VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_SHORT).show();
-                // hide the progress dialog
-             //   hidepDialog();
+                 // hide the progress dialog
+                     //   hidepDialog();
+
             }
         });
 
-        // Adding request to request queue
+// Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq);
     }
 

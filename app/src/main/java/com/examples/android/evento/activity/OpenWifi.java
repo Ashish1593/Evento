@@ -1,6 +1,6 @@
 package com.examples.android.evento.activity;
 
-import android.content.Context;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
@@ -8,14 +8,12 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Toast;
 
 import com.facebook.accountkit.Account;
 import com.facebook.accountkit.AccountKit;
 import com.facebook.accountkit.AccountKitCallback;
 import com.facebook.accountkit.AccountKitError;
-import com.facebook.accountkit.AccountKitLoginResult;
+
 import com.facebook.accountkit.PhoneNumber;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
@@ -87,7 +85,7 @@ public class OpenWifi extends AppCompatActivity {
                     String phoneNumberString = phoneNumber.toString();
 
                     WifiConfiguration wifiConfig = new WifiConfiguration();
-                    wifiConfig.SSID = String.format("\"%s\"", "HasGeek Legacy");
+                    wifiConfig.SSID = String.format("\"%s\"", "HasGeek");
                     wifiConfig.preSharedKey = String.format("\"%s\"", "geeksrus");
 
                     WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
@@ -115,6 +113,7 @@ public class OpenWifi extends AppCompatActivity {
                             startActivity(intent);
                         }
                     });
+
 //                .setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
 //                    @Override
 //                    public void onClick(DialogInterface dialog, int which) {

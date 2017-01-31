@@ -156,10 +156,6 @@ public TabLayout tabLayout;
                     sections.add(s.getTitle());
                     hashMap.put(s.getTitle(), s.getItems());
                 }
-
-
-
-
                 recyclerView.setAdapter(new FoodCourtVendorRecyclerViewAdapter(hashMap, sections, new ItemInteractionListener<FoodCourtVendorItem>() {
                     @Override
                     public void onItemClick(View v, FoodCourtVendorItem item) {

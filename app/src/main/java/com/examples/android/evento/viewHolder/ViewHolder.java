@@ -23,9 +23,6 @@ public class ViewHolder extends RecyclerView.ViewHolder{
         talkName = (TextView) v.findViewById(R.id.talkname);
         speakerName= (TextView) v.findViewById(R.id.speaker);
         openTalkDetails=(LinearLayout) v.findViewById(R.id.openTalkDetails);
-
-
-
-    }
+ }
 
 }

@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 package com.examples.android.evento.fragments;
 
 import android.app.ProgressDialog;
@@ -35,6 +42,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -88,11 +96,16 @@ public class Event50p extends Fragment  {
                 googleMap = mMap;
 
                 // For showing a move to my location button
-                 // googleMap.setMyLocationEnabled(true);
-               // 12.8917° N, 77.5852° E
+                // googleMap.setMyLocationEnabled(true);
+                // 12.8917° N, 77.5852° E
                 // For dropping a marker at a point on the Map
                 LatLng MLRConventionCenter = new LatLng(12.8917,77.5852);
                 googleMap.addMarker(new MarkerOptions().position(MLRConventionCenter).title("MLR CONVENTON Center").snippet("M L R CONVENTION CENtER J P NAGAR"));
+
+                MarkerOptions mo = new MarkerOptions().position(MLRConventionCenter).title("MLR CONVENTON Center").snippet("M L R CONVENTION CENtER J P NAGAR").visible(true);
+                Marker marker = googleMap.addMarker(mo);
+                mo.anchor(0f, 0.5f);
+                marker.showInfoWindow();
 
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(MLRConventionCenter).zoom(16).build();
@@ -121,8 +134,8 @@ public class Event50p extends Fragment  {
 
 
 
-                    Intent intent = new Intent(v.getContext(), ScheduleActivity.class);
-                    startActivity(intent);
+                Intent intent = new Intent(v.getContext(), ScheduleActivity.class);
+                startActivity(intent);
 
 
 
@@ -132,14 +145,14 @@ public class Event50p extends Fragment  {
 
 
         myRecyclerView =(RecyclerView) view.findViewById(R.id.CardView50p);
-       LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
-         myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
+        myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-     //  myRecyclerView = (RecyclerView)view.findViewById(R.id.card_recycler_view);
-  //     myRecyclerView.setHasFixedSize(true);
+        //  myRecyclerView = (RecyclerView)view.findViewById(R.id.card_recycler_view);
+        //     myRecyclerView.setHasFixedSize(true);
 //    RecyclerView.LayoutManager myLayoutManager = new GridLayoutManager(getActivity(),2);
 //
-       myRecyclerView.setLayoutManager(myLayoutManager);
+        myRecyclerView.setLayoutManager(myLayoutManager);
 
 
 
@@ -202,14 +215,14 @@ public class Event50p extends Fragment  {
 
 
 
-      // showpDialog();
+        // showpDialog();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 urlJsonObj, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
-             //   Log.d(TAG,response.toString());
+                //   Log.d(TAG,response.toString());
                 try {
                     //  Parsing json object response
                     //response will be a json object
@@ -240,9 +253,9 @@ public class Event50p extends Fragment  {
                             Toast.LENGTH_LONG).show();
                 }
 
-            myRecyclerView.setAdapter(new RecylerViewadapter(getActivity(),details50p));
+                myRecyclerView.setAdapter(new RecylerViewadapter(getActivity(),details50p));
 
-              //  hidepDialog();
+                //  hidepDialog();
             }
 
         }, new Response.ErrorListener() {
@@ -254,7 +267,7 @@ public class Event50p extends Fragment  {
                         "no network", Toast.LENGTH_SHORT).show();
                 // hide the progress dialog
 
-              //  hidepDialog();
+                //  hidepDialog();
             }
         });
 

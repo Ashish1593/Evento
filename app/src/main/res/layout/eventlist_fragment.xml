@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <TextView
@@ -13,10 +13,11 @@
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         />
 
     <GridView
+        android:background="#ffffff"
         android:id="@+id/gridView"
         android:scaleType="fitXY"
         android:numColumns="2"

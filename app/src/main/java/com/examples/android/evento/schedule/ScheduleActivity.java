@@ -1,5 +1,7 @@
 package com.examples.android.evento.schedule;
 
+import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.examples.android.evento.R;
 import com.examples.android.evento.adapters.RecyclerViewAdapterAnnouncements;
 import com.examples.android.evento.controller.AppController;
+import com.examples.android.evento.fragments.Event50p;
 import com.examples.android.evento.model.Announcements;
 import com.examples.android.evento.model.TalkDetails;
 import com.google.gson.Gson;
@@ -38,14 +41,13 @@ import java.util.List;
 public class ScheduleActivity extends AppCompatActivity {
 
     private static String TAG = com.examples.android.evento.activity.AnnouncementsActivity.class.getSimpleName();
-    private String urlJsonObj = "https://50p.talkfunnel.com/2017/json";
-   private RecyclerView mRecyclerView;
+   private String urlJsonObj = "https://50p.talkfunnel.com/2017/json";
+    private RecyclerView mRecyclerView;
     private SwipeRefreshLayout swipeLayout;
     private SessionsAdapter mAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -56,33 +58,35 @@ public class ScheduleActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_space_schedule);
 
 
+//
+//        swipeLayout = (SwipeRefreshLayout)findViewById(R.id.fragment_proposal_swipe_container);
+//        swipeLayout.setOnRefreshListener(mOnSwipeListener);
+//        swipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+//                android.R.color.holo_green_light,
+//                android.R.color.holo_orange_light,
+//                android.R.color.holo_red_light);
 
-        swipeLayout = (SwipeRefreshLayout)findViewById(R.id.fragment_proposal_swipe_container);
-        swipeLayout.setOnRefreshListener(mOnSwipeListener);
-        swipeLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
-
-        mRecyclerView = (RecyclerView)findViewById(R.id.fragment_space_schedule_recyclerview);
+        mRecyclerView = (RecyclerView) findViewById(R.id.fragment_space_schedule_recyclerview);
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
-      //  mRecyclerView.addItemDecoration(new DividerItemDecoration(this));
+        //  mRecyclerView.addItemDecoration(new DividerItemDecoration(this));
 
-      //  mRecyclerView.setOnScrollListener(scrollListener);
-
+        //  mRecyclerView.setOnScrollListener(scrollListener);
+//
+//        Intent intent =getIntent();
+//        String url = intent.getStringExtra("jsonurl");
         makeJsonObjectRequest();
-
     }
-    private SwipeRefreshLayout.OnRefreshListener mOnSwipeListener = new SwipeRefreshLayout.OnRefreshListener() {
-        @Override
-        public void onRefresh() {
-            Log.i(TAG, "onRefresh() POST LoadScheduleEvent");
-
-        }
-    };
+//    private SwipeRefreshLayout.OnRefreshListener mOnSwipeListener = new SwipeRefreshLayout.OnRefreshListener() {
+//        @Override
+//        public void onRefresh() {
+//            Log.i(TAG, "onRefresh() POST LoadScheduleEvent");
+//            makeJsonObjectRequest();
+//        }
+//
+//    };
 
 //    RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
 //        @Override
@@ -100,12 +104,15 @@ public class ScheduleActivity extends AppCompatActivity {
 //    };
 
 
+
+
+
     private void makeJsonObjectRequest() {
 
         //  showpDialog();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                urlJsonObj , null, new Response.Listener<JSONObject>() {
+              urlJsonObj , null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

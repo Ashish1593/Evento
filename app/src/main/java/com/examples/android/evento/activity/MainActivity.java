@@ -1,6 +1,7 @@
 package com.examples.android.evento.activity;
 
 //import android.app.Fragment;
+//import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,6 +37,8 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.fragments.Event50p;
+import com.examples.android.evento.fragments.Jsfoo2017;
+import com.examples.android.evento.fragments.RootConf2017;
 import com.examples.android.evento.model.EventDetails;
 import com.examples.android.evento.fragments.EventFossMeet;
 import com.examples.android.evento.fragments.EventPycon;
@@ -43,7 +46,7 @@ import com.examples.android.evento.fragments.EventslistFragment;
 import com.examples.android.evento.R;
 import com.examples.android.evento.adapters.ViewPagerAdapter;
 import com.examples.android.evento.fragments.WorkshoponDNSandDNSSEC;
-import com.facebook.accountkit.AccountKit;
+import  com.facebook.accountkit.AccountKit;
 
 import java.util.ArrayList;
 
@@ -106,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
             Fragment eventPycon=new EventPycon();
           //Fragment seeallevents = new SeeAllEvents();
            Fragment eventslistFragment = new EventslistFragment();
+            Fragment eventJsfoo2017 = new Jsfoo2017();
+            Fragment eventRootconf2017 = new RootConf2017();
 
 
 
@@ -116,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
             pagerAdapter.addFragment(event50p);
             pagerAdapter.addFragment(eventPycon);
             pagerAdapter.addFragment(eventFossMeet);
+            pagerAdapter.addFragment(eventRootconf2017);
+            pagerAdapter.addFragment(eventJsfoo2017);
             pagerAdapter.addFragment(eventslistFragment);
             //pagerAdapter.addFragment(seeallevents);
             ViewPager viewPager = (ViewPager) findViewById(viewpager);

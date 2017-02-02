@@ -29,6 +29,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,6 +81,10 @@ public class EventFossMeet extends Fragment {
                 LatLng NITCalicut = new LatLng(11.3217, 75.9342);
                 googleMap.addMarker(new MarkerOptions().position(NITCalicut).title("NIT").snippet("National Institute Of Technology Calicut"));
 
+                MarkerOptions mo = new MarkerOptions().position(NITCalicut).title("NIT").snippet("National Institute Of Technology Calicut").visible(true);
+                Marker marker = googleMap.addMarker(mo);
+                mo.anchor(0f, 0.5f);
+                marker.showInfoWindow();
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(NITCalicut).zoom(16).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));

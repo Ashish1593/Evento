@@ -47,28 +47,25 @@ public class EventslistFragment extends Fragment {
     private String urlJsonObj = "https://talkfunnel.com/json";
 
     public ArrayList<EventDetails> details ;
-    private ProgressDialog pDialog;
-    private int Position;
-    private String name;
-    private String date;
-    private String place;
-    private String url;
+//    private ProgressDialog pDialog;
+//    private int Position;
+//    private String name;
+//    private String date;
+//    private String place;
+//    private String url;
 
-    GridView grid;
+   private GridView grid;
 
 
   //  }
 
-
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-
-
-    }
-
+//  @Override
+//    public void onCreate(Bundle savedInstanceState){
+//        super.onCreate(savedInstanceState);
+//
+//
+//    }
+//
 
 
 
@@ -124,9 +121,9 @@ public class EventslistFragment extends Fragment {
 
 
 
-                    GridViewAdapter adapter = new GridViewAdapter(getActivity(), details);
+                  //  GridViewAdapter adapter = new GridViewAdapter(getActivity(), details);
 
-                    grid.setAdapter(adapter);
+                    grid.setAdapter(new GridViewAdapter(getActivity(), details));
 
 
 
@@ -165,15 +162,15 @@ public class EventslistFragment extends Fragment {
      */
 
 
-    private void showpDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
-    }
-
-    private void hidepDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
-    }
+//    private void showpDialog() {
+//        if (!pDialog.isShowing())
+//            pDialog.show();
+//    }
+//
+//    private void hidepDialog() {
+//        if (pDialog.isShowing())
+//            pDialog.dismiss();
+//    }
 
 
 

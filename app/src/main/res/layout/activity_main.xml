@@ -67,8 +67,8 @@ android:background="#90000000"
 
                 <ImageButton
                     android:id="@+id/imageViewhasgeektv"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
                     android:padding="10dp"
@@ -106,8 +106,8 @@ android:background="#90000000"
 
                 <ImageButton
                     android:onClick="talkfunnel"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
                     android:padding="10dp"
@@ -138,8 +138,8 @@ android:background="#90000000"
 
                 <ImageButton
                     android:onClick="hasjob"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
                     android:padding="10dp"
@@ -172,8 +172,8 @@ android:background="#90000000"
 
                 <ImageButton
 
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
                     android:padding="10dp"
@@ -223,8 +223,8 @@ android:background="#90000000"
 
                 <ImageButton
 
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
                     android:padding="10dp"
@@ -259,8 +259,8 @@ android:background="#90000000"
 
                 <ImageButton
                     android:onClick="announcements"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
                     android:padding="10dp"
@@ -292,8 +292,8 @@ android:background="#90000000"
 
                 <ImageButton
 
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
                     android:padding="10dp"
@@ -329,8 +329,8 @@ android:background="#90000000"
 
                 <ImageButton
                     android:onClick="foodcourt"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
                     android:padding="10dp"
@@ -379,8 +379,8 @@ android:background="#90000000"
             android:id="@+id/scanBadges">
              <ImageButton
 
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/background"
                 android:padding="10dp"
@@ -415,9 +415,9 @@ android:background="#90000000"
             android:orientation="vertical"
             android:id="@+id/connecttonetwork">
             <ImageButton
-
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:clickable="true"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/background"
                 android:padding="10dp"

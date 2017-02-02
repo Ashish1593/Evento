@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +56,7 @@ public class EventslistFragment extends Fragment {
 //    private String place;
 //    private String url;
 
-   private GridView grid;
+   private RecyclerView evRecyclerView;
 
 
   //  }
@@ -73,9 +75,12 @@ public class EventslistFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.eventlist_fragment, container, false);
-        grid=(GridView)rootView.findViewById(R.id.gridView);
+        evRecyclerView=(RecyclerView) rootView.findViewById(R.id.gridView);
 
 
+        LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
+        myLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        evRecyclerView.setLayoutManager(myLayoutManager);
 //            GridViewAdapter adapter = new GridViewAdapter(getActivity(), details);
 //
 //            grid.setAdapter(adapter);
@@ -123,7 +128,7 @@ public class EventslistFragment extends Fragment {
 
                   //  GridViewAdapter adapter = new GridViewAdapter(getActivity(), details);
 
-                    grid.setAdapter(new GridViewAdapter(getActivity(), details));
+                    evRecyclerView.setAdapter(new GridViewAdapter(getActivity(), details));
 
 
 

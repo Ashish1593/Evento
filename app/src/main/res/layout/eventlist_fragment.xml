@@ -4,10 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:orientation="vertical">
+    android:orientation="vertical"
 
+    >
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4sp">
     <TextView
         android:text="AllEvents"
+
         android:textSize="20sp"
         android:layout_height="40dp"
         android:layout_width="match_parent"
@@ -15,19 +21,25 @@
         android:layout_gravity="center_horizontal"
         android:textColor="#000000"
         />
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.RecyclerView
 
-    <GridView
-        android:background="#ffffff"
+        android:background="#20000000"
         android:id="@+id/gridView"
         android:scaleType="fitXY"
-        android:numColumns="2"
+        android:numColumns="1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:columnWidth="100dp"
-        android:verticalSpacing="20dp"
-        android:horizontalSpacing="6dp"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
         android:stretchMode="columnWidth"
         android:gravity="center"
-        android:layout_margin="10dp"/>
+        android:layout_margin="2dp"/>
 
 </LinearLayout>
+
+
+
+
+

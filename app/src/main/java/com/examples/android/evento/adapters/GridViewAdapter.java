@@ -2,9 +2,11 @@ package com.examples.android.evento.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +16,24 @@ import android.widget.TextView;
 
 import com.examples.android.evento.model.EventDetails;
 import com.examples.android.evento.R;
+import com.examples.android.evento.viewHolder.AnnouncementsViewHolder;
+import com.examples.android.evento.viewHolder.EventListViewHolder;
+import com.examples.android.evento.viewHolder.ViewHolder;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by ankit on 11/12/16.
  */
 
-    public class GridViewAdapter extends BaseAdapter {
+    public class GridViewAdapter extends RecyclerView.Adapter<EventListViewHolder> {
     private Activity mcontext;
     private final List<Fragment> mFragments = new ArrayList<Fragment>();
     private ArrayList<EventDetails> details;
@@ -32,70 +43,92 @@ import java.util.List;
         this.details = details;
     }
 
+
     @Override
-    public int getCount() {
-        return details.size();
+    public EventListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.eventlistitem, parent, false);
+        EventListViewHolder viewHolder = new EventListViewHolder(view);
+
+        return viewHolder;
+
     }
 
 
     @Override
-    public long getItemId(int position) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-    @Override
-    public Object getItem(int position) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    public void onBindViewHolder(final EventListViewHolder holder, final int position) {
 
-//    @Override
-//    public Fragment getItem(int position) {
+        holder.evName.setText(details.get(position).getEventname());
+        holder.evPlace.setText(details.get(position).getEventplace());
+        holder.evDate.setText(details.get(position).getEventdate());
+        holder.evURL.setText(details.get(position).getEventURL());
+
+
+        String d =details.get(position).getEventdate();
+
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String td = formatter.format(Calendar.getInstance().getTime());
+
+
 //
-//      //  return EventslistFragment.newInstance(details.get(Position).getEventname(), details.get(Position).getEventplace(), details.get(Position).getEventdate(), details.get(Position).getEventURL());
-//return null;
-//    }
+//        if(date1.after(date2)){
+//            System.out.println("Date1 is after Date2");
+//        }
+//
+//        //before() will return true if and only if date1 is before date2
+//        if(date1.before(date2)){
+//            System.out.println("Date1 is before Date2");
+//        }
+//
+//        //equals() returns true if both the dates are equal
+//        if(date1.equals(date2)){
+//            System.out.println("Date1 is equal Date2");
+//        }
 
 
-    @Override
-    public View getView(final int position, final View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
-        View grid;
-        LayoutInflater inflater = (LayoutInflater) mcontext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if (convertView == null) {
+        try {
 
-           // grid = new View(mcontext);
-            grid = inflater.inflate(R.layout.eventlistitem, null);
+            Date date = formatter.parse(d);
+            Date todaysdate = formatter.parse(td);
 
-            TextView evName = (TextView) grid.findViewById(R.id.textView_eventName);
-            TextView evPlace = (TextView) grid.findViewById(R.id.textView_place);
-            TextView evDate = (TextView) grid.findViewById(R.id.textView_date);
-
-            evName.setText(details.get(position).getEventname());
-            evPlace.setText(details.get(position).getEventplace());
-            evDate.setText(details.get(position).getEventdate());
+            if(date.before(todaysdate))
+            {
+         holder.frameLayout.setBackgroundColor(Color.parseColor("#20000000"));
+                holder.statustext.setText("PAST EVENTS");
+                holder.statustext.setTextColor(Color.RED);
+            }
+            else{
+                holder.frameLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                holder.statustext.setText("UPCOMING");
+                holder.statustext.setTextColor(Color.GREEN);
+            }
 
 
-            LinearLayout openEvents = (LinearLayout) grid.findViewById(R.id.openEvent);
-
-            openEvents.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-                    final String URI = details.get(position).getEventURL();
-                    intent.launchUrl(mcontext, Uri.parse(URI));
-
-                }
-            });
-
-        } else {
-            grid = (View) convertView;
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
 
-        return grid;
+        holder.evURL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+                final String URI = details.get(position).getEventURL();
+                intent.launchUrl(mcontext, Uri.parse(URI));
+
+            }
+
+
+        });
+
+    }
+        @Override
+        public int getItemCount () {
+            return details.size();
+        }
+
+
     }
 
-}
+

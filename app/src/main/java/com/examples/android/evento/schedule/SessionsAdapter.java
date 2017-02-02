@@ -23,6 +23,8 @@ import android.widget.Toast;
 //import com.hasgeek.zalebi.api.model.Room;
 //import com.hasgeek.zalebi.api.model.Session;
 import com.examples.android.evento.R;
+import com.vipul.hp_hp.timelineview.TimelineView;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,6 +48,11 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return TimelineView.getTimeLineViewType(position,getItemCount());
+    }
+
+    @Override
     public ListItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
@@ -53,7 +60,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
                         viewGroup,
                         false);
 
-        return new ListItemViewHolder(itemView);
+        return new ListItemViewHolder(itemView,viewType);
     }
 
     @Override
@@ -123,14 +130,18 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
         public TextView duration;
         public LinearLayout colorIndicator;
         public ViewHolderClick mListener;
+        public  TimelineView mTimelineView;
 
-        public ListItemViewHolder(View itemView) {
+        public ListItemViewHolder(View itemView , int viewType) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.fragment_space_schedule_list_row_title);
             speaker = (TextView) itemView.findViewById(R.id.fragment_space_schedule_list_row_speaker);
             time = (TextView) itemView.findViewById(R.id.fragment_space_schedule_list_row_time);
             duration = (TextView) itemView.findViewById(R.id.fragment_space_schedule_list_row_duration);
             colorIndicator = (LinearLayout) itemView.findViewById(R.id.fragment_space_schedule_list_row_color_indicator);
+            mTimelineView = (TimelineView) itemView.findViewById(R.id.time_marker);
+
+            mTimelineView.initLine(viewType);
             itemView.setOnClickListener(this);
         }
 

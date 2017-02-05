@@ -19,36 +19,37 @@ android:layout_height="match_parent" >
         />
 
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="About 50p"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="1dp"
+    <!--<TextView-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:text="About 50p"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginTop="22dp"-->
+        <!--android:layout_marginBottom="1dp"-->
 
-        />
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        <!--/>-->
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:elevation="30dp"-->
 
-        >
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/about50p"
-            android:textColor="#000000"
-            android:lineSpacingExtra="5dp"
-            android:textSize="18sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+        <!--&gt;-->
+        <!--<TextView-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:text="@string/about50p"-->
+            <!--android:textColor="#000000"-->
+            <!--android:lineSpacingExtra="5dp"-->
+            <!--android:textSize="18sp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="10dp"-->
 
-            />
-    </android.support.v7.widget.CardView>
+            <!--/>-->
+    <!--</android.support.v7.widget.CardView>-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -89,7 +90,8 @@ android:layout_height="match_parent" >
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5sp">
+        android:layout_margin="5sp"
+      >
         <com.google.android.gms.maps.MapView
 
             android:id="@+id/mapView50p"

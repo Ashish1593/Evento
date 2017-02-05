@@ -1,6 +1,5 @@
-package com.examples.android.evento.schedule;
+package com.examples.android.evento.activity;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -8,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -18,11 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.examples.android.evento.R;
-import com.examples.android.evento.adapters.RecyclerViewAdapterAnnouncements;
 import com.examples.android.evento.controller.AppController;
-import com.examples.android.evento.fragments.Event50p;
-import com.examples.android.evento.model.Announcements;
-import com.examples.android.evento.model.TalkDetails;
+import com.examples.android.evento.model.Session;
+import com.examples.android.evento.adapters.SessionsAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -41,7 +37,7 @@ import java.util.List;
 public class ScheduleActivity extends AppCompatActivity {
 
     private static String TAG = com.examples.android.evento.activity.AnnouncementsActivity.class.getSimpleName();
-   private String urlJsonObj = "https://50p.talkfunnel.com/2017/json";
+   //private String urlJsonObj = "https://50p.talkfunnel.com/2017/json";
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout swipeLayout;
     private SessionsAdapter mAdapter;
@@ -75,9 +71,9 @@ public class ScheduleActivity extends AppCompatActivity {
 
         //  mRecyclerView.setOnScrollListener(scrollListener);
 //
-//        Intent intent =getIntent();
-//        String url = intent.getStringExtra("jsonurl");
-        makeJsonObjectRequest();
+        Intent intent =getIntent();
+        String url = intent.getStringExtra("jsonurl");
+        makeJsonObjectRequest(url);
     }
 //    private SwipeRefreshLayout.OnRefreshListener mOnSwipeListener = new SwipeRefreshLayout.OnRefreshListener() {
 //        @Override
@@ -107,7 +103,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
 
 
-    private void makeJsonObjectRequest() {
+    private void makeJsonObjectRequest(String urlJsonObj) {
 
         //  showpDialog();
 
@@ -131,9 +127,11 @@ public class ScheduleActivity extends AppCompatActivity {
                         for(int k=0; k<slots.length();k++) {
                             sessions.addAll(Arrays.asList(gson.fromJson(slots.getJSONObject(k).optString("sessions", "[]"), Session[].class)));
                         }
-                    }
+                   }
 
                     mRecyclerView.setAdapter(new SessionsAdapter(ScheduleActivity.this, sessions));
+
+
 
 //                    for(Session s: sessions) {
 //                       mRecyclerView.setAdapter(new SessionsAdapter(ScheduleActivity.this, sessions));
@@ -158,8 +156,10 @@ public class ScheduleActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //  VolleyLog.d(TAG, "Error: " + error.getMessage());
+//                Toast.makeText(getApplicationContext(),
+//                        error.getMessage(), Toast.LENGTH_SHORT).show();
                 Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                        "no network", Toast.LENGTH_SHORT).show();
                 // hide the progress dialog
                 //   hidepDialog();
 

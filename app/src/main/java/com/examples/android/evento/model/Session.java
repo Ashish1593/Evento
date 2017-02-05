@@ -1,4 +1,4 @@
-package com.examples.android.evento.schedule;
+package com.examples.android.evento.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

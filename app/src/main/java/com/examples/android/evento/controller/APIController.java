@@ -6,7 +6,6 @@ package com.examples.android.evento.controller;
 
 
 //import com.examples.android.evento.schedule.ScheduleHelper;
-import com.examples.android.evento.schedule.Session;
 ////import com.examples.android.evento.schedule.Space;
 import com.examples.android.evento.utils.AuthWrapper;
 import com.examples.android.evento.interfacelistener.TalkfunnelAPI;
@@ -15,15 +14,7 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
-import okhttp3.OkHttpClient;
+        import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;

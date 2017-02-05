@@ -1,6 +1,7 @@
 package com.examples.android.evento.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
@@ -22,6 +23,7 @@ import com.examples.android.evento.R;
 import com.examples.android.evento.adapters.RecylerViewadapter;
 import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.model.TalkDetails;
+import com.examples.android.evento.activity.ScheduleActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -106,6 +108,17 @@ public class Jsfoo2017 extends Fragment{
         });
 
 
+        Button  ViewSchedule = (Button) view.findViewById(R.id.viewschedulejsfoo);
+        ViewSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ScheduleActivity.class);
+                intent.putExtra("jsonurl","https://jsfoo.talkfunnel.com/2017/json");
+                startActivity(intent);
+            }
+        });
+
+
 
         myRecyclerView =(RecyclerView) view.findViewById(R.id.CardViewJSFOO);
         LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
@@ -115,6 +128,17 @@ public class Jsfoo2017 extends Fragment{
 
         myRecyclerView.setLayoutManager(myLayoutManager);
 
+
+        Button buyJsfooTicket = (Button) view.findViewById(R.id.BuyjsfooTickets);
+        buyJsfooTicket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+                final String URI = "https://jsfoo.in/2017/";
+                intent.launchUrl(getActivity(), Uri.parse(URI));
+
+            }
+        });
 
 
 //        final TextView clickToSeeAllEvents = (TextView) view.findViewById(R.id.clicktoseefossmeetproposedtalks);

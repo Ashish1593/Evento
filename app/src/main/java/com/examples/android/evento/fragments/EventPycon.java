@@ -1,6 +1,7 @@
 package com.examples.android.evento.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
 import com.examples.android.evento.model.TalkDetails;
 import com.examples.android.evento.adapters.RecylerViewadapter;
+import com.examples.android.evento.activity.ScheduleActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -106,6 +108,17 @@ public class EventPycon extends Fragment{
        myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
         myRecyclerView.setLayoutManager(myLayoutManager);
+
+        Button  ViewSchedule = (Button) view.findViewById(R.id.viewschedulepycon);
+        ViewSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+           Intent intent = new Intent(v.getContext(), ScheduleActivity.class);
+                intent.putExtra("jsonurl","https://pyconpune.talkfunnel.com/2017/json");
+                startActivity(intent);
+}
+        });
+
 
 //        final TextView clickToSeeAllEvents = (TextView) view.findViewById(R.id.clicktoseepyconproposedtalks);
 //

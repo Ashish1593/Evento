@@ -2,10 +2,6 @@ package com.examples.android.evento.model;
 
         import com.google.gson.annotations.SerializedName;
 
-/**
- * Author: @karthikb351
- * Project: android
- */
 
 public class FoodCourtVendorItem {
 

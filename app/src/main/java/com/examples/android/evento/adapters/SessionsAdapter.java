@@ -1,4 +1,4 @@
-package com.examples.android.evento.schedule;
+package com.examples.android.evento.adapters;
 
 /**
  * Created by ankit on 31/1/17.
@@ -7,8 +7,6 @@ package com.examples.android.evento.schedule;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -23,20 +21,20 @@ import android.widget.Toast;
 //import com.hasgeek.zalebi.api.model.Room;
 //import com.hasgeek.zalebi.api.model.Session;
 import com.examples.android.evento.R;
+import com.examples.android.evento.model.Session;
 import com.vipul.hp_hp.timelineview.TimelineView;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by karthikbalakrishnan on 30/03/15.
- */
+import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
+
+
 public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListItemViewHolder>{
 
     private final Context context;
@@ -69,6 +67,19 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
         viewHolder.title.setText(s.getTitle());
         viewHolder.speaker.setText(s.getSpeaker());
 
+
+        if(s.getRoom()==null) {
+            //background.setBackgroundColor(inflater.getContext().getResources().getColor(R.color.colorPrimary));
+            viewHolder.location.setText("Main Auditorium");
+        } else if(s.getRoom().contains("audi")) {
+           // background.setBackgroundColor(inflater.getContext().getResources().getColor(R.color.colorPrimary));
+            viewHolder.location.setText("Main Auditorium");
+        }
+        else {
+          //  background.setBackgroundColor(inflater.getContext().getResources().getColor(R.color.colorAccent));
+            viewHolder.location.setText("Banquet Hall");
+        }
+
         DateFormat m_ISO8601Local = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         m_ISO8601Local.setTimeZone(TimeZone.getTimeZone("GMT+0"));
         final Calendar start = Calendar.getInstance();
@@ -88,9 +99,13 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
         SimpleDateFormat sdfs = new SimpleDateFormat("hh:mm a");
         sdfs.setTimeZone(TimeZone.getDefault());
 
-        String session_time = sdfs.format(start.getTime()) + "\n" + sdfs.format(end.getTime());
+        String session_time = sdfs.format(start.getTime()) + "-"+  sdfs.format(end.getTime());
 
         viewHolder.time.setText(session_time);
+
+
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+         viewHolder.date.setText(sd.format(start.getTime()));
 
 
         viewHolder.mListener = new ListItemViewHolder.ViewHolderClick() {
@@ -106,12 +121,12 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
             }
         };
 
-        if(s.getIsBreak()) {
-            viewHolder.colorIndicator.setBackgroundColor(Color.DKGRAY);
-        }
-        else {
-            viewHolder.colorIndicator.setBackgroundColor(Color.LTGRAY);
-        }
+//        if(s.getIsBreak()) {
+//            viewHolder.colorIndicator.setBackgroundColor(Color.DKGRAY);
+//        }
+//        else {
+//            viewHolder.colorIndicator.setBackgroundColor(Color.LTGRAY);
+//        }
 
     }
 
@@ -119,15 +134,23 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
 
     @Override
     public int getItemCount() {
+
+        if(sessions.size()==0){
+            Toast.makeText(getApplicationContext(),
+                    "Schedule is not prepared", Toast.LENGTH_SHORT).show();
+
+        }
         return sessions.size();
     }
 
 
     public final static class ListItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView title;
+        public TextView date;
         public TextView speaker;
         public TextView time;
         public TextView duration;
+        public  TextView location;
         public LinearLayout colorIndicator;
         public ViewHolderClick mListener;
         public  TimelineView mTimelineView;
@@ -138,9 +161,10 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
             speaker = (TextView) itemView.findViewById(R.id.fragment_space_schedule_list_row_speaker);
             time = (TextView) itemView.findViewById(R.id.fragment_space_schedule_list_row_time);
             duration = (TextView) itemView.findViewById(R.id.fragment_space_schedule_list_row_duration);
-            colorIndicator = (LinearLayout) itemView.findViewById(R.id.fragment_space_schedule_list_row_color_indicator);
+            //colorIndicator = (LinearLayout) itemView.findViewById(R.id.fragment_space_schedule_list_row_color_indicator);
             mTimelineView = (TimelineView) itemView.findViewById(R.id.time_marker);
-
+             location = (TextView)itemView.findViewById(R.id.room);
+            date = (TextView)itemView.findViewById(R.id.date);
             mTimelineView.initLine(viewType);
             itemView.setOnClickListener(this);
         }

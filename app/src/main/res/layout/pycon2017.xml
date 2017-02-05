@@ -48,17 +48,38 @@ android:layout_height="match_parent" >
             android:layout_marginTop="10dp"
             />
     </android.support.v7.widget.CardView>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Proposed Talks"
         android:layout_marginLeft="10dp"
         android:textSize="20sp"
+        android:layout_weight="1"
         android:id="@+id/clicktoseepyconproposedtalks"
         android:textStyle="bold"
         android:layout_marginTop="22dp"
         android:layout_marginBottom="1dp"
         />
+    <!--<Button-->
+
+        <!--android:id="@+id/BuyPyconTickets"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:text="Buy Ticket"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:background="#FF4500"-->
+
+        <!--android:clickable="true"-->
+        <!--/>-->
+        </LinearLayout>
 
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
@@ -97,19 +118,38 @@ android:layout_height="match_parent" >
 
     </android.support.v7.widget.CardView>
 
-    <Button
 
-        android:id="@+id/BuyPyconTickets"
-        android:layout_height="wrap_content"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:text="Buy Ticket"
-        android:layout_marginTop="20dp"
-        android:textColor="#ffffff"
-        android:background="#FF4500"
 
-        android:clickable="true"
-        />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
 
+        <Button
+            android:clickable="true"
+            android:id="@+id/BuyPyconTickets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FF4500"
+            android:text="Buy Tickets"
+            android:textColor="#ffffff" />
+
+
+        <Button
+            android:clickable="true"
+            android:id="@+id/viewschedulepycon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FF4500"
+            android:text="View Schedule"
+            android:textColor="#ffffff"
+
+            />
+    </LinearLayout>
     <!--<FrameLayout-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"-->

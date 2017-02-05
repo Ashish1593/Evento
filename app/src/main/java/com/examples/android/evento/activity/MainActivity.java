@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
          //   Fragment workshoponDNSandDNSSEC = new WorkshoponDNSandDNSSEC();
            // Fragment Events_two_fragments = new Events_two_fragments();
-            Fragment event50p = new Event50p();
+          //  Fragment event50p = new Event50p();
             Fragment eventFossMeet = new EventFossMeet();
             Fragment eventPycon=new EventPycon();
           //Fragment seeallevents = new SeeAllEvents();
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
             // pagerAdapter.addFragment(workshoponDNSandDNSSEC);
             //pagerAdapter.addFragment(Events_two_fragments);
-            pagerAdapter.addFragment(event50p);
+            //pagerAdapter.addFragment(event50p);
             pagerAdapter.addFragment(eventPycon);
             pagerAdapter.addFragment(eventFossMeet);
             pagerAdapter.addFragment(eventRootconf2017);

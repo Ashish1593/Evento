@@ -27,14 +27,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.examples.android.evento.activity.QRcodeScanner;
 import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
 import com.examples.android.evento.model.TalkDetails;
 import com.examples.android.evento.adapters.RecylerViewadapter;
-import com.examples.android.evento.schedule.ScheduleActivity;
-import com.examples.android.evento.schedule.Session;
-import com.examples.android.evento.schedule.SessionsAdapter;
+import com.examples.android.evento.activity.ScheduleActivity;
+import com.examples.android.evento.adapters.SessionsAdapter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -44,16 +42,12 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 

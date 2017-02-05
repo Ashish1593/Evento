@@ -28,6 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 /**
  * Created by ankit on 11/12/16.
@@ -66,6 +67,23 @@ import java.util.Locale;
         String d =details.get(position).getEventdate();
 
 
+
+        List<String> colors = new ArrayList<>();
+
+        colors.add("#8d6e63"); //eg.Blue
+        colors.add("#78909c"); // ...
+        colors.add("#9ccc65");
+        colors.add("#009688");
+        colors.add("#7986cb");
+        colors.add("#9575cd");
+
+
+
+
+        Random random = new Random();
+
+        int generatedRandomNum = random.nextInt(colors.size());
+
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String td = formatter.format(Calendar.getInstance().getTime());
 
@@ -99,7 +117,7 @@ import java.util.Locale;
                 holder.statustext.setTextColor(Color.RED);
             }
             else{
-                holder.frameLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                holder.frameLayout.setBackgroundColor(Color.parseColor(colors.get(generatedRandomNum)));
                 holder.statustext.setText("UPCOMING");
                 holder.statustext.setTextColor(Color.GREEN);
             }

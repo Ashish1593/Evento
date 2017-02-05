@@ -12,6 +12,8 @@ android:layout_height="match_parent"
 android:gravity="center"
 android:paddingTop="5dp"
 android:layout_margin="1dp"
+
+    android:hapticFeedbackEnabled="true"
 android:layout_gravity="center"
 android:scaleType="fitXY"
     android:id="@+id/frame"
@@ -56,8 +58,8 @@ android:background="@drawable/gradient">
     android:gravity="center"
     tools:text="Event Name"
     android:maxLines="1"
-    android:textColor="#000000"
-    android:textSize="15sp"
+    android:textColor="#816894"
+    android:textSize="20sp"
     android:textStyle="bold"/>
 
      <TextView
@@ -69,7 +71,7 @@ android:background="@drawable/gradient">
     tools:text="Event Place"
     android:maxLines="1"
     android:gravity="center"
-    android:textColor="#000000"
+    android:textColor="#ffffff"
     android:textSize="15sp"
     android:textStyle="bold" />
      <TextView
@@ -78,7 +80,7 @@ android:background="@drawable/gradient">
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     tools:text="Event Date"
-    android:textColor="#000000"
+    android:textColor="#ffffff"
     android:gravity="center"
     android:layout_marginBottom="25dp"
     android:textSize="15sp"

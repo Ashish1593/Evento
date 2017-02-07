@@ -1,12 +1,19 @@
 package com.examples.android.evento.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+
+import java.io.Serializable;
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by ankit on 16/12/16.
  */
 
-public class TalkDetails {
+public class TalkDetails implements Serializable {
 
     private String speakerName;
     private String talkTitle;
@@ -30,4 +37,18 @@ public class TalkDetails {
     public String getTalkURL(){
         return talkURL;
     }
+
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void writeToParcel( Parcel dest, int flags) {
+//
+//        dest.writeString(speakerName);
+//        dest.writeString(talkTitle);
+//        dest.writeString(talkURL);
+//
+//    }
 }

@@ -13,6 +13,10 @@ public class AuthController {
         return false;
     }
 
+
+
+
+
     public static void saveAuthToken(String authToken) {
         SharedPreferenceController.setSharedPref(AUTH_TOKEN_KEY, authToken);
     }

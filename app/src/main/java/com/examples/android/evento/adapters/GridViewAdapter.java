@@ -70,15 +70,20 @@ import java.util.Random;
 
         List<String> colors = new ArrayList<>();
 
-        colors.add("#8d6e63"); //eg.Blue
-        colors.add("#78909c"); // ...
-        colors.add("#9ccc65");
-        colors.add("#009688");
-        colors.add("#7986cb");
-        colors.add("#9575cd");
-
-
-
+        colors.add("#cfd8dc");
+        colors.add("#d7ccc8");
+        colors.add("#ffccbc");
+        colors.add("#ffe0b2");
+        colors.add("#ffecb3");
+        colors.add("#fff9c4");
+        colors.add("#f0f4c3");
+        colors.add("#dcedc8");
+        colors.add("#c8e6c9");
+        colors.add("#b2dfdb");
+        colors.add("#b2ebf2");
+        colors.add("#b3e5fc");
+        colors.add("#bbdefb");
+        colors.add("#c5cae9");
 
         Random random = new Random();
 

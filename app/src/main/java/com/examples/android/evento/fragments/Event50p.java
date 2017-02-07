@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 package com.examples.android.evento.fragments;
 
 import android.app.ProgressDialog;
@@ -27,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+//import com.examples.android.evento.activity.ProposedTalksActivity;
 import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
 import com.examples.android.evento.model.TalkDetails;
@@ -57,7 +51,7 @@ import static com.google.android.gms.plus.PlusOneDummyView.TAG;
  * Created by ankit on 9/12/16.
  */
 
-public class Event50p extends Fragment  {
+public class Event50p extends Fragment    {
     MapView mMapView;
     private GoogleMap googleMap;
     private String urlJsonObj = "https://50p.talkfunnel.com/2017/json";
@@ -138,6 +132,25 @@ public class Event50p extends Fragment  {
         });
 
 
+//        Button  Viewsepratetalk = (Button) view.findViewById(R.id.separatetalkview);
+//        Viewsepratetalk.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+////                final String URI = "https://50p.talkfunnel.com/2017/schedule";
+////                intent.launchUrl(getActivity(), Uri.parse(URI));
+//
+//
+//
+//                Intent intent = new Intent(v.getContext(), ProposedTalksActivity.class);
+//                startActivity(intent);
+//
+//
+//
+//
+//            }
+//        });
+
         myRecyclerView =(RecyclerView) view.findViewById(R.id.CardView50p);
         LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
         myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -181,6 +194,7 @@ public class Event50p extends Fragment  {
 
         return view;
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -229,11 +243,15 @@ public class Event50p extends Fragment  {
                         String talkTitle = talks50p.getString("title");
                         String talkURL = talks50p.getString("url");
 
-                        TalkDetails proprsal50pDetails = new TalkDetails(speakerName,talkTitle,talkURL);
+                        TalkDetails proposal50pDetails = new TalkDetails(speakerName,talkTitle,talkURL);
 
-                        details50p.add(proprsal50pDetails);
+                        details50p.add(proposal50pDetails);
 
 
+
+                        Intent intent = new Intent(getActivity(), ScheduleActivity.class);
+                      intent.putExtra("50pdetails",details50p);
+                        //startActivity(intent);
                     }
 
 

@@ -71,7 +71,7 @@ android:background="@drawable/gradient">
     tools:text="Event Place"
     android:maxLines="1"
     android:gravity="center"
-    android:textColor="#ffffff"
+    android:textColor="#000000"
     android:textSize="15sp"
     android:textStyle="bold" />
      <TextView
@@ -80,7 +80,7 @@ android:background="@drawable/gradient">
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     tools:text="Event Date"
-    android:textColor="#ffffff"
+    android:textColor="#000000"
     android:gravity="center"
     android:layout_marginBottom="25dp"
     android:textSize="15sp"

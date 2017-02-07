@@ -26,6 +26,11 @@
 
 </string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
-    <string name="FACEBOOK_APP_ID">1337046403014854</string>
-    <string name="ACCOUNT_KIT_CLIENT_TOKEN">f3d2b20953de38ce3c30b00802f51f12</string>
+    <!--<string name="FACEBOOK_APP_ID">1337046403014854</string>-->
+
+    <string name="FACEBOOK_APP_ID">2150654815170532</string>
+    <!--<string name="ACCOUNT_KIT_CLIENT_TOKEN">f3d2b20953de38ce3c30b00802f51f12</string>-->
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">a9c1a26861b706727150b97acabb2886</string>
+    <string name="ak_login_protocol_scheme">ak2150654815170532</string>
+
 </resources>

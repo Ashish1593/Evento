@@ -7,6 +7,15 @@ package com.examples.android.evento.controller;
 
 //import com.examples.android.evento.schedule.ScheduleHelper;
 ////import com.examples.android.evento.schedule.Space;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.examples.android.evento.activity.ScheduleActivity;
+import com.examples.android.evento.adapters.SessionsAdapter;
+import com.examples.android.evento.model.Session;
 import com.examples.android.evento.utils.AuthWrapper;
 import com.examples.android.evento.interfacelistener.TalkfunnelAPI;
 import com.google.gson.ExclusionStrategy;
@@ -14,7 +23,15 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-        import okhttp3.OkHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
@@ -22,6 +39,9 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
+
+import static android.content.ContentValues.TAG;
+import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
 
 
 public class APIController {
@@ -36,6 +56,8 @@ public class APIController {
         }
         return apiController;
     }
+
+   public RecyclerView mRecyclerView;
 
 
     public  String getAuthHeaderFromToken(String token) {
@@ -115,60 +137,77 @@ public class APIController {
         });
     }
 
-//    public Observable<List<Session>> getSessionsBySpaceId(String spaceId) {
-//
-//        //final Space space = SpaceController.getSpaceById_Cold(Realm.getDefaultInstance(), spaceId);
-//
-//
-//        return Observable.create(new Observable.OnSubscribe<List<Session>>() {
-//            @Override
-//            public void call(Subscriber<? super List<Session>> subscriber) {
-//                try {
-//                    final Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
-//                        @Override
-//                        public boolean shouldSkipField(FieldAttributes f) {
-//                          //  return f.getDeclaringClass() == RealmObject.class;
-//                        return false;
-//                        }
-//
-//                        @Override
-//                        public boolean shouldSkipClass(Class<?> clazz) {
-//                            return false;
-//                        }
-//                    }).create();
-//                    final OkHttpClient client = new OkHttpClient();
-//                    final Request request = new Request.Builder()
-//                            .url("https://50p.talkfunnel.com/2017/json")
-//                            .build();
-//                    Response response = client.newCall(request).execute();
-//                    JSONObject jsonObject = new JSONObject(response.body().string());
-//                    List<Session> sessions = new ArrayList<>();
-//                    JSONArray schedule = new JSONArray(jsonObject.optString("schedule", "[]"));
-//
-//                    for (int i = 0; i < schedule.length(); i++) {
-//                        JSONArray slots = schedule.getJSONObject(i).getJSONArray("slots");
-//                        for (int k = 0; k < slots.length(); k++) {
-//                            sessions.addAll(Arrays.asList(gson.fromJson(slots.getJSONObject(k).optString("sessions", "[]"), Session[].class)));
-//                        }
+
+
+    public void makeJsonObjectRequest(String urlJsonObj) {
+
+        //  showpDialog();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(com.android.volley.Request.Method.GET,
+                urlJsonObj , null, new com.android.volley.Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+                try {          //  Parsing json object response
+                    //response will be a json object
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    Gson gson = gsonBuilder.create();
+                    // JSONObject obj = null;
+
+                    List<Session> sessions = new ArrayList<>();
+                    JSONArray schedule = new JSONArray(response.optString("schedule", "[]"));
+
+                    for(int i=0; i<schedule.length(); i++) {
+                        JSONArray slots = schedule.getJSONObject(i).getJSONArray("slots");
+                        for(int k=0; k<slots.length();k++) {
+                            sessions.addAll(Arrays.asList(gson.fromJson(slots.getJSONObject(k).optString("sessions", "[]"), Session[].class)));
+                        }
+                    }
+
+                    mRecyclerView.setAdapter(new SessionsAdapter(getApplicationContext(), sessions));
+
+
+
+//                    for(Session s: sessions) {
+//                       mRecyclerView.setAdapter(new SessionsAdapter(ScheduleActivity.this, sessions));
 //                    }
-////
-//                    for (Session s : sessions) {
-//                     //   s.setSpace(space);
-//                    }
-//
-//                    HashMap<Integer, List<Session>> hashMap = ScheduleHelper.getDayOfYearMapFromSessions(sessions);
-//                    for (Integer key : hashMap.keySet()) {
-//                        ScheduleHelper.addDimensToSessions(hashMap.get(key));
-//                    }
-//
-//                    subscriber.onNext(sessions);
-//                    subscriber.onCompleted();
-//
-//                } catch (Exception e) {
-//                    subscriber.onError(e);
-//                }
-//            }
-//        });
-//    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),
+                            "Error: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
+
+
+                //   announcementRecyclerView.setAdapter(new RecyclerViewAdapterAnnouncements(com.examples.android.evento.activity.AnnouncementsActivity.this,announcementsArraylist));
+
+            }
+
+        }, new com.android.volley.Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //  VolleyLog.d(TAG, "Error: " + error.getMessage());
+//                Toast.makeText(getApplicationContext(),
+//                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),
+                        "no network", Toast.LENGTH_SHORT).show();
+                // hide the progress dialog
+                //   hidepDialog();
+
+            }
+        });
+
+// Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
+    }
+
+
+
+
 
 }

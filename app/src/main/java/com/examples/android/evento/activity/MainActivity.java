@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
@@ -46,7 +48,15 @@ import com.examples.android.evento.fragments.EventslistFragment;
 import com.examples.android.evento.R;
 import com.examples.android.evento.adapters.ViewPagerAdapter;
 import com.examples.android.evento.fragments.WorkshoponDNSandDNSSEC;
+import com.facebook.accountkit.Account;
 import  com.facebook.accountkit.AccountKit;
+import com.facebook.accountkit.AccountKitCallback;
+import com.facebook.accountkit.AccountKitError;
+import com.facebook.accountkit.AccountKitLoginResult;
+import com.facebook.accountkit.PhoneNumber;
+import com.facebook.accountkit.ui.AccountKitActivity;
+import com.facebook.accountkit.ui.AccountKitConfiguration;
+import com.facebook.accountkit.ui.LoginType;
 
 import java.util.ArrayList;
 
@@ -61,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
  // json object response url
      private String urlJsonObj = "https://talkfunnel.com/json";
      private final int SPLASH_DISPLAY_LENGTH = 3000;
+    public static int APP_REQUEST_CODE = 99;
 
     Context context;
 
@@ -85,8 +96,11 @@ public class MainActivity extends AppCompatActivity {
 
             this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+            AccountKit.initialize(getApplicationContext());
              setContentView(R.layout.activity_main);
+
+
+
 
 /////////////////////////////////////////////////////////
 //            Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -118,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
             ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
             // pagerAdapter.addFragment(workshoponDNSandDNSSEC);
             //pagerAdapter.addFragment(Events_two_fragments);
-            //pagerAdapter.addFragment(event50p);
+          // pagerAdapter.addFragment(event50p);
             pagerAdapter.addFragment(eventPycon);
             pagerAdapter.addFragment(eventFossMeet);
             pagerAdapter.addFragment(eventRootconf2017);
@@ -163,6 +177,130 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+
+
+
+
+
+
+
+
+
+
+    public void onLoginPhone() {
+        final Intent intent = new Intent(this, AccountKitActivity.class);
+        AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder =
+                new AccountKitConfiguration.AccountKitConfigurationBuilder(
+                        LoginType.PHONE,
+                        AccountKitActivity.ResponseType.CODE); // or .ResponseType.TOKEN
+        // ... perform additional configuration ...
+        intent.putExtra(
+                AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION,
+                configurationBuilder.build());
+          startActivityForResult(intent, APP_REQUEST_CODE);
+        connectwifi();
+    }
+
+
+
+
+
+
+    @Override
+    protected void onActivityResult(
+            final int requestCode,
+            final int resultCode,
+            final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode != APP_REQUEST_CODE) {
+            return;
+        }
+
+        AccountKitLoginResult loginResult = AccountKit.loginResultWithIntent(data);
+        final String accessToken = loginResult.getAccessToken().getToken();
+
+
+        AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
+            @Override
+            public void onSuccess(final Account account) {
+
+                PhoneNumber phoneNumber = account.getPhoneNumber();
+                String phoneNumberString = phoneNumber.toString();
+
+//                com.examples.android.evento.controller.PhoneNumber.setPhone_Number(accessToken);
+                //   com.examples.android.evento.controller.PhoneNumber.setPhone_Number(phoneNumberString);
+
+                connectwifi();
+//                mUtility.saveToPreferences("AccessToken", accessToken);
+//                mUtility.saveToPreferences("PhoneNumber", phoneNumberString);
+//
+//
+//
+//                fetchUserTask.execute(accessToken, phoneNumberString);
+
+
+
+
+            }
+
+            @Override
+            public void onError(final AccountKitError error) {
+                // Handle Error
+
+            }
+        });
+
+
+    }
+
+
+
+
+
+
+    public void connectwifi() {
+        WifiConfiguration wifiConfig = new WifiConfiguration();
+        wifiConfig.SSID = String.format("\"%s\"", "Geekskool");
+        wifiConfig.preSharedKey = String.format("\"%s\"", "takeiteasy");
+
+        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+        if (wifiManager.isWifiEnabled()) {
+            wifiManager.setWifiEnabled(false);
+        } else {
+            wifiManager.setWifiEnabled(true);
+        }
+        int netId = wifiManager.addNetwork(wifiConfig);
+        wifiManager.disconnect();
+        wifiManager.enableNetwork(netId, true);
+        wifiManager.reconnect();
+
+
+        //  showSimpleDialog(phoneNumberString);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
+        builder.setCancelable(false);
+        builder.setTitle("Connected to Hasgeek successfully");
+        builder.setMessage("Simple Dialog Message");
+        builder.setPositiveButton("OK!!!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+//                .setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                });
+
+        // Create the AlertDialog object and return it
+        builder.create().show();
+    }
+
 
     public void hasgeektv(View view ) {
 
@@ -226,6 +364,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void connecttonetwork(View view ) {
+
+
 
         Intent intent = new Intent(view.getContext(),OpenWifi.class);
         startActivity(intent);
@@ -300,233 +440,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 return true;
             }
-
-
-
-
-
-
-//////////////////////////////////////
-//
-//            @Override
-//            public void onGenerated(Palette palette) {
-//               collapsingToolbarLayout .setContentScrimColor(palette.getMutedColor(R.attrs.colorPrimary));
-//                collapsingToolbarLayout.setStatusBarScrimColor(palette.getMutedColor(R.attrs.colorPrimaryDark));
-//            }
-//        });
-//    }
-//
-//    private void toolbarTextAppernce() {
-//        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsedappbar);
-//        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedappbar);
-//    }
-/////////////////////////////////////
-//        /**
-//         * Method to make json object request where json response starts wtih {
-//         * */
-//    /**
-//     * Method to make json object request where json response starts wtih {
-//     * */
-//    private void makeJsonObjectRequest() {
-//
-//        showpDialog();
-//
-//        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-//                urlJsonObj, null, new Response.Listener<JSONObject>() {
-//
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d(TAG, response.toString());
-//                try {
-//                    //  Parsing json object response
-//                    //response will be a json object
-//                    JSONArray eventsArray = response.getJSONArray("spaces");
-//                    details = new ArrayList<EventDetails>();
-//                    for(int i=0;i<eventsArray.length();i++) {
-//                        JSONObject events = eventsArray.getJSONObject(i);
-//                        String name = events.getString("title");
-//                        String location = events.getString("datelocation");
-//                        String date = events.getString("start");
-//                        String URL = events.getString("url");
-//
-//                      EventDetails edetails = new EventDetails(name,location,date,URL);
-//
-//                        details.add(edetails);
-//
-//
-//
-//                    }
-//
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getApplicationContext(),
-//                            "Error: " + e.getMessage(),
-//                            Toast.LENGTH_LONG).show();
-//                }
-//
-//                ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);
-//               ViewPager viewPager = (ViewPager) findViewById(viewpager);
-//
-//               viewPager.setAdapter(pagerAdapter);
-//
-//              // viewPager.setPageTransformer(true, new RotateUpTransformer());
-//                //viewPager.setPageTransformer(true, new AccordionTransformer());
-//                //viewPager.setPageTransformer(true, new ScaleInOutTransformer());
-//                //viewPager.setPageTransformer(true, new ZoomInTransformer());
-//               // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
-//               // viewPager.setPageTransformer(true, new FlipVerticalTransformer());
-//               // viewPager.setPageTransformer(true, new TabletTransformer());
-//                //viewPager.setPageTransformer(true, new DepthPageTransformer());
-//               // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
-//               // viewPager.setPageTransformer(true, new CubeInTransformer());
-//            //    viewPager.setPageTransformer(true, new RotateDownTransformer());
-//               // viewPager.setPageTransformer(true, new StackTransformer());
-//               // viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
-//          // viewPager.setPageTransformer(true, new CubeOutTransformer());
-//                hidepDialog();
-//       }
-//
-//        }, new Response.ErrorListener() {
-//
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d(TAG, "Error: " + error.getMessage());
-//                Toast.makeText(getApplicationContext(),
-//                        error.getMessage(), Toast.LENGTH_SHORT).show();
-//                // hide the progress dialog
-//                hidepDialog();
-//            }
-//        });
-//
-//        // Adding request to request queue
-//        AppController.getInstance().addToRequestQueue(jsonObjReq);
-//    }
-//
-//
-//
-//    /**
-//     * Method to make json array request where response starts with [
-//     */
-//
-//
-//    private void showpDialog() {
-//        if (!pDialog.isShowing())
-//            pDialog.show();
-//    }
-//
-//    private void hidepDialog() {
-//        if (pDialog.isShowing())
-//            pDialog.dismiss();
-//    }
-////////////////////////////////////////////////////////////////////
-
-//
-//    private void makeJsonObjectRequest() {
-//
-//        showpDialog();
-//
-//        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-//                urlJsonObj, null, new Response.Listener<JSONObject>() {
-//
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d(TAG, response.toString());
-//                try {
-//                    //  Parsing json object response
-//                    //response will be a json object
-//                    JSONArray eventsArray = response.getJSONArray("spaces");
-//                    details = new ArrayList<EventDetails>();
-//                    if(eventsArray.length()>0) {
-//                        for (int i = 0; i < eventsArray.length(); i++) {
-//                            JSONObject events = eventsArray.getJSONObject(i);
-//                            String name = events.getString("title");
-//                            String location = events.getString("datelocation");
-//                            String date = events.getString("start");
-//                            String URL = events.getString("url");
-//
-//                            EventDetails edetails = new EventDetails(name, location, date, URL);
-//
-//                            details.add(edetails);
-//                        }
-//                    } else
-//                        {
-//                            Toast.makeText(MainActivity.this, "This is my Toast message!", Toast.LENGTH_LONG).show();
-//                        }
-//
-//
-//
-//
-//
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getApplicationContext(),
-//                            "Error: " + e.getMessage(),
-//                            Toast.LENGTH_LONG).show();
-//                }
-////
-//
-//
-////                ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),details);
-////               ViewPager viewPager = (ViewPager) findViewById(viewpager);
-////
-////               viewPager.setAdapter(pagerAdapter);
-//
-////               // viewPager.setPageTransformer(true, new RotateUpTransformer());
-//                //viewPager.setPageTransformer(true, new AccordionTransformer());
-//                //viewPager.setPageTransformer(true, new ScaleInOutTransformer());
-//                //viewPager.setPageTransformer(true, new ZoomInTransformer());
-//                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
-//                // viewPager.setPageTransformer(true, new FlipVerticalTransformer());
-//                // viewPager.setPageTransformer(true, new TabletTransformer());
-//                //viewPager.setPageTransformer(true, new DepthPageTransformer());
-//                // viewPager.setPageTransformer(true, new FlipHorizontalTransformer());
-//                // viewPager.setPageTransformer(true, new CubeInTransformer());
-//                //    viewPager.setPageTransformer(true, new RotateDownTransformer());
-//                // viewPager.setPageTransformer(true, new StackTransformer());
-//                // viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
-//                // viewPager.setPageTransformer(true, new CubeOutTransformer());
-//
-//                hidepDialog();
-//            }
-//
-//        }, new Response.ErrorListener() {
-//
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                VolleyLog.d(TAG, "Error: " + error.getMessage());
-//                Toast.makeText(getApplicationContext(),
-//                        error.getMessage(), Toast.LENGTH_SHORT).show();
-//                // hide the progress dialog
-//                hidepDialog();
-//            }
-//        }
-//
-//        );
-//
-//        // Adding request to request queue
-//        AppController.getInstance().addToRequestQueue(jsonObjReq);
-//    }
-//
-//
-//
-//    /**
-//     * Method to make json array request where response starts with [
-//     */
-//
-//
-//    private void showpDialog() {
-//        if (!pDialog.isShowing())
-//            pDialog.show();
-//    }
-//
-//    private void hidepDialog() {
-//        if (pDialog.isShowing())
-//            pDialog.dismiss();
-//    }
-//
 
 
 

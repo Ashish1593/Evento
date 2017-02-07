@@ -61,7 +61,7 @@ public class EventPycon extends Fragment{
         mMapView.onCreate(null);
         mMapView.onResume();
 
-       try {
+        try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,8 +73,8 @@ public class EventPycon extends Fragment{
                 googleMap = mMap;
 
                 // For showing a move to my location button
-            // googleMap.setMyLocationEnabled(true);
-             //   18.5312° N, 73.8557° E
+                // googleMap.setMyLocationEnabled(true);
+                //   18.5312° N, 73.8557° E
                 // For dropping a marker at a point on the Map
                 LatLng collegeofEngPune = new LatLng(18.5312, 73.8557);
                 googleMap.addMarker(new MarkerOptions().position(collegeofEngPune).title("College Of Engineering Pune").snippet("College Of Engoneering Pune"));
@@ -91,7 +91,7 @@ public class EventPycon extends Fragment{
 
 
         Button buyPyconTicket = (Button) view.findViewById(R.id.BuyPyconTickets);
-       buyPyconTicket.setOnClickListener(new View.OnClickListener() {
+        buyPyconTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
@@ -102,10 +102,10 @@ public class EventPycon extends Fragment{
         });
 
         myRecyclerView =(RecyclerView) view.findViewById(R.id.CardViewPycon);
-      //  RecyclerView.LayoutManager myLayoutManager = new GridLayoutManager(getActivity(),2);
+        //  RecyclerView.LayoutManager myLayoutManager = new GridLayoutManager(getActivity(),2);
         LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
 
-       myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
         myRecyclerView.setLayoutManager(myLayoutManager);
 
@@ -113,10 +113,10 @@ public class EventPycon extends Fragment{
         ViewSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-           Intent intent = new Intent(v.getContext(), ScheduleActivity.class);
+                Intent intent = new Intent(v.getContext(), ScheduleActivity.class);
                 intent.putExtra("jsonurl","https://pyconpune.talkfunnel.com/2017/json");
                 startActivity(intent);
-}
+            }
         });
 
 

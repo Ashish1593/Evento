@@ -9,11 +9,11 @@
     android:clickable="true">
 
 
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-        <!--tools:context="com.examples.android.evento.activity.MainActivity">-->
+        tools:context="com.examples.android.evento.activity.MainActivity">
 
 
         <android.support.v4.view.ViewPager
@@ -25,23 +25,23 @@
             android:layout_alignParentTop="true"
             android:background="#ffffff"/>
 
-<!--<android.support.v7.widget.CardView-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_centerVertical="true"-->
+<android.support.v7.widget.CardView
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_centerVertical="true"
 
-    <!--&gt;-->
-        <!--<ImageButton-->
-            <!--android:layout_width="10dp"-->
-            <!--android:layout_height="10dp"-->
-            <!--android:scaleType="fitXY"-->
-            <!--android:background="#ffffff"-->
+    >
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:scaleType="fitXY"
+            android:background="#20000000"
 
-            <!--android:src="@drawable/swipe"-->
-            <!--/>-->
-        <!--</android.support.v7.widget.CardView>-->
+            android:src="@drawable/arrow"
+            />
+        </android.support.v7.widget.CardView>
 
-    <!--</RelativeLayout>-->
+    </RelativeLayout>
 
     <LinearLayout
 

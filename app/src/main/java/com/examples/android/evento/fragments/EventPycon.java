@@ -8,18 +8,22 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.examples.android.evento.adapters.SessionsAdapter;
 import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
+import com.examples.android.evento.model.Session;
 import com.examples.android.evento.model.TalkDetails;
 import com.examples.android.evento.adapters.RecylerViewadapter;
 import com.examples.android.evento.activity.ScheduleActivity;
@@ -32,10 +36,15 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 //import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
@@ -46,17 +55,21 @@ import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 
 public class EventPycon extends Fragment{
     MapView mMapView;
+    private RecyclerView mRecyclerView;
     private GoogleMap googleMap;
     private ProgressDialog pDialog;
     private String urlJsonObj = "https://pyconpune.talkfunnel.com/2017/json";
     private ArrayList<TalkDetails> detailsPycon;
-    private RecyclerView myRecyclerView;
+    private TextView emptyView;
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState )
     {
         View view = inflater.inflate(R.layout.pycon2017,container,false);
+
+
         mMapView = (MapView) view.findViewById(R.id.mapViewPycon);
         mMapView.onCreate(null);
         mMapView.onResume();
@@ -100,24 +113,36 @@ public class EventPycon extends Fragment{
 
             }
         });
+        emptyView = (TextView) view.findViewById(R.id.empty_view);
 
-        myRecyclerView =(RecyclerView) view.findViewById(R.id.CardViewPycon);
-        //  RecyclerView.LayoutManager myLayoutManager = new GridLayoutManager(getActivity(),2);
-        LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.schedule_recyclerview);
+        mRecyclerView.setNestedScrollingEnabled(false);
+      //  mRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(llm);
 
-        myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        myRecyclerView.setLayoutManager(myLayoutManager);
 
-        Button  ViewSchedule = (Button) view.findViewById(R.id.viewschedulepycon);
-        ViewSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ScheduleActivity.class);
-                intent.putExtra("jsonurl","https://pyconpune.talkfunnel.com/2017/json");
-                startActivity(intent);
-            }
-        });
+
+
+//        myRecyclerView =(RecyclerView) view.findViewById(R.id.CardViewPycon);
+//        //  RecyclerView.LayoutManager myLayoutManager = new GridLayoutManager(getActivity(),2);
+//        LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
+//
+//        myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//
+//        myRecyclerView.setLayoutManager(myLayoutManager);
+
+//        Button  ViewSchedule = (Button) view.findViewById(R.id.viewschedulepycon);
+//        ViewSchedule.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(v.getContext(), ScheduleActivity.class);
+//                intent.putExtra("jsonurl","https://pyconpune.talkfunnel.com/2017/json");
+//                startActivity(intent);
+//            }
+//        });
 
 
 //        final TextView clickToSeeAllEvents = (TextView) view.findViewById(R.id.clicktoseepyconproposedtalks);
@@ -171,88 +196,82 @@ public class EventPycon extends Fragment{
 
 
 
-
     private void makeJsonObjectRequest() {
 
-
-
-        // showpDialog();
+        //  showpDialog();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                urlJsonObj, null, new Response.Listener<JSONObject>() {
+                urlJsonObj , null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
-                //   Log.d(TAG,response.toString());
-                try {
-                    //  Parsing json object response
+                Log.d(TAG, response.toString());
+                try {          //  Parsing json object response
                     //response will be a json object
-                    JSONArray proposalsPyconArray = response.getJSONArray("proposals");
-                    detailsPycon = new ArrayList<TalkDetails>();
-                    for(int i=0;i<proposalsPyconArray.length();i++) {
-                        JSONObject talksPycon = proposalsPyconArray.getJSONObject(i);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    Gson gson = gsonBuilder.create();
+                    // JSONObject obj = null;
 
-                        String speakerName = talksPycon.getString("fullname");
-                        String talkTitle = talksPycon.getString("title");
-                        String talkURL = talksPycon.getString("url");
+                    List<Session> sessions = new ArrayList<>();
+                    JSONArray schedule = new JSONArray(response.optString("schedule", "[]"));
 
-                        TalkDetails proprsalPyconDetails = new TalkDetails(speakerName,talkTitle,talkURL);
-
-                        detailsPycon.add(proprsalPyconDetails);
-
-
-
-
+                    for(int i=0; i<schedule.length(); i++) {
+                        JSONArray slots = schedule.getJSONObject(i).getJSONArray("slots");
+                        for(int k=0; k<slots.length();k++) {
+                            sessions.addAll(Arrays.asList(gson.fromJson(slots.getJSONObject(k).optString("sessions", "[]"), Session[].class)));
+                        }
                     }
+
+
+                    if (sessions.isEmpty()) {
+                        mRecyclerView.setVisibility(View.GONE);
+                        emptyView.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        mRecyclerView.setVisibility(View.VISIBLE);
+                        emptyView.setVisibility(View.GONE);
+                    }
+
+
+                    mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessions));
+
+
+
+//                    for(Session s: sessions) {
+//                       mRecyclerView.setAdapter(new SessionsAdapter(ScheduleActivity.this, sessions));
+//                    }
 
 
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(getActivity().getApplicationContext(),
+                    Toast.makeText(getContext(),
                             "Error: " + e.getMessage(),
                             Toast.LENGTH_LONG).show();
                 }
-//
-                myRecyclerView.setAdapter(new RecylerViewadapter(getActivity(),detailsPycon));
 
-//
+
+                //   announcementRecyclerView.setAdapter(new RecyclerViewAdapterAnnouncements(com.examples.android.evento.activity.AnnouncementsActivity.this,announcementsArraylist));
+
             }
 
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                Toast.makeText(getActivity().getApplicationContext(),
+                //  VolleyLog.d(TAG, "Error: " + error.getMessage());
+//                Toast.makeText(getApplicationContext(),
+//                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),
                         "no network", Toast.LENGTH_SHORT).show();
                 // hide the progress dialog
+                //   hidepDialog();
 
-                //  hidepDialog();
             }
         });
 
-
-
-        // Adding request to request queue
+// Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq);
-    }
-
-
-
-    /**
-     * Method to make json array request where response starts with [
-     */
-
-
-    public void showpDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
-    }
-
-    public void hidepDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
     }
 
 }

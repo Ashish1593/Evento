@@ -19,23 +19,23 @@
             />
 
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="About Pycon"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="22dp"
-            android:layout_marginBottom="1dp"
+        <!--<TextView-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:text="About Pycon"-->
+            <!--android:textSize="20sp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginTop="22dp"-->
+            <!--android:layout_marginBottom="1dp"-->
 
-            />
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            <!--/>-->
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
 
-            >
+            <!--&gt;-->
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -43,29 +43,30 @@
                 android:textColor="#000000"
                 android:lineSpacingExtra="5dp"
                 android:textSize="18sp"
+                android:textAlignment="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 />
-        </android.support.v7.widget.CardView>
+        <!--</android.support.v7.widget.CardView>-->
 
-        <LinearLayout
+        <!--<LinearLayout-->
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Proposed Talks"
-                android:layout_marginLeft="10dp"
-                android:textSize="20sp"
-                android:layout_weight="1"
-                android:id="@+id/clicktoseepyconproposedtalks"
-                android:textStyle="bold"
-                android:layout_marginTop="22dp"
-                android:layout_marginBottom="1dp"
-                />
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal">-->
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Proposed Talks"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:textSize="20sp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:id="@+id/clicktoseepyconproposedtalks"-->
+                <!--android:textStyle="bold"-->
+                <!--android:layout_marginTop="22dp"-->
+                <!--android:layout_marginBottom="1dp"-->
+                <!--/>-->
             <!--<Button-->
 
             <!--android:id="@+id/BuyPyconTickets"-->
@@ -79,32 +80,93 @@
 
             <!--android:clickable="true"-->
             <!--/>-->
-        </LinearLayout>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp">
-            <android.support.v7.widget.RecyclerView
-                android:background="#10000000"
-                android:id="@+id/CardViewPycon"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
 
 
-                />
-        </android.support.v7.widget.CardView>
+
+
+
+        <!--</LinearLayout>-->
+
+
+
+
+
+
 
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="Get Direction"
-            android:layout_marginLeft="10dp"
+            android:text="Schedule"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="22dp"
             android:layout_marginBottom="1dp"
+
             />
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4sp">
+
+            <android.support.v7.widget.RecyclerView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/schedule_recyclerview"
+                android:layout_width="match_parent"
+
+                android:background="#20000000"
+              android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_margin="10dp"
+                android:visibility="gone"
+
+                android:text="Schedule not prepared"
+                />
+
+
+
+        </android.support.v7.widget.CardView>
+
+
+
+
+
+
+
+
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp">-->
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:background="#10000000"-->
+                <!--android:id="@+id/CardViewPycon"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="200dp"-->
+
+
+                <!--/>-->
+        <!--</android.support.v7.widget.CardView>-->
+
+        <!--<TextView-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:text="Get Direction"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:textSize="20sp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_marginTop="22dp"-->
+            <!--android:layout_marginBottom="1dp"-->
+            <!--/>-->
 
         <android.support.v7.widget.CardView
             android:layout_width="wrap_content"
@@ -138,17 +200,17 @@
                 android:textColor="#ffffff" />
 
 
-            <Button
-                android:clickable="true"
-                android:id="@+id/viewschedulepycon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#FF4500"
-                android:text="View Schedule"
-                android:textColor="#ffffff"
+            <!--<Button-->
+                <!--android:clickable="true"-->
+                <!--android:id="@+id/viewschedulepycon"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="#FF4500"-->
+                <!--android:text="View Schedule"-->
+                <!--android:textColor="#ffffff"-->
 
-                />
+                <!--/>-->
         </LinearLayout>
         <!--<FrameLayout-->
         <!--android:layout_width="match_parent"-->

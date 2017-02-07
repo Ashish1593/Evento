@@ -42,7 +42,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
 
     public SessionsAdapter(Context context, List<Session> sessions) {
         this.context = context;
-        this.sessions = sessions;
+      this.sessions = sessions;
     }
 
     @Override

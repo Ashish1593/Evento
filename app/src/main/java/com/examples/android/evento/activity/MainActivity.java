@@ -15,9 +15,11 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,6 +31,7 @@ import org.json.JSONObject;
 import android.app.ProgressDialog;
 import android.util.Log;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -99,7 +102,20 @@ public class MainActivity extends AppCompatActivity {
             AccountKit.initialize(getApplicationContext());
              setContentView(R.layout.activity_main);
 
+            //ImageButton openDrawer = (ImageButton) findViewById(R.id.opendrawer);
 
+           final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+
+
+            ImageButton openDrawer = (ImageButton) findViewById(R.id.opendrawer);
+
+            openDrawer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mDrawerLayout.openDrawer(Gravity.LEFT);
+                }
+            });
 
 
 /////////////////////////////////////////////////////////

@@ -28,16 +28,16 @@
 <android.support.v7.widget.CardView
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
-    android:layout_centerVertical="true"
+  android:layout_margin="10dp"
 
     >
         <ImageButton
-            android:layout_width="20dp"
+            android:layout_width="30dp"
             android:layout_height="30dp"
             android:scaleType="fitXY"
-            android:background="#20000000"
-
-            android:src="@drawable/arrow"
+            android:background="#00ffffff"
+            android:id="@+id/opendrawer"
+            android:src="@drawable/hamburgericon1"
             />
         </android.support.v7.widget.CardView>
 
@@ -67,49 +67,74 @@
             android:orientation="horizontal"
 
             >
-
-
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:clickable="true"
+                android:onClick="connecttonetwork"
                 android:background="?android:selectableItemBackground"
                 android:orientation="vertical"
-                android:id="@+id/hasgeektv"
-                android:onClick="hasgeektv"
-                >
-
-
+                android:id="@+id/connecttonetwork">
                 <ImageButton
-                    android:id="@+id/imageViewhasgeektv"
+                    android:clickable="true"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
                     android:padding="10dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/hasgeektv"
+                    android:paddingLeft="1dp"
+                    android:src="@drawable/wifi2"
                     android:text=""
+                    android:onClick="connecttonetwork"
                     android:textColor="#FFFFFF"
-                    android:textSize="25sp"
-                    android:clickable="true"
-                    android:onClick="hasgeektv"
-                    />
+                    android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/textViewhasgeektv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Hasgeek TV"
+                    android:text="connect to hasgeek network"
+                    android:onClick="connecttonetwork"
                     android:textAlignment="center"
-                    android:textColor="#ffffff"
-                    android:clickable="true"
-                    android:onClick="hasgeektv"/>
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
 
 
-                    </LinearLayout>
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="qrcodescanner"
+                android:background="?android:selectableItemBackground"
+                android:orientation="vertical"
+                android:id="@+id/scanBadges">
+                <ImageButton
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:paddingLeft="1dp"
+                    android:src="@drawable/scanqr2"
+                    android:text=""
+                    android:onClick="qrcodescanner"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Scan QR Code"
+                    android:onClick="qrcodescanner"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
 
 
             <LinearLayout
@@ -117,31 +142,161 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:id="@+id/talkfunnel"
-                android:onClick="talkfunnel">
+                android:onClick="liveStream"
+                >
 
                 <ImageButton
-                    android:onClick="talkfunnel"
+
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
                     android:padding="10dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/talkfunnel"
+                    android:src="@drawable/livestream2"
+                    android:text=""
+                    android:onClick="liveStream"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
+                    android:id="@+id/livestream"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="LiveStream"
+                    android:onClick="liveStream"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:onClick="foodcourt"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/foodcourt"
+
+
+                >
+
+                <ImageButton
+                    android:onClick="foodcourt"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/foodcourt4"
                     android:text=""
                     android:textColor="#FFFFFF"
                     android:textSize="25sp" />
 
                 <TextView
-                    android:onClick="talkfunnel"
+                    android:onClick="foodcourt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="TalkFunnel"
+                    android:text="Food Court"
                     android:textColor="#ffffff" />
 
             </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="0dp"
+
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+
+            >
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onDiscussionClick"
+                android:background="?android:selectableItemBackground"
+                android:orientation="vertical">
+
+
+                <ImageButton
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:padding="10dp"
+                    android:onClick="onDiscussionClick"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/discussion1"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
+                    android:id="@+id/discussions"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Discussions"
+                    android:onClick="onDiscussionClick"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:id="@+id/announcements"
+                android:onClick="announcements"
+                >
+
+                <ImageButton
+                    android:onClick="announcements"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/announcement1"
+                    android:text=""
+
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:onClick="announcements"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Announcements"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="80dp"
@@ -211,160 +366,6 @@
                     />
 
             </LinearLayout>
-            </LinearLayout>
-
-
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="0dp"
-
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:layout_marginRight="20dp"
-
-            >
-
-            <LinearLayout
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="onDiscussionClick"
-                android:background="?android:selectableItemBackground"
-                android:orientation="vertical">
-
-
-                <ImageButton
-
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/background"
-                    android:padding="10dp"
-                    android:onClick="onDiscussionClick"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/discussions"
-                    android:text=""
-                    android:textColor="#FFFFFF"
-                    android:textSize="25sp"
-                    android:id="@+id/discussions"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Discussions"
-                    android:onClick="onDiscussionClick"
-                    android:textAlignment="center"
-                    android:textColor="#ffffff" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:id="@+id/announcements"
-                android:onClick="announcements"
-                >
-
-                <ImageButton
-                    android:onClick="announcements"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/background"
-                    android:padding="10dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/announcements"
-                    android:text=""
-
-                    android:textColor="#FFFFFF"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:onClick="announcements"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Announcements"
-                    android:textAlignment="center"
-                    android:textColor="#ffffff" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:onClick="liveStream"
-                >
-
-                <ImageButton
-
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/background"
-                    android:padding="10dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/livestream"
-                    android:text=""
-                    android:onClick="liveStream"
-                    android:textColor="#FFFFFF"
-                    android:textSize="25sp"
-                    android:id="@+id/livestream"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="LiveStream"
-                    android:onClick="liveStream"
-                    android:textColor="#ffffff" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:onClick="foodcourt"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:id="@+id/foodcourt"
-
-
-                >
-
-                <ImageButton
-                    android:onClick="foodcourt"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/background"
-                    android:padding="10dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/foodcourt"
-                    android:text=""
-                    android:textColor="#FFFFFF"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:onClick="foodcourt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Food Court"
-                    android:textColor="#ffffff" />
-
-            </LinearLayout>
 
 
         </LinearLayout>
@@ -374,87 +375,92 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="17dp"
-        android:orientation="horizontal"
 
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_marginRight="20dp"
 
         >
 
-        <LinearLayout
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-           android:layout_marginTop="0dp"
-            android:layout_marginLeft="12dp"
-            android:onClick="qrcodescanner"
-            android:background="?android:selectableItemBackground"
-            android:orientation="vertical"
-            android:id="@+id/scanBadges">
-             <ImageButton
 
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:background="@drawable/background"
-                android:padding="10dp"
-                android:scaleType="fitXY"
-                android:paddingLeft="1dp"
-                android:src="@drawable/scanbadge1"
-                android:text=""
-                 android:onClick="qrcodescanner"
-                android:textColor="#FFFFFF"
-                android:textSize="25sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Scan QR Code"
-                android:onClick="qrcodescanner"
-                android:textAlignment="center"
-                android:textColor="#ffffff" />
-
-        </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginTop="0dp"
-            android:layout_marginLeft="8dp"
-            android:onClick="connecttonetwork"
+            android:clickable="true"
             android:background="?android:selectableItemBackground"
             android:orientation="vertical"
-            android:id="@+id/connecttonetwork">
+            android:id="@+id/hasgeektv"
+            android:onClick="hasgeektv"
+            >
+
+
             <ImageButton
-                android:clickable="true"
+                android:id="@+id/imageViewhasgeektv"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/background"
                 android:padding="10dp"
                 android:scaleType="fitXY"
-                android:paddingLeft="1dp"
-                android:src="@drawable/wifi1"
+                android:src="@drawable/hasgeektv"
                 android:text=""
-                android:onClick="connecttonetwork"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:clickable="true"
+                android:onClick="hasgeektv"
+                />
+
+            <TextView
+                android:id="@+id/textViewhasgeektv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Hasgeek TV"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:clickable="true"
+                android:onClick="hasgeektv"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:id="@+id/talkfunnel"
+            android:onClick="talkfunnel">
+
+            <ImageButton
+                android:onClick="talkfunnel"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@drawable/background"
+                android:padding="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/talkfunnel"
+                android:text=""
                 android:textColor="#FFFFFF"
                 android:textSize="25sp" />
 
             <TextView
+                android:onClick="talkfunnel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="connect to hasgeek network"
-                android:onClick="connecttonetwork"
-                android:textAlignment="center"
+                android:layout_gravity="center_horizontal"
+                android:text="TalkFunnel"
                 android:textColor="#ffffff" />
 
         </LinearLayout>
+
 
 </LinearLayout>
 

@@ -130,8 +130,8 @@ android:layout_height="match_parent" >
             android:padding="5dp"
             android:layout_margin="10dp"
             android:visibility="gone"
-
-            android:text="Schedule not prepared"
+            android:textColor="#ff0000"
+            android:text="Schedule_not_yet_decided"
              />
 
     </android.support.v7.widget.CardView>

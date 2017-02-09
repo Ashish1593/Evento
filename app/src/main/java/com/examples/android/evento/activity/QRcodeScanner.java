@@ -7,7 +7,12 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -29,28 +34,18 @@ import java.util.Map;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-/**
- * Created by NgocTri on 6/18/2016.
- */
 public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView.ResultHandler {
-    public ZXingScannerView mScannerView;
+    private ZXingScannerView mScannerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferenceController.init(getApplicationContext());
-        //   DeviceController.init(getApplicationContext());
-
-        setContentView(R.layout.scanner);
-
-    }
-
-
-
-    public void onbuttonClick( View view){
-
-
-        if(view == null)
-            view = getCurrentFocus();
+       // DeviceController.init(getApplicationContext());
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                               WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.qrcodescanner);
 
         if (AuthController.isLoggedIn()) {
 
@@ -59,12 +54,10 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
             mScannerView.setResultHandler(this);
             mScannerView.startCamera();
 
-
         }
-
         else {
-            //    mScannerView.stopCamera();
-            Snackbar.make(view, "Hang on, we need to know who you are", Snackbar.LENGTH_LONG)
+
+            Snackbar.make(findViewById(R.id.snackbar),"Hang on, we need to know who you are", Snackbar.LENGTH_INDEFINITE)
                     .setAction("Login", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -74,31 +67,97 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
                             startActivity(i);
                         }
 
-                    }).show();
+                    })
+
+                    .show();
+
+            mScannerView = new ZXingScannerView(this);
+            setContentView(mScannerView);
+            mScannerView.setResultHandler(this);
+            mScannerView.startCamera();
 
 
-        }
 
+
+//            Button btn = (Button) findViewById(R.id.camera_button);
+//
+//            btn.setOnClickListener(new View.OnClickListener() {
+//
+//                @Override
+//                public void onClick(View v) {
+//
+//
+//                    onbuttonClick(v);
+//
+//
+//                }
+//            });
+       }
 
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mScannerView = new ZXingScannerView(this);
-        setContentView(mScannerView);
-        mScannerView.setResultHandler(this);
-        mScannerView.startCamera();
 
 
-    }
+
+//    public void onbuttonClick(View view ){
+//
+//
+//        if(view == null)
+//            view = getCurrentFocus();
+//
+////        if (AuthController.isLoggedIn()) {
+////
+////            mScannerView = new ZXingScannerView(this);
+////            setContentView(mScannerView);
+////            mScannerView.setResultHandler(this);
+////            mScannerView.startCamera();
+////
+////
+////        }
+//
+//   //     else {
+//
+//            Snackbar.make(view, "Hang on, we need to know who you are", Snackbar.LENGTH_LONG)
+//                    .setAction("Login", new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            String url = "http://auth.hasgeek.com/auth?client_id=eDnmYKApSSOCXonBXtyoDQ&scope=id+email+phone+organizations+teams+com.talkfunnel:*&response_type=token";
+//                            Intent i = new Intent(Intent.ACTION_VIEW);
+//                            i.setData(Uri.parse(url));
+//                            startActivity(i);
+//                        }
+//
+//                    }).show();
+//
+//        mScannerView = new ZXingScannerView(this);
+//        setContentView(mScannerView);
+//        mScannerView.setResultHandler(this);
+//        mScannerView.startCamera();
+//
+//
+//    }
+
+
+ //}
+
 
     @Override
     protected void onPause() {
         super.onPause();
-        mScannerView.stopCamera();
+       mScannerView.resumeCameraPreview(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mScannerView.startCamera();
 
+
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        mScannerView.stopCamera();
+    }
 
 
     @Override
@@ -154,7 +213,10 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
                                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        mScannerView.resumeCameraPreview(QRcodeScanner.this);
+                                 mScannerView.resumeCameraPreview(QRcodeScanner.this);
+//                                      mScannerView.startCamera();
+                                        mScannerView.setResultHandler(QRcodeScanner.this);
+                                        mScannerView.startCamera();
                                     }
                                 })
                                 .create().show();
@@ -199,6 +261,7 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
 
 
 
+            mScannerView.stopCamera();
 
 
         }else {

@@ -7,12 +7,11 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
+
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.LinearLayout;
+
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -41,10 +40,10 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferenceController.init(getApplicationContext());
-       // DeviceController.init(getApplicationContext());
+        // DeviceController.init(getApplicationContext());
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                               WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.qrcodescanner);
 
         if (AuthController.isLoggedIn()) {
@@ -54,10 +53,9 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
             mScannerView.setResultHandler(this);
             mScannerView.startCamera();
 
-        }
-        else {
+        } else {
 
-            Snackbar.make(findViewById(R.id.snackbar),"Hang on, we need to know who you are", Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(findViewById(R.id.snackbar), "Hang on, we need to know who you are", Snackbar.LENGTH_INDEFINITE)
                     .setAction("Login", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -77,86 +75,32 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
             mScannerView.startCamera();
 
 
-
-
-//            Button btn = (Button) findViewById(R.id.camera_button);
-//
-//            btn.setOnClickListener(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View v) {
-//
-//
-//                    onbuttonClick(v);
-//
-//
-//                }
-//            });
-       }
+        }
 
     }
-
-
-
-//    public void onbuttonClick(View view ){
-//
-//
-//        if(view == null)
-//            view = getCurrentFocus();
-//
-////        if (AuthController.isLoggedIn()) {
-////
-////            mScannerView = new ZXingScannerView(this);
-////            setContentView(mScannerView);
-////            mScannerView.setResultHandler(this);
-////            mScannerView.startCamera();
-////
-////
-////        }
-//
-//   //     else {
-//
-//            Snackbar.make(view, "Hang on, we need to know who you are", Snackbar.LENGTH_LONG)
-//                    .setAction("Login", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            String url = "http://auth.hasgeek.com/auth?client_id=eDnmYKApSSOCXonBXtyoDQ&scope=id+email+phone+organizations+teams+com.talkfunnel:*&response_type=token";
-//                            Intent i = new Intent(Intent.ACTION_VIEW);
-//                            i.setData(Uri.parse(url));
-//                            startActivity(i);
-//                        }
-//
-//                    }).show();
-//
-//        mScannerView = new ZXingScannerView(this);
-//        setContentView(mScannerView);
-//        mScannerView.setResultHandler(this);
-//        mScannerView.startCamera();
-//
-//
-//    }
-
-
- //}
 
 
     @Override
     protected void onPause() {
         super.onPause();
-       mScannerView.resumeCameraPreview(this);
+        // mScannerView.resumeCameraPreview(this);
+        mScannerView.stopCamera();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mScannerView.startCamera();
+        mScannerView.resumeCameraPreview(this);
+//        mScannerView.startCamera();
 
 
     }
+
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
-        mScannerView.stopCamera();
+        // mScannerView.stopCamera();
+        mScannerView.resumeCameraPreview(this);
     }
 
 
@@ -172,8 +116,7 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
             String key = ContactExchangeUtils.getKeyFromCode(data);
 
 
-
-            String url ="https://50p.talkfunnel.com/2017/"+"participant?"+"puk="+puk+"&key="+key;
+            String url = "https://50p.talkfunnel.com/2017/" + "participant?" + "puk=" + puk + "&key=" + key;
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(com.android.volley.Request.Method.GET,
                     url, null, new com.android.volley.Response.Listener<JSONObject>() {
 
@@ -191,8 +134,8 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
 
 
                         new android.support.v7.app.AlertDialog.Builder(QRcodeScanner.this)
-                                .setTitle(fullname+"")
-                                .setMessage("Company: "+company+"\nPhone: "+phone+"\nEmail: "+email)
+                                .setTitle(fullname + "")
+                                .setMessage("Company: " + company + "\nPhone: " + phone + "\nEmail: " + email)
                                 .setCancelable(true)
                                 .setPositiveButton("Add to contacts", new DialogInterface.OnClickListener() {
                                     @Override
@@ -213,7 +156,7 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
                                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                 mScannerView.resumeCameraPreview(QRcodeScanner.this);
+                                        mScannerView.resumeCameraPreview(QRcodeScanner.this);
 //                                      mScannerView.startCamera();
                                         mScannerView.setResultHandler(QRcodeScanner.this);
                                         mScannerView.startCamera();
@@ -222,17 +165,12 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
                                 .create().show();
 
 
-
-                    }
-                    catch (JSONException e) {
+                    } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(),
                                 "Error: " + e.getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }
-
-
-
 
 
                     //  mScannerView.resumeCameraPreview(QRcodeScanner.this);
@@ -245,10 +183,11 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
                     //     Log.d(TAG, "Error " + error.getMessage());
 
                 }
-            }){
+
+            }) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String, String>  params = new HashMap<String, String>();
+                    Map<String, String> params = new HashMap<String, String>();
                     params.put("Authorization", AuthUtils.getAuthHeaderFromToken(AuthController.getAuthToken()));
 
 
@@ -259,21 +198,16 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
             AppController.getInstance().addToRequestQueue(jsonObjReq);
 
 
-
-
             mScannerView.stopCamera();
 
 
-        }else {
+        } else {
             Toast.makeText(this, "Invalid QR Code", Toast.LENGTH_LONG).show();
             mScannerView.resumeCameraPreview(QRcodeScanner.this);
         }
 
 
-
-
     }
-
 
 
 }

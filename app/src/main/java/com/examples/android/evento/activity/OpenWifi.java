@@ -1,9 +1,12 @@
 package com.examples.android.evento.activity;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -25,13 +28,15 @@ import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
 
-
-
+import java.util.List;
 
 
 public class OpenWifi extends AppCompatActivity {
     public static int APP_REQUEST_CODE = 99;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
+
+
+    StringBuilder sb = new StringBuilder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +50,11 @@ public class OpenWifi extends AppCompatActivity {
         String phonenumber = prefs.getString("phonenumber", null);
 
 
-        if ( phonenumber != null) {
+        if (phonenumber != null) {
 
             connectwifi(phonenumber);
 
-        }
-        else {
+        } else {
             onLoginPhone();
 
         }
@@ -87,68 +91,73 @@ public class OpenWifi extends AppCompatActivity {
 //        {
 
 
+        AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
+            @Override
+            public void onSuccess(final Account account) {
+
+                PhoneNumber phoneNumber = account.getPhoneNumber();
+                String phoneNumberString = phoneNumber.toString();
 
 
-            AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
-                @Override
-                public void onSuccess(final Account account) {
-
-                    PhoneNumber phoneNumber = account.getPhoneNumber();
-                    String phoneNumberString = phoneNumber.toString();
+                SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                editor.putString("phonenumber", phoneNumberString);
+                editor.apply();
 
 
-                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-                    editor.putString("phonenumber", phoneNumberString);
-                    editor.apply();
+                connectwifi(phoneNumberString);
+
+            }
 
 
-                    connectwifi(phoneNumberString);
+            @Override
+            public void onError(final AccountKitError error) {
+                // Handle Error
 
-                }
-
-
-
-
-                @Override
-                public void onError(final AccountKitError error) {
-                    // Handle Error
-
-                }
-            });
+            }
+        });
 
 
     }
 
 
-    public void connectwifi(String phoneNumber){
+    public void connectwifi(final String phoneNumber) {
 
         WifiConfiguration wifiConfig = new WifiConfiguration();
-        wifiConfig.SSID = String.format("\"%s\"", "TP_LINK");
-        wifiConfig.preSharedKey = String.format("\"%s\"", "wififiwi");
+        wifiConfig.SSID = String.format("\"%s\"", "HasGeek Legacy");
+        wifiConfig.preSharedKey = String.format("\"%s\"", "geeksrus");
 
         WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         if (wifiManager.isWifiEnabled()) {
-            wifiManager.setWifiEnabled(false);
+            //wifiManager.setWifiEnabled(false);
+            int netId = wifiManager.addNetwork(wifiConfig);
+            wifiManager.disconnect();
+            wifiManager.enableNetwork(netId, true);
+            wifiManager.reconnect();
         } else {
             wifiManager.setWifiEnabled(true);
+            int netId = wifiManager.addNetwork(wifiConfig);
+            wifiManager.disconnect();
+            wifiManager.enableNetwork(netId, true);
+            wifiManager.reconnect();
         }
-        int netId = wifiManager.addNetwork(wifiConfig);
-        wifiManager.disconnect();
-        wifiManager.enableNetwork(netId, true);
-        wifiManager.reconnect();
+
+//        int netId = wifiManager.addNetwork(wifiConfig);
+//        wifiManager.disconnect();
+//        wifiManager.enableNetwork(netId, true);
+//        wifiManager.reconnect();
+//
 
 
 
         new android.app.AlertDialog.Builder(OpenWifi.this)
-                .setTitle("AlertDialog Title")
-                .setMessage(Html.fromHtml(phoneNumber + "Simple Dialog Message"))
+                .setTitle("Hasgeek wifi")
+                .setMessage(Html.fromHtml(phoneNumber + "  You are now connected to hasgeek network"))
                 .setCancelable(true)
-                .setPositiveButton("Ok",null)
+                .setPositiveButton("Ok", null)
                 .create().show();
-//
-//
-
     }
 
 
 }
+
+

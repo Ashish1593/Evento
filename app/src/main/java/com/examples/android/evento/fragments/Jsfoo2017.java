@@ -264,13 +264,10 @@ public class Jsfoo2017 extends Fragment{
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                //  VolleyLog.d(TAG, "Error: " + error.getMessage());
-//                Toast.makeText(getApplicationContext(),
-//                        error.getMessage(), Toast.LENGTH_SHORT).show();
+
                 Toast.makeText(getContext(),
                         "no network", Toast.LENGTH_SHORT).show();
-                // hide the progress dialog
-                //   hidepDialog();
+
 
             }
         });

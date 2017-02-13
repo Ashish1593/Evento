@@ -19,19 +19,19 @@ import java.util.ArrayList;
  */
 
 public class RecyclerViewAdapterAnnouncements extends RecyclerView.Adapter<AnnouncementsViewHolder> {
-    private ArrayList<Announcements>detailsAnnouncements;
     Activity mContext;
+    private ArrayList<Announcements> detailsAnnouncements;
 
 
-    public RecyclerViewAdapterAnnouncements(Activity c,ArrayList<Announcements> detailsAnnouncements){
-        this.detailsAnnouncements=detailsAnnouncements;
-        this.mContext=c;
+    public RecyclerViewAdapterAnnouncements(Activity c, ArrayList<Announcements> detailsAnnouncements) {
+        this.detailsAnnouncements = detailsAnnouncements;
+        this.mContext = c;
 
     }
 
     @Override
-    public AnnouncementsViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.announcementsitem,parent,false);
+    public AnnouncementsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.announcementsitem, parent, false);
         AnnouncementsViewHolder viewHolder = new AnnouncementsViewHolder(view);
 
         return viewHolder;
@@ -39,21 +39,20 @@ public class RecyclerViewAdapterAnnouncements extends RecyclerView.Adapter<Annou
     }
 
     @Override
-    public void onBindViewHolder(final AnnouncementsViewHolder holder, final int  position){
+    public void onBindViewHolder(final AnnouncementsViewHolder holder, final int position) {
 
         holder.title.setText(detailsAnnouncements.get(position).getTitle());
         holder.Description.setText(detailsAnnouncements.get(position).getDescription());
-
 
 
         holder.announcement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-                if(detailsAnnouncements.get(position).getURL()!=null){
-                final String URI = detailsAnnouncements.get(position).getURL();
-                intent.launchUrl(mContext, Uri.parse(URI));}
-                else{
+                if (detailsAnnouncements.get(position).getURL() != null) {
+                    final String URI = detailsAnnouncements.get(position).getURL();
+                    intent.launchUrl(mContext, Uri.parse(URI));
+                } else {
 
                 }
 
@@ -61,10 +60,10 @@ public class RecyclerViewAdapterAnnouncements extends RecyclerView.Adapter<Annou
         });
 
 
-
     }
+
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return detailsAnnouncements.size();
     }
 }

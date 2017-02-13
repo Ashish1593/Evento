@@ -59,7 +59,7 @@ public class FoodCourtVendorRecyclerViewAdapter extends SimpleSectionedAdapter<F
 
     @Override
     protected FoodCourtVendorViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
-        CardView view = (CardView)LayoutInflater.from(parent.getContext())
+        CardView view = (CardView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_foodcourt_foodcourt_vendor_page_item, parent, false);
         return new FoodCourtVendorViewHolder(view);
     }
@@ -73,7 +73,7 @@ public class FoodCourtVendorRecyclerViewAdapter extends SimpleSectionedAdapter<F
         holder.mItem = item;
 
         holder.tv_title.setText(item.getTitle());
-        holder.tv_price.setText("Rs. "+item.getPrice());
+        holder.tv_price.setText("Rs. " + item.getPrice());
 
         String type = item.getType();
 

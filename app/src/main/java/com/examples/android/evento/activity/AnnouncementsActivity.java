@@ -120,20 +120,6 @@ else{
 
 
 
-    /**
-     * Method to make json array request where response starts with [
-     */
-
-//
-//    private void showpDialog() {
-//        if (!pDialog.isShowing())
-//            pDialog.show();
-//    }
-//
-//    private void hidepDialog() {
-//        if (pDialog.isShowing())
-//            pDialog.dismiss();
-//    }
 
 
 }

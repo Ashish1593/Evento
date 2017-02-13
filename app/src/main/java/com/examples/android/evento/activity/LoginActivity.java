@@ -19,7 +19,7 @@ import rx.schedulers.Schedulers;
 
 public class LoginActivity extends AppCompatActivity {
     public void l(String msg) {
-        Log.d(this.getClass().getSimpleName(), msg+" ");
+        Log.d(this.getClass().getSimpleName(), msg + " ");
     }
 
     @Override
@@ -28,10 +28,10 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = getIntent();
         // check if this intent is started via custom scheme link
         if (intent.getAction().equals(Intent.ACTION_VIEW)) {
-            Uri uri = Uri.parse("talkfunnel://login?"+intent.getData().getFragment());
+            Uri uri = Uri.parse("talkfunnel://login?" + intent.getData().getFragment());
             final String access_token = uri.getQueryParameter("access_token");
             String token_type = uri.getQueryParameter("token_type");
-            l("URI is "+uri.toString());
+            l("URI is " + uri.toString());
 
             APIController.getService().getAuthVerification(access_token)
                     .subscribeOn(Schedulers.io())
@@ -64,9 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
     void loginSuccessful(String access_token) {
         AuthController.saveAuthToken(access_token);
-//        Answers.getInstance().logLogin(new LoginEvent()
-//                .putMethod("Browser")
-//                .putSuccess(true));
+
         Toast.makeText(LoginActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
         finish();
 
@@ -82,7 +80,6 @@ public class LoginActivity extends AppCompatActivity {
     public void initViews(Bundle savedInstanceState) {
 
     }
-
 
 
     public void notFoundError() {

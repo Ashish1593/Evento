@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -23,10 +24,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.examples.android.evento.adapters.SessionsAdapter;
 import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
+import com.examples.android.evento.controller.DataBaseController;
 import com.examples.android.evento.model.Session;
 import com.examples.android.evento.model.TalkDetails;
 import com.examples.android.evento.adapters.RecylerViewadapter;
-import com.examples.android.evento.activity.ScheduleActivity;
+//import com.examples.android.evento.activity.ScheduleActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -42,18 +44,18 @@ import com.google.gson.GsonBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static com.google.android.gms.plus.PlusOneDummyView.TAG;
-//import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 /**
  * Created by ankit on 11/12/16.
  */
 
-public class EventPycon extends Fragment{
+public class EventPycon extends Fragment {
     MapView mMapView;
     private RecyclerView mRecyclerView;
     private GoogleMap googleMap;
@@ -61,14 +63,14 @@ public class EventPycon extends Fragment{
     private String urlJsonObj = "https://pyconpune.talkfunnel.com/2017/json";
     private ArrayList<TalkDetails> detailsPycon;
     private TextView emptyView;
-
+  private   DataBaseController db;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState )
-    {
-        View view = inflater.inflate(R.layout.pycon2017,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.pycon2017, container, false);
 
+      db = new DataBaseController(getActivity());
 
         mMapView = (MapView) view.findViewById(R.id.mapViewPycon);
         mMapView.onCreate(null);
@@ -86,8 +88,8 @@ public class EventPycon extends Fragment{
                 googleMap = mMap;
 
                 // For showing a move to my location button
-                // googleMap.setMyLocationEnabled(true);
-                //   18.5312° N, 73.8557° E
+                //   googleMap.setMyLocationEnabled(true);
+                // 18.5312° N, 73.8557° E
                 // For dropping a marker at a point on the Map
                 LatLng collegeofEngPune = new LatLng(18.5312, 73.8557);
                 googleMap.addMarker(new MarkerOptions().position(collegeofEngPune).title("College Of Engineering Pune").snippet("College Of Engoneering Pune"));
@@ -117,59 +119,18 @@ public class EventPycon extends Fragment{
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.schedule_recyclerview);
         mRecyclerView.setNestedScrollingEnabled(false);
-      //  mRecyclerView.setHasFixedSize(true);
+        //  mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
-
-
-
-
-
-//        myRecyclerView =(RecyclerView) view.findViewById(R.id.CardViewPycon);
-//        //  RecyclerView.LayoutManager myLayoutManager = new GridLayoutManager(getActivity(),2);
-//        LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
-//
-//        myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//
-//        myRecyclerView.setLayoutManager(myLayoutManager);
-
-//        Button  ViewSchedule = (Button) view.findViewById(R.id.viewschedulepycon);
-//        ViewSchedule.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(v.getContext(), ScheduleActivity.class);
-//                intent.putExtra("jsonurl","https://pyconpune.talkfunnel.com/2017/json");
-//                startActivity(intent);
-//            }
-//        });
-
-
-//        final TextView clickToSeeAllEvents = (TextView) view.findViewById(R.id.clicktoseepyconproposedtalks);
-//
-//
-//        clickToSeeAllEvents.setOnClickListener(new View.OnClickListener(){
-//
-//            public  void onClick (View view){
-//                Fragment fragment = new EventslistFragment();
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.proposedTalksPycon,fragment);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-//                clickToSeeAllEvents.setVisibility(View.GONE);
-//
-//            }
-//        });
-
-
         makeJsonObjectRequest();
 
 
-        return  view;
+        return view;
 
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -195,52 +156,50 @@ public class EventPycon extends Fragment{
     }
 
 
-
     private void makeJsonObjectRequest() {
 
-        //  showpDialog();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                urlJsonObj , null, new Response.Listener<JSONObject>() {
+                urlJsonObj, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());
-                try {          //  Parsing json object response
-                    //response will be a json object
+                try {
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     Gson gson = gsonBuilder.create();
-                    // JSONObject obj = null;
+
 
                     List<Session> sessions = new ArrayList<>();
                     JSONArray schedule = new JSONArray(response.optString("schedule", "[]"));
 
-                    for(int i=0; i<schedule.length(); i++) {
+                    for (int i = 0; i < schedule.length(); i++) {
                         JSONArray slots = schedule.getJSONObject(i).getJSONArray("slots");
-                        for(int k=0; k<slots.length();k++) {
+                        for (int k = 0; k < slots.length(); k++) {
                             sessions.addAll(Arrays.asList(gson.fromJson(slots.getJSONObject(k).optString("sessions", "[]"), Session[].class)));
                         }
                     }
 
 
+
+                    String eventPycon= gson.toJson(sessions);
+
+
+
+                    db.addScheduleAndEventData(eventPycon ,"EventPycon");
+
+
                     if (sessions.isEmpty()) {
                         mRecyclerView.setVisibility(View.GONE);
                         emptyView.setVisibility(View.VISIBLE);
-                    }
-                    else {
+                    } else {
                         mRecyclerView.setVisibility(View.VISIBLE);
                         emptyView.setVisibility(View.GONE);
                     }
 
 
+
                     mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessions));
-
-
-
-//                    for(Session s: sessions) {
-//                       mRecyclerView.setAdapter(new SessionsAdapter(ScheduleActivity.this, sessions));
-//                    }
-
 
 
                 } catch (JSONException e) {
@@ -251,26 +210,19 @@ public class EventPycon extends Fragment{
                 }
 
 
-                //   announcementRecyclerView.setAdapter(new RecyclerViewAdapterAnnouncements(com.examples.android.evento.activity.AnnouncementsActivity.this,announcementsArraylist));
-
             }
 
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                //  VolleyLog.d(TAG, "Error: " + error.getMessage());
-//                Toast.makeText(getApplicationContext(),
-//                        error.getMessage(), Toast.LENGTH_SHORT).show();
+
                 Toast.makeText(getContext(),
                         "no network", Toast.LENGTH_SHORT).show();
-                // hide the progress dialog
-                //   hidepDialog();
 
             }
         });
 
-// Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq);
     }
 

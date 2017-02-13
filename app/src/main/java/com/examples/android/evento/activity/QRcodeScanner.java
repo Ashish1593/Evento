@@ -48,6 +48,18 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
 
         if (AuthController.isLoggedIn()) {
 
+
+            Snackbar.make(findViewById(R.id.snackbar), "", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Logout", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            AuthController.deleteAuthToken();
+                        }
+
+                    })
+
+                    .show();
+
             mScannerView = new ZXingScannerView(this);
             setContentView(mScannerView);
             mScannerView.setResultHandler(this);
@@ -69,6 +81,7 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
 
                     .show();
 
+
             mScannerView = new ZXingScannerView(this);
             setContentView(mScannerView);
             mScannerView.setResultHandler(this);
@@ -83,15 +96,16 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
     @Override
     protected void onPause() {
         super.onPause();
-        // mScannerView.resumeCameraPreview(this);
-        mScannerView.stopCamera();
+     //  mScannerView.resumeCameraPreview(this);
+      mScannerView.stopCamera();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mScannerView.resumeCameraPreview(this);
-//        mScannerView.startCamera();
+   mScannerView.resumeCameraPreview(this);
+       // mScannerView.setResultHandler(this);
+  //     mScannerView.startCamera();
 
 
     }
@@ -99,8 +113,8 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
     @Override
     protected void onStop() {
         super.onStop();
-        // mScannerView.stopCamera();
-        mScannerView.resumeCameraPreview(this);
+       //  mScannerView.stopCamera();
+       mScannerView.resumeCameraPreview(this);
     }
 
 
@@ -133,14 +147,7 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
                         final String twitter = participants.getString("twitter");
 
 
-                        new android.support.v7.app.AlertDialog.Builder(QRcodeScanner.this)
-                                .setTitle(fullname + "")
-                                .setMessage("Company: " + company + "\nPhone: " + phone + "\nEmail: " + email)
-                                .setCancelable(true)
-                                .setPositiveButton("Add to contacts", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(Intent.ACTION_INSERT);
+                        Intent intent = new Intent(Intent.ACTION_INSERT);
                                         intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
 
                                         intent.putExtra(ContactsContract.Intents.Insert.NAME, fullname);
@@ -150,19 +157,38 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
                                         intent.putExtra(ContactsContract.Intents.Insert.JOB_TITLE, job_title);
                                         intent.putExtra(ContactsContract.Intents.Insert.IM_HANDLE, twitter);
                                         startActivity(intent);
-                                    }
-                                })
 
-                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        mScannerView.resumeCameraPreview(QRcodeScanner.this);
-//                                      mScannerView.startCamera();
-                                        mScannerView.setResultHandler(QRcodeScanner.this);
-                                        mScannerView.startCamera();
-                                    }
-                                })
-                                .create().show();
+//
+//                        new android.support.v7.app.AlertDialog.Builder(QRcodeScanner.this)
+//                                .setTitle(fullname + "")
+//                                .setMessage("Company: " + company + "\nPhone: " + phone + "\nEmail: " + email)
+//                                .setCancelable(true)
+//                                .setPositiveButton("Add to contacts", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        Intent intent = new Intent(Intent.ACTION_INSERT);
+//                                        intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+//
+//                                        intent.putExtra(ContactsContract.Intents.Insert.NAME, fullname);
+//                                        intent.putExtra(ContactsContract.Intents.Insert.PHONE, phone);
+//                                        intent.putExtra(ContactsContract.Intents.Insert.COMPANY, company);
+//                                        intent.putExtra(ContactsContract.Intents.Insert.EMAIL, email);
+//                                        intent.putExtra(ContactsContract.Intents.Insert.JOB_TITLE, job_title);
+//                                        intent.putExtra(ContactsContract.Intents.Insert.IM_HANDLE, twitter);
+//                                        startActivity(intent);
+//                                    }
+//                                })
+//
+//                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        mScannerView.resumeCameraPreview(QRcodeScanner.this);
+////                                      mScannerView.startCamera();
+//                                        mScannerView.setResultHandler(QRcodeScanner.this);
+//                                        mScannerView.startCamera();
+//                                    }
+//                                })
+//                                .create().show();
 
 
                     } catch (JSONException e) {
@@ -197,7 +223,7 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
 
             AppController.getInstance().addToRequestQueue(jsonObjReq);
 
-
+//mScannerView.resumeCameraPreview(QRcodeScanner.this);
             mScannerView.stopCamera();
 
 

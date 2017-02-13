@@ -62,7 +62,7 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                imageView.startAnimation(animation_3);
+                imageView.startAnimation(animation_2);
                 finish();
                 Intent i = new Intent(getBaseContext(),MainActivity.class);
                 startActivity(i);

@@ -4,15 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
+    android:clickable="true"
     android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:clickable="true">
+    android:focusableInTouchMode="true">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         tools:context="com.examples.android.evento.activity.MainActivity">
 
 
@@ -23,38 +22,37 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:background="#ffffff"/>
+            android:background="#ffffff" />
 
-<android.support.v7.widget.CardView
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-  android:layout_margin="10dp"
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
 
-    >
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:scaleType="fitXY"
-            android:background="#00ffffff"
-            android:id="@+id/opendrawer"
-            android:src="@drawable/hamburgericon1"
-            />
+            >
+
+            <ImageButton
+                android:id="@+id/opendrawer"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="#00ffffff"
+                android:scaleType="fitXY"
+                android:src="@drawable/hamburgericon1" />
         </android.support.v7.widget.CardView>
 
     </RelativeLayout>
 
-    <LinearLayout
 
+    <LinearLayout
         android:id="@+id/left_drawer"
         android:layout_width="400dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:choiceMode="singleChoice"
-
-        android:orientation="vertical"
         android:background="#90000000"
-        android:paddingTop="80dp"
->
+        android:choiceMode="singleChoice"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:paddingTop="80dp">
 
 
         <LinearLayout
@@ -67,26 +65,28 @@
             android:orientation="horizontal"
 
             >
+
             <LinearLayout
+                android:id="@+id/connecttonetwork"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="connecttonetwork"
                 android:background="?android:selectableItemBackground"
-                android:orientation="vertical"
-                android:id="@+id/connecttonetwork">
+                android:onClick="connecttonetwork"
+                android:orientation="vertical">
+
                 <ImageButton
-                    android:clickable="true"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
+                    android:clickable="true"
+                    android:onClick="connecttonetwork"
                     android:padding="10dp"
-                    android:scaleType="fitXY"
                     android:paddingLeft="1dp"
+                    android:scaleType="fitXY"
                     android:src="@drawable/wifi2"
                     android:text=""
-                    android:onClick="connecttonetwork"
                     android:textColor="#FFFFFF"
                     android:textSize="25sp" />
 
@@ -94,8 +94,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="connect to hasgeek network"
                     android:onClick="connecttonetwork"
+                    android:text="connect to hasgeek network"
                     android:textAlignment="center"
                     android:textColor="#ffffff" />
 
@@ -103,25 +103,26 @@
 
 
             <LinearLayout
+                android:id="@+id/scanBadges"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="qrcodescanner"
                 android:background="?android:selectableItemBackground"
-                android:orientation="vertical"
-                android:id="@+id/scanBadges">
+                android:onClick="qrcodescanner"
+                android:orientation="vertical">
+
                 <ImageButton
 
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
+                    android:onClick="qrcodescanner"
                     android:padding="10dp"
-                    android:scaleType="fitXY"
                     android:paddingLeft="1dp"
+                    android:scaleType="fitXY"
                     android:src="@drawable/scanqr2"
                     android:text=""
-                    android:onClick="qrcodescanner"
                     android:textColor="#FFFFFF"
                     android:textSize="25sp" />
 
@@ -129,8 +130,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Scan QR Code"
                     android:onClick="qrcodescanner"
+                    android:text="Scan QR Code"
                     android:textAlignment="center"
                     android:textColor="#ffffff" />
 
@@ -141,56 +142,52 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
                 android:onClick="liveStream"
-                >
+                android:orientation="vertical">
 
                 <ImageButton
 
+                    android:id="@+id/livestream"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
+                    android:onClick="liveStream"
                     android:padding="10dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/livestream2"
                     android:text=""
-                    android:onClick="liveStream"
                     android:textColor="#FFFFFF"
-                    android:textSize="25sp"
-                    android:id="@+id/livestream"/>
+                    android:textSize="25sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="LiveStream"
                     android:onClick="liveStream"
+                    android:text="LiveStream"
                     android:textColor="#ffffff" />
 
             </LinearLayout>
 
 
-
-
-
             <LinearLayout
-                android:onClick="foodcourt"
+                android:id="@+id/foodcourt"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="foodcourt"
                 android:orientation="vertical"
-                android:id="@+id/foodcourt"
 
 
                 >
 
                 <ImageButton
-                    android:onClick="foodcourt"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
+                    android:onClick="foodcourt"
                     android:padding="10dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/foodcourt4"
@@ -199,20 +196,17 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:onClick="foodcourt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:onClick="foodcourt"
                     android:text="Food Court"
                     android:textColor="#ffffff" />
 
             </LinearLayout>
 
 
-
-            </LinearLayout>
-
-
+        </LinearLayout>
 
 
         <LinearLayout
@@ -221,9 +215,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="0dp"
 
+            android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
-            android:layout_marginRight="20dp"
 
             >
 
@@ -231,32 +225,32 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="onDiscussionClick"
                 android:background="?android:selectableItemBackground"
+                android:onClick="onDiscussionClick"
                 android:orientation="vertical">
 
 
                 <ImageButton
 
+                    android:id="@+id/discussions"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
-                    android:padding="10dp"
                     android:onClick="onDiscussionClick"
+                    android:padding="10dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/discussion1"
                     android:text=""
                     android:textColor="#FFFFFF"
-                    android:textSize="25sp"
-                    android:id="@+id/discussions"/>
+                    android:textSize="25sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Discussions"
                     android:onClick="onDiscussionClick"
+                    android:text="Discussions"
                     android:textAlignment="center"
                     android:textColor="#ffffff" />
 
@@ -264,20 +258,19 @@
 
 
             <LinearLayout
+                android:id="@+id/announcements"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:id="@+id/announcements"
                 android:onClick="announcements"
-                >
+                android:orientation="vertical">
 
                 <ImageButton
-                    android:onClick="announcements"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
+                    android:onClick="announcements"
                     android:padding="10dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/announcement1"
@@ -287,10 +280,10 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:onClick="announcements"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:onClick="announcements"
                     android:text="Announcements"
                     android:textAlignment="center"
                     android:textColor="#ffffff" />
@@ -299,20 +292,19 @@
 
 
             <LinearLayout
+                android:id="@+id/hasjob"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:id="@+id/hasjob"
                 android:onClick="hasjob"
-                >
+                android:orientation="vertical">
 
                 <ImageButton
-                    android:onClick="hasjob"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
+                    android:onClick="hasjob"
                     android:padding="10dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/hasgeeekjobs"
@@ -321,10 +313,10 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:onClick="hasjob"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:onClick="hasjob"
                     android:text="HasJob"
                     android:textColor="#ffffff" />
 
@@ -332,12 +324,12 @@
 
 
             <LinearLayout
+                android:id="@+id/hasgeek"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:id="@+id/hasgeek"
                 android:onClick="hasgeek"
+                android:orientation="vertical"
 
                 >
 
@@ -347,23 +339,21 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
+                    android:onClick="hasgeek"
                     android:padding="10dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/hasgeek"
                     android:text=""
                     android:textColor="#FFFFFF"
-                    android:textSize="25sp"
-                    android:onClick="hasgeek"
-                    />
+                    android:textSize="25sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="HasGeek"
-                    android:textColor="#ffffff"
                     android:onClick="hasgeek"
-                    />
+                    android:text="HasGeek"
+                    android:textColor="#ffffff" />
 
             </LinearLayout>
 
@@ -371,133 +361,132 @@
         </LinearLayout>
 
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="0dp"
-
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:layout_marginRight="20dp"
-
-        >
-
-
-
-
-
         <LinearLayout
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:background="?android:selectableItemBackground"
-            android:orientation="vertical"
-            android:id="@+id/hasgeektv"
-            android:onClick="hasgeektv"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="0dp"
+
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+
             >
 
 
-            <ImageButton
-                android:id="@+id/imageViewhasgeektv"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:background="@drawable/background"
-                android:padding="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/hasgeektv"
-                android:text=""
-                android:textColor="#FFFFFF"
-                android:textSize="25sp"
+            <LinearLayout
+                android:id="@+id/hasgeektv"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:selectableItemBackground"
                 android:clickable="true"
                 android:onClick="hasgeektv"
-                />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textViewhasgeektv"
-                android:layout_width="wrap_content"
+
+                <ImageButton
+                    android:id="@+id/imageViewhasgeektv"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:clickable="true"
+                    android:onClick="hasgeektv"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/hasgeektv"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/textViewhasgeektv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:onClick="hasgeektv"
+                    android:text="Hasgeek TV"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/talkfunnel"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Hasgeek TV"
-                android:textAlignment="center"
-                android:textColor="#ffffff"
-                android:clickable="true"
-                android:onClick="hasgeektv"/>
+                android:layout_weight="1"
+                android:onClick="talkfunnel"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/background"
+                    android:onClick="talkfunnel"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/talkfunnel"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="talkfunnel"
+                    android:text="TalkFunnel"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:id="@+id/talkfunnel"
-            android:onClick="talkfunnel">
 
-            <ImageButton
-                android:onClick="talkfunnel"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:background="@drawable/background"
-                android:padding="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/talkfunnel"
-                android:text=""
-                android:textColor="#FFFFFF"
-                android:textSize="25sp" />
+            android:gravity="bottom"
+            android:orientation="vertical">
 
             <TextView
-                android:onClick="talkfunnel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="TalkFunnel"
-                android:textColor="#ffffff" />
+                android:onClick="aboutGeekskool"
+                android:text="Made by"
+                android:textColor="#ffffff"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal"
+                android:onClick="aboutGeekskool"
+                android:scaleType="fitXY"
+                android:src="@drawable/geekskool" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:onClick="aboutGeekskool"
+                android:text="GeekSkool"
+                android:textColor="#ffffff"
+                android:textSize="25sp" />
+
 
         </LinearLayout>
 
+    </LinearLayout>
 
-</LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_gravity="center_horizontal"
-        android:gravity="bottom"
-
-        android:layout_marginRight="20dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Made by"
-            android:textColor="#ffffff"
-            android:textSize="25sp"
-            android:onClick="aboutGeekskool"
-            android:layout_gravity="center_horizontal"/>
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="25dp"
-            android:src="@drawable/geekskool"
-            android:scaleType="fitXY"
-            android:onClick="aboutGeekskool"
-            android:layout_gravity="center_horizontal"/>
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="GeekSkool"
-            android:textColor="#ffffff"
-            android:textSize="25sp"
-            android:onClick="aboutGeekskool"
-            android:layout_gravity="center_horizontal"/>
-
-
-       </LinearLayout>
-       </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

@@ -34,7 +34,7 @@ import java.util.Random;
  * Created by ankit on 11/12/16.
  */
 
-    public class GridViewAdapter extends RecyclerView.Adapter<EventListViewHolder> {
+public class GridViewAdapter extends RecyclerView.Adapter<EventListViewHolder> {
     private Activity mcontext;
     private final List<Fragment> mFragments = new ArrayList<Fragment>();
     private ArrayList<EventDetails> details;
@@ -64,8 +64,7 @@ import java.util.Random;
         holder.evURL.setText(details.get(position).getEventURL());
 
 
-        String d =details.get(position).getEventdate();
-
+        String d = details.get(position).getEventdate();
 
 
         List<String> colors = new ArrayList<>();
@@ -93,35 +92,16 @@ import java.util.Random;
         String td = formatter.format(Calendar.getInstance().getTime());
 
 
-//
-//        if(date1.after(date2)){
-//            System.out.println("Date1 is after Date2");
-//        }
-//
-//        //before() will return true if and only if date1 is before date2
-//        if(date1.before(date2)){
-//            System.out.println("Date1 is before Date2");
-//        }
-//
-//        //equals() returns true if both the dates are equal
-//        if(date1.equals(date2)){
-//            System.out.println("Date1 is equal Date2");
-//        }
-
-
-
         try {
 
             Date date = formatter.parse(d);
             Date todaysdate = formatter.parse(td);
 
-            if(date.before(todaysdate))
-            {
-         holder.frameLayout.setBackgroundColor(Color.parseColor("#20000000"));
+            if (date.before(todaysdate)) {
+                holder.frameLayout.setBackgroundColor(Color.parseColor("#20000000"));
                 holder.statustext.setText("PAST EVENTS");
                 holder.statustext.setTextColor(Color.RED);
-            }
-            else{
+            } else {
                 holder.frameLayout.setBackgroundColor(Color.parseColor(colors.get(generatedRandomNum)));
                 holder.statustext.setText("UPCOMING");
                 holder.statustext.setTextColor(Color.GREEN);
@@ -146,12 +126,13 @@ import java.util.Random;
         });
 
     }
-        @Override
-        public int getItemCount () {
-            return details.size();
-        }
 
-
+    @Override
+    public int getItemCount() {
+        return details.size();
     }
+
+
+}
 
 

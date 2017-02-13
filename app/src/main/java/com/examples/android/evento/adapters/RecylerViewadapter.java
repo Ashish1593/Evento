@@ -20,19 +20,19 @@ import java.util.ArrayList;
 
 public class RecylerViewadapter extends RecyclerView.Adapter<ViewHolder> {
 
-    private ArrayList<TalkDetails>detailsEventTalk;
     Activity mContext;
+    private ArrayList<TalkDetails> detailsEventTalk;
 
 
-public RecylerViewadapter(Activity c,ArrayList<TalkDetails> detailsEventTalk){
-    this.detailsEventTalk=detailsEventTalk;
-    this.mContext=c;
+    public RecylerViewadapter(Activity c, ArrayList<TalkDetails> detailsEventTalk) {
+        this.detailsEventTalk = detailsEventTalk;
+        this.mContext = c;
 
-}
+    }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.talksdetailsitem,parent,false);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.talksdetailsitem, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;
@@ -40,7 +40,7 @@ public RecylerViewadapter(Activity c,ArrayList<TalkDetails> detailsEventTalk){
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int  position){
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         holder.talkName.setText(detailsEventTalk.get(position).getTalkTitle());
         holder.speakerName.setText(detailsEventTalk.get(position).getSpeakerName());
@@ -55,11 +55,12 @@ public RecylerViewadapter(Activity c,ArrayList<TalkDetails> detailsEventTalk){
 
             }
         });
-  }
-@Override
-    public int getItemCount(){
-    return detailsEventTalk.size();
-}
+    }
+
+    @Override
+    public int getItemCount() {
+        return detailsEventTalk.size();
+    }
 
 }
 

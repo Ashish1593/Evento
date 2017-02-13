@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.examples.android.evento.activity.ScheduleActivity;
+//import com.examples.android.evento.activity.ScheduleActivity;
 import com.examples.android.evento.adapters.SessionsAdapter;
 import com.examples.android.evento.model.Session;
 import com.examples.android.evento.utils.AuthWrapper;

@@ -1,9 +1,6 @@
 package com.examples.android.evento.activity;
 
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.ScanResult;
@@ -32,10 +29,8 @@ import java.util.List;
 
 
 public class OpenWifi extends AppCompatActivity {
-    public static int APP_REQUEST_CODE = 99;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
-
-
+    public static int APP_REQUEST_CODE = 99;
     StringBuilder sb = new StringBuilder();
 
     @Override
@@ -86,9 +81,6 @@ public class OpenWifi extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         AccountKitLoginResult loginResult = AccountKit.loginResultWithIntent(data);
 
-        final String accessToken = loginResult.getAccessToken().getToken();
-//        if (requestCode == APP_REQUEST_CODE)
-//        {
 
 
         AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
@@ -146,7 +138,6 @@ public class OpenWifi extends AppCompatActivity {
 //        wifiManager.enableNetwork(netId, true);
 //        wifiManager.reconnect();
 //
-
 
 
         new android.app.AlertDialog.Builder(OpenWifi.this)

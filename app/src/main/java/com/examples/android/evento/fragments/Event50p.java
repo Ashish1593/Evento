@@ -25,7 +25,7 @@ import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
 import com.examples.android.evento.model.TalkDetails;
 import com.examples.android.evento.adapters.RecylerViewadapter;
-import com.examples.android.evento.activity.ScheduleActivity;
+//import com.examples.android.evento.activity.ScheduleActivity;
 import com.examples.android.evento.adapters.SessionsAdapter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -122,8 +122,8 @@ public class Event50p extends Fragment    {
 
 
 
-                Intent intent = new Intent(v.getContext(), ScheduleActivity.class);
-                startActivity(intent);
+           //     Intent intent = new Intent(v.getContext(), ScheduleActivity.class);
+            //    startActivity(intent);
 
 
 
@@ -249,8 +249,8 @@ public class Event50p extends Fragment    {
 
 
 
-                        Intent intent = new Intent(getActivity(), ScheduleActivity.class);
-                      intent.putExtra("50pdetails",details50p);
+                   //     Intent intent = new Intent(getActivity(), ScheduleActivity.class);
+                     // intent.putExtra("50pdetails",details50p);
                         //startActivity(intent);
                     }
 

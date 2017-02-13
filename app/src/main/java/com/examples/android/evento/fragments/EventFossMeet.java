@@ -27,7 +27,7 @@ import com.examples.android.evento.R;
 import com.examples.android.evento.model.Session;
 import com.examples.android.evento.model.TalkDetails;
 import com.examples.android.evento.adapters.RecylerViewadapter;
-import com.examples.android.evento.activity.ScheduleActivity;
+//import com.examples.android.evento.activity.ScheduleActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;

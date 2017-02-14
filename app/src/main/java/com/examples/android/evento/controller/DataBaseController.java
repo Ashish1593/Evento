@@ -15,10 +15,19 @@ public class DataBaseController extends SQLiteOpenHelper {
     private static final String Key_EventName ="EventName" ;
     private static final String Key_EventData = "EventData";
 
+    public static DataBaseController instance;
 
-    public DataBaseController(Context context){
+    private DataBaseController(Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
+    }
 
+    public static DataBaseController getInstance(Context context){
+        if (instance == null){
+            instance = new DataBaseController(context);
+            return instance;
+        }else {
+            return instance;
+        }
     }
 
     @Override
@@ -45,7 +54,7 @@ public class DataBaseController extends SQLiteOpenHelper {
 
     values.put(Key_EventName,EventName);
     values.put(Key_EventData,scheduleAndEventData);
-    db.insert(TABLE_NAME_SceduleAndEventsData,null ,values);
+    long response = db.insert(TABLE_NAME_SceduleAndEventsData,null ,values);
     db.close();
 
 
@@ -55,13 +64,17 @@ public class DataBaseController extends SQLiteOpenHelper {
     public String getScheduleAndEventData(String EventName){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_NAME_SceduleAndEventsData, new String[] { Key_EventName,
-                        Key_EventData}, Key_EventName + "=?",
+        Cursor cursor = db.query(TABLE_NAME_SceduleAndEventsData, new String[] {Key_EventName,
+                        Key_EventData}, Key_EventName + " = ?",
                 new String[] { String.valueOf(EventName) }, null, null, null, null);
         if (cursor != null)
+
             cursor.moveToFirst();
 
+
+
         String EventsnameScheduleandData = cursor.getString(1);
+
 
         return EventsnameScheduleandData;
 
@@ -78,5 +91,23 @@ public class DataBaseController extends SQLiteOpenHelper {
         return db.update(TABLE_NAME_SceduleAndEventsData, values, Key_EventName+ " = ?",
                 new String[] { String.valueOf(EventName) });
     }
+
+
+    public int  getCount(String EventName){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_NAME_SceduleAndEventsData, new String[] {Key_EventName,
+                        Key_EventData}, Key_EventName + " = ?",
+                new String[] { String.valueOf(EventName) }, null, null, null, null);
+
+
+          return   cursor.getCount();
+
+
+    }
+
+
+
 
 }

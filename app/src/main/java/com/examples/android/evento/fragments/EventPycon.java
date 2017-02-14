@@ -40,6 +40,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,13 +65,14 @@ public class EventPycon extends Fragment {
     private ArrayList<TalkDetails> detailsPycon;
     private TextView emptyView;
   private   DataBaseController db;
+    private static final String TAG = EventPycon.class.getSimpleName();
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pycon2017, container, false);
 
-      db = new DataBaseController(getActivity());
+      db = DataBaseController.getInstance(getActivity());
 
         mMapView = (MapView) view.findViewById(R.id.mapViewPycon);
         mMapView.onCreate(null);
@@ -123,6 +125,19 @@ public class EventPycon extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
+
+
+if( db.getCount("EventPycon") !=0) {
+    List<Session> sessionModel1 = new ArrayList<>();
+
+    GsonBuilder gsonBuilder = new GsonBuilder();
+    Gson gson = gsonBuilder.create();
+    sessionModel1 = gson.fromJson(db.getScheduleAndEventData("EventPycon"), new TypeToken<List<Session>>() {
+    }.getType());
+
+    mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel1));
+}
+        else
         makeJsonObjectRequest();
 
 
@@ -182,11 +197,19 @@ public class EventPycon extends Fragment {
 
 
 
-                    String eventPycon= gson.toJson(sessions);
+                    String eventPycon= gson.toJson(sessions, new TypeToken<List<Session>>(){}.getType());
 
 
 
                     db.addScheduleAndEventData(eventPycon ,"EventPycon");
+                    Log.v(TAG, db.getScheduleAndEventData("EventPycon"));
+
+
+                   //  JSONArray jsonArray = new JSONArray(db.getScheduleAndEventData("EventPycon"));
+
+
+                    List<Session> sessionModel = new ArrayList<>();
+                    sessionModel =gson.fromJson(db.getScheduleAndEventData("EventPycon"), new TypeToken<List<Session>>(){}.getType());
 
 
                     if (sessions.isEmpty()) {
@@ -197,9 +220,7 @@ public class EventPycon extends Fragment {
                         emptyView.setVisibility(View.GONE);
                     }
 
-
-
-                    mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessions));
+                     mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel));
 
 
                 } catch (JSONException e) {

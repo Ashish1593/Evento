@@ -25,14 +25,21 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.examples.android.evento.R;
 import com.examples.android.evento.activity.MainActivity;
 import com.examples.android.evento.adapters.GridViewAdapter;
+import com.examples.android.evento.adapters.SessionsAdapter;
 import com.examples.android.evento.controller.AppController;
+import com.examples.android.evento.controller.DataBaseController;
 import com.examples.android.evento.model.EventDetails;
+import com.examples.android.evento.model.Session;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
@@ -48,7 +55,7 @@ public class EventslistFragment extends Fragment {
 
     private String urlJsonObj = "https://talkfunnel.com/json";
 
-    public ArrayList<EventDetails> details ;
+   // public ArrayList<EventDetails> details ;
 //    private ProgressDialog pDialog;
 //    private int Position;
 //    private String name;
@@ -57,7 +64,7 @@ public class EventslistFragment extends Fragment {
 //    private String url;
 
    private RecyclerView evRecyclerView;
-
+private DataBaseController db;
 
   //  }
 
@@ -77,14 +84,30 @@ public class EventslistFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.eventlist_fragment, container, false);
         evRecyclerView=(RecyclerView) rootView.findViewById(R.id.gridView);
 
-
+        db = DataBaseController.getInstance(getActivity());
         LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
         myLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         evRecyclerView.setLayoutManager(myLayoutManager);
 //            GridViewAdapter adapter = new GridViewAdapter(getActivity(), details);
 //
 //            grid.setAdapter(adapter);
-        makeJsonObjectRequest();
+
+        if( db.getCount("EventDetails") !=0) {
+            ArrayList<EventDetails> eventDetailsModel1 = new ArrayList<>();
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
+            eventDetailsModel1 = gson.fromJson(db.getScheduleAndEventData("EventDetails"), new TypeToken<List<EventDetails>>() {
+            }.getType());
+
+            evRecyclerView.setAdapter(new GridViewAdapter(getActivity(), eventDetailsModel1));
+        }
+        else
+            makeJsonObjectRequest();
+
+
+
+        //  makeJsonObjectRequest();
 
         return rootView;
     }
@@ -108,7 +131,7 @@ public class EventslistFragment extends Fragment {
                     //  Parsing json object response
                     //response will be a json object
                     JSONArray eventsArray = response.getJSONArray("spaces");
-                    details = new ArrayList<EventDetails>();
+                    List<EventDetails> details = new ArrayList<>();
 
                         for (int i = 0; i < eventsArray.length(); i++) {
                             JSONObject events = eventsArray.getJSONObject(i);
@@ -123,12 +146,28 @@ public class EventslistFragment extends Fragment {
 
 
                         }
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    Gson gson = gsonBuilder.create();
 
+
+                    String eventdetails= gson.toJson(details, new TypeToken<List<EventDetails>>(){}.getType());
+
+
+
+                    db.addScheduleAndEventData(eventdetails ,"EventDetails");
+                    Log.v(TAG, db.getScheduleAndEventData("EventDetails"));
+
+
+                    //  JSONArray jsonArray = new JSONArray(db.getScheduleAndEventData("EventPycon"));
+
+
+                    ArrayList<EventDetails> eventDetailsModel = new ArrayList<>();
+                    eventDetailsModel =gson.fromJson(db.getScheduleAndEventData("EventDetails"), new TypeToken<List<EventDetails>>(){}.getType());
 
 
                   //  GridViewAdapter adapter = new GridViewAdapter(getActivity(), details);
 
-                    evRecyclerView.setAdapter(new GridViewAdapter(getActivity(), details));
+                    evRecyclerView.setAdapter(new GridViewAdapter(getActivity(), eventDetailsModel));
 
 
 

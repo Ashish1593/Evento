@@ -24,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.examples.android.evento.adapters.SessionsAdapter;
 import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
+import com.examples.android.evento.controller.DataBaseController;
 import com.examples.android.evento.model.Session;
 import com.examples.android.evento.model.TalkDetails;
 import com.examples.android.evento.adapters.RecylerViewadapter;
@@ -39,6 +40,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,11 +63,12 @@ public class EventFossMeet extends Fragment {
     private ArrayList<TalkDetails> detailsFossMeet;
     private ProgressDialog pDialog;
     private RecyclerView mRecyclerView;
-
+private DataBaseController db;
     private TextView emptyView;
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState){
         View view =inflater.inflate(R.layout.fossmeet2017,container,false);
+        db = DataBaseController.getInstance(getActivity());
 
         mMapView = (MapView) view.findViewById(R.id.mapViewFossMeet);
 
@@ -172,7 +175,23 @@ public class EventFossMeet extends Fragment {
 //            }
 //        });
 
-        makeJsonObjectRequest();
+
+
+        if( db.getCount("EventFossMeet") !=0) {
+            List<Session> sessionModel1 = new ArrayList<>();
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
+            sessionModel1 = gson.fromJson(db.getScheduleAndEventData("EventFossMeet"), new TypeToken<List<Session>>() {
+            }.getType());
+
+            mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel1));
+        }
+        else
+            makeJsonObjectRequest();
+
+
+      //  makeJsonObjectRequest();
 
 
 
@@ -229,6 +248,22 @@ public class EventFossMeet extends Fragment {
                     }
 
 
+                    String eventFossMeet= gson.toJson(sessions, new TypeToken<List<Session>>(){}.getType());
+
+
+
+                    db.addScheduleAndEventData(eventFossMeet ,"EventFossMeet");
+                    Log.v(TAG, db.getScheduleAndEventData("EventFossMeet"));
+
+
+                    //  JSONArray jsonArray = new JSONArray(db.getScheduleAndEventData("EventPycon"));
+
+
+                    List<Session> sessionModel = new ArrayList<>();
+                    sessionModel =gson.fromJson(db.getScheduleAndEventData("EventFossMeet"), new TypeToken<List<Session>>(){}.getType());
+
+
+
                     if (sessions.isEmpty()) {
                         mRecyclerView.setVisibility(View.GONE);
                         emptyView.setVisibility(View.VISIBLE);
@@ -238,7 +273,7 @@ public class EventFossMeet extends Fragment {
                         emptyView.setVisibility(View.GONE);
                     }
 
-                    mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessions));
+                    mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel));
 
 
 

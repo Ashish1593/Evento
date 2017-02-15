@@ -135,12 +135,16 @@ if( db.getCount("EventPycon") !=0) {
     sessionModel1 = gson.fromJson(db.getScheduleAndEventData("EventPycon"), new TypeToken<List<Session>>() {
     }.getType());
 
-    mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel1));
-}
-        else
-        makeJsonObjectRequest();
+    if(sessionModel1.size()!=0) {
+        mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel1));
 
+    }
 
+    else {
+        //     makeJsonObjectRequest();
+        mRecyclerView.setVisibility(View.GONE);
+        emptyView.setVisibility(View.VISIBLE);
+    }  }
         return view;
 
 

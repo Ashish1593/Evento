@@ -60,8 +60,8 @@ public class GridViewAdapter extends RecyclerView.Adapter<EventListViewHolder> {
 
         holder.evName.setText(details.get(position).getEventname());
         holder.evPlace.setText(details.get(position).getEventplace());
-        holder.evDate.setText(details.get(position).getEventdate());
-        holder.evURL.setText(details.get(position).getEventURL());
+      //  holder.evDate.setText(details.get(position).getEventdate());
+     //   holder.evURL.setText(details.get(position).getEventURL());
 
 
         String d = details.get(position).getEventdate();
@@ -102,9 +102,10 @@ public class GridViewAdapter extends RecyclerView.Adapter<EventListViewHolder> {
                 holder.statustext.setText("PAST EVENTS");
                 holder.statustext.setTextColor(Color.RED);
             } else {
-                holder.frameLayout.setBackgroundColor(Color.parseColor(colors.get(generatedRandomNum)));
+                //holder.frameLayout.setBackgroundColor(Color.parseColor(colors.get(generatedRandomNum)));
+                holder.frameLayout.setBackgroundColor(Color.WHITE);
                 holder.statustext.setText("UPCOMING");
-                holder.statustext.setTextColor(Color.GREEN);
+                holder.statustext.setTextColor(Color.BLUE);
             }
 
 
@@ -113,7 +114,7 @@ public class GridViewAdapter extends RecyclerView.Adapter<EventListViewHolder> {
         }
 
 
-        holder.evURL.setOnClickListener(new View.OnClickListener() {
+        holder.frameLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();

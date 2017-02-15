@@ -28,8 +28,8 @@ public class EventListViewHolder extends RecyclerView.ViewHolder {
 
         evName = (TextView) v.findViewById(R.id.textView_eventName);
         evPlace = (TextView) v.findViewById(R.id.textView_place);
-        evDate = (TextView) v.findViewById(R.id.textView_date);
-        evURL=(TextView) v.findViewById(R.id.textView_eventURL);
+        //evDate = (TextView) v.findViewById(R.id.textView_date);
+       // evURL=(TextView) v.findViewById(R.id.textView_eventURL);
         frameLayout =(FrameLayout) v.findViewById(R.id.frame);
         statustext =(TextView) v.findViewById(R.id.statustext);
     }

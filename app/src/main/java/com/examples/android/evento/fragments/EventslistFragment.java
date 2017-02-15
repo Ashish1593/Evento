@@ -102,8 +102,8 @@ private DataBaseController db;
 
             evRecyclerView.setAdapter(new GridViewAdapter(getActivity(), eventDetailsModel1));
         }
-        else
-            makeJsonObjectRequest();
+
+            //makeJsonObjectRequest();
 
 
 

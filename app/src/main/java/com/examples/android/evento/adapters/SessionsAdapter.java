@@ -136,8 +136,8 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
     public int getItemCount() {
 
         if(sessions.size()==0){
-            Toast.makeText(getApplicationContext(),
-                    "Schedule is not prepared", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(),
+//                    "Schedule is not prepared", Toast.LENGTH_SHORT).show();
 
         }
         return sessions.size();

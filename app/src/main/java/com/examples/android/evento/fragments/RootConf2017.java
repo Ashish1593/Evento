@@ -25,6 +25,7 @@ import com.examples.android.evento.R;
 import com.examples.android.evento.adapters.RecylerViewadapter;
 import com.examples.android.evento.adapters.SessionsAdapter;
 import com.examples.android.evento.controller.AppController;
+import com.examples.android.evento.controller.DataBaseController;
 import com.examples.android.evento.model.Session;
 import com.examples.android.evento.model.TalkDetails;
 //import com.examples.android.evento.activity.ScheduleActivity;
@@ -39,6 +40,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,6 +66,7 @@ public class RootConf2017 extends Fragment{
     private RecyclerView mRecyclerView;
 
     private TextView emptyView;
+    private DataBaseController db;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view =inflater.inflate(R.layout.rootconf2017,container,false);
@@ -73,7 +76,7 @@ public class RootConf2017 extends Fragment{
         mMapView.onCreate(null);
 
         mMapView.onResume();
-
+db = DataBaseController.getInstance(getActivity());
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -174,7 +177,27 @@ public class RootConf2017 extends Fragment{
 //            }
 //        });
 
-        makeJsonObjectRequest();
+        if( db.getCount("EventRootConf") !=0) {
+            List<Session> sessionModel1 = new ArrayList<>();
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
+            sessionModel1 = gson.fromJson(db.getScheduleAndEventData("EventRootConf"), new TypeToken<List<Session>>() {
+            }.getType());
+
+
+            if (sessionModel1.size() != 0) {
+                mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel1));
+            } else {
+                //     makeJsonObjectRequest();
+
+                mRecyclerView.setVisibility(View.GONE);
+                emptyView.setVisibility(View.VISIBLE);
+            }
+        }
+
+
+        //  makeJsonObjectRequest();
 
 
 

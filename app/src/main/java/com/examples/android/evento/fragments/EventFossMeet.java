@@ -186,9 +186,19 @@ private DataBaseController db;
             }.getType());
 
             mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel1));
+
+            if (sessionModel1.size() != 0) {
+                mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel1));
+
+            } else {
+                //     makeJsonObjectRequest();
+                mRecyclerView.setVisibility(View.GONE);
+                emptyView.setVisibility(View.VISIBLE);
+            }// makeJsonObjectRequest();
+
         }
-        else
-            makeJsonObjectRequest();
+
+
 
 
       //  makeJsonObjectRequest();

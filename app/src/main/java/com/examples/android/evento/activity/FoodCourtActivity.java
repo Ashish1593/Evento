@@ -34,9 +34,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by ankit on 27/12/16.
- */
 
 
 public class FoodCourtActivity extends AppCompatActivity {

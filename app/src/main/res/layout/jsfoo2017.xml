@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<android.support.v4.widget.NestedScrollView
 xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:layout_height="match_parent" >
@@ -46,8 +46,199 @@ android:layout_height="match_parent" >
             android:textAlignment="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
             />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical">
+        <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+
+        <!--&gt;-->
+
+        <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="4dp"-->
+        <!--android:foreground="#20000000">-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+
+            >
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:foreground="#20000000"
+                >
+                <LinearLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?android:selectableItemBackground"
+                    android:onClick="onDiscussionClick"
+                    android:orientation="vertical">
+
+
+                    <ImageButton
+
+                        android:id="@+id/discussions"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/background1"
+                        android:onClick="onDiscussionClick"
+                        android:padding="10dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/discussion1"
+                        android:text=""
+                        android:textColor="#FFFFFF"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:onClick="onDiscussionClick"
+                        android:text="Discussions"
+                        android:textAlignment="center"
+                        />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:foreground="#20000000">
+                <LinearLayout
+                    android:id="@+id/announcements"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="announcements"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/background1"
+                        android:onClick="announcements"
+                        android:padding="10dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/announcement1"
+                        android:text=""
+
+                        android:textColor="#FFFFFF"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:onClick="announcements"
+                        android:text="Announcements"
+                        android:textAlignment="center"
+                        />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:foreground="#20000000">
+                <LinearLayout
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="liveStream"
+                    android:orientation="vertical">
+
+                    <ImageButton
+
+                        android:id="@+id/livestream"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/background1"
+                        android:onClick="liveStream"
+                        android:padding="10dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/livestream2"
+                        android:text=""
+                        android:textColor="#FFFFFF"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:onClick="liveStream"
+                        android:text="LiveStream"
+                        />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:foreground="#20000000">
+                <LinearLayout
+                    android:id="@+id/foodcourt"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="foodcourt"
+                    android:orientation="vertical"
+                    >
+
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/background1"
+                        android:onClick="foodcourt"
+                        android:padding="10dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/foodcourt4"
+                        android:text=""
+                        android:textColor="#FFFFFF"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:onClick="foodcourt"
+                        android:text="Food Court"
+                        />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+        <!--</android.support.v7.widget.CardView>-->
+
+    </LinearLayout>
     <!--</android.support.v7.widget.CardView>-->
     <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->
@@ -99,8 +290,8 @@ android:layout_height="match_parent" >
         android:textStyle="bold"
         android:gravity="center"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
 
         />
 
@@ -126,7 +317,7 @@ android:layout_height="match_parent" >
             android:layout_margin="10dp"
             android:visibility="gone"
             android:textColor="#ff0000"
-            android:text="Schedule_not_yet_decided"
+            android:text="Schedule not yet decided"
             />
 
 
@@ -147,7 +338,9 @@ android:layout_height="match_parent" >
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5sp">
+        android:layout_margin="5sp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp">
         <com.google.android.gms.maps.MapView
 
             android:id="@+id/mapViewJSFOO"
@@ -204,7 +397,7 @@ android:layout_height="match_parent" >
 </LinearLayout>
 
 
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>
 
 
 

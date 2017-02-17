@@ -43,41 +43,40 @@
     </RelativeLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/left_drawer"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="#90000000"
         android:choiceMode="singleChoice"
         android:clickable="true"
-        android:orientation="vertical"
-        android:paddingTop="80dp">
+        >
 
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
             android:orientation="horizontal"
+
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+
 
             >
 
             <LinearLayout
                 android:id="@+id/connecttonetwork"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="?android:selectableItemBackground"
                 android:onClick="connecttonetwork"
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
                     android:clickable="true"
@@ -94,6 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
                     android:onClick="connecttonetwork"
                     android:text="connect to hasgeek network"
                     android:textAlignment="center"
@@ -104,8 +104,8 @@
 
             <LinearLayout
                 android:id="@+id/scanBadges"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="?android:selectableItemBackground"
                 android:onClick="qrcodescanner"
@@ -113,8 +113,8 @@
 
                 <ImageButton
 
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:background="@drawable/background"
                     android:onClick="qrcodescanner"
@@ -131,331 +131,332 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:onClick="qrcodescanner"
-                    android:text="Scan QR Code"
+                    android:layout_marginTop="5dp"
+                    android:text="Scan Badge"
                     android:textAlignment="center"
                     android:textColor="#ffffff" />
 
             </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="liveStream"
-                android:orientation="vertical">
+            <!--<LinearLayout-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:onClick="liveStream"-->
+                <!--android:orientation="vertical">-->
 
-                <ImageButton
+                <!--<ImageButton-->
 
-                    android:id="@+id/livestream"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/background"
-                    android:onClick="liveStream"
-                    android:padding="10dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/livestream2"
-                    android:text=""
-                    android:textColor="#FFFFFF"
-                    android:textSize="25sp" />
+                    <!--android:id="@+id/livestream"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:background="@drawable/background"-->
+                    <!--android:onClick="liveStream"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/livestream2"-->
+                    <!--android:text=""-->
+                    <!--android:textColor="#FFFFFF"-->
+                    <!--android:textSize="25sp" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:onClick="liveStream"
-                    android:text="LiveStream"
-                    android:textColor="#ffffff" />
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:onClick="liveStream"-->
+                    <!--android:text="LiveStream"-->
+                    <!--android:textColor="#ffffff" />-->
 
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/foodcourt"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="foodcourt"
-                android:orientation="vertical"
+            <!--</LinearLayout>-->
 
 
-                >
+            <!--<LinearLayout-->
+                <!--android:id="@+id/foodcourt"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:onClick="foodcourt"-->
+                <!--android:orientation="vertical"-->
 
-                <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/background"
-                    android:onClick="foodcourt"
-                    android:padding="10dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/foodcourt4"
-                    android:text=""
-                    android:textColor="#FFFFFF"
-                    android:textSize="25sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:onClick="foodcourt"
-                    android:text="Food Court"
-                    android:textColor="#ffffff" />
+                <!--&gt;-->
 
-            </LinearLayout>
+                <!--<ImageButton-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:background="@drawable/background"-->
+                    <!--android:onClick="foodcourt"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/foodcourt4"-->
+                    <!--android:text=""-->
+                    <!--android:textColor="#FFFFFF"-->
+                    <!--android:textSize="25sp" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:onClick="foodcourt"-->
+                    <!--android:text="Food Court"-->
+                    <!--android:textColor="#ffffff" />-->
+
+            <!--</LinearLayout>-->
 
 
         </LinearLayout>
 
 
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginLeft="0dp"-->
+
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:orientation="horizontal"-->
+
+            <!--&gt;-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="?android:selectableItemBackground"-->
+                <!--android:onClick="onDiscussionClick"-->
+                <!--android:orientation="vertical">-->
+
+
+                <!--<ImageButton-->
+
+                    <!--android:id="@+id/discussions"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:background="@drawable/background"-->
+                    <!--android:onClick="onDiscussionClick"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/discussion1"-->
+                    <!--android:text=""-->
+                    <!--android:textColor="#FFFFFF"-->
+                    <!--android:textSize="25sp" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:onClick="onDiscussionClick"-->
+                    <!--android:text="Discussions"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textColor="#ffffff" />-->
+
+            <!--</LinearLayout>-->
+
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/announcements"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:onClick="announcements"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<ImageButton-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:background="@drawable/background"-->
+                    <!--android:onClick="announcements"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/announcement1"-->
+                    <!--android:text=""-->
+
+                    <!--android:textColor="#FFFFFF"-->
+                    <!--android:textSize="25sp" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:onClick="announcements"-->
+                    <!--android:text="Announcements"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textColor="#ffffff" />-->
+
+            <!--</LinearLayout>-->
+
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/hasjob"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:onClick="hasjob"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<ImageButton-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:background="@drawable/background"-->
+                    <!--android:onClick="hasjob"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/hasgeeekjobs"-->
+                    <!--android:text=""-->
+                    <!--android:textColor="#FFFFFF"-->
+                    <!--android:textSize="25sp" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:onClick="hasjob"-->
+                    <!--android:text="HasJob"-->
+                    <!--android:textColor="#ffffff" />-->
+
+            <!--</LinearLayout>-->
+
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/hasgeek"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:onClick="hasgeek"-->
+                <!--android:orientation="vertical"-->
+
+                <!--&gt;-->
+
+                <!--<ImageButton-->
+
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:background="@drawable/background"-->
+                    <!--android:onClick="hasgeek"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/hasgeek"-->
+                    <!--android:text=""-->
+                    <!--android:textColor="#FFFFFF"-->
+                    <!--android:textSize="25sp" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:onClick="hasgeek"-->
+                    <!--android:text="HasGeek"-->
+                    <!--android:textColor="#ffffff" />-->
+
+            <!--</LinearLayout>-->
+
+
+        <!--</LinearLayout>-->
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginLeft="0dp"-->
+
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:orientation="horizontal"-->
+
+            <!--&gt;-->
+
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/hasgeektv"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="?android:selectableItemBackground"-->
+                <!--android:clickable="true"-->
+                <!--android:onClick="hasgeektv"-->
+                <!--android:orientation="vertical">-->
+
+
+                <!--<ImageButton-->
+                    <!--android:id="@+id/imageViewhasgeektv"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:background="@drawable/background"-->
+                    <!--android:clickable="true"-->
+                    <!--android:onClick="hasgeektv"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/hasgeektv"-->
+                    <!--android:text=""-->
+                    <!--android:textColor="#FFFFFF"-->
+                    <!--android:textSize="25sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/textViewhasgeektv"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:clickable="true"-->
+                    <!--android:onClick="hasgeektv"-->
+                    <!--android:text="Hasgeek TV"-->
+                    <!--android:textAlignment="center"-->
+                    <!--android:textColor="#ffffff" />-->
+
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/talkfunnel"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:onClick="talkfunnel"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<ImageButton-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:background="@drawable/background"-->
+                    <!--android:onClick="talkfunnel"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/talkfunnel"-->
+                    <!--android:text=""-->
+                    <!--android:textColor="#FFFFFF"-->
+                    <!--android:textSize="25sp" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:onClick="talkfunnel"-->
+                    <!--android:text="TalkFunnel"-->
+                    <!--android:textColor="#ffffff" />-->
+
+            <!--</LinearLayout>-->
+
+
+        <!--</LinearLayout>-->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="0dp"
-
             android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
 
-            >
-
-            <LinearLayout
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?android:selectableItemBackground"
-                android:onClick="onDiscussionClick"
-                android:orientation="vertical">
-
-
-                <ImageButton
-
-                    android:id="@+id/discussions"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/background"
-                    android:onClick="onDiscussionClick"
-                    android:padding="10dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/discussion1"
-                    android:text=""
-                    android:textColor="#FFFFFF"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:onClick="onDiscussionClick"
-                    android:text="Discussions"
-                    android:textAlignment="center"
-                    android:textColor="#ffffff" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/announcements"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="announcements"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/background"
-                    android:onClick="announcements"
-                    android:padding="10dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/announcement1"
-                    android:text=""
-
-                    android:textColor="#FFFFFF"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:onClick="announcements"
-                    android:text="Announcements"
-                    android:textAlignment="center"
-                    android:textColor="#ffffff" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/hasjob"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="hasjob"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/background"
-                    android:onClick="hasjob"
-                    android:padding="10dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/hasgeeekjobs"
-                    android:text=""
-                    android:textColor="#FFFFFF"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:onClick="hasjob"
-                    android:text="HasJob"
-                    android:textColor="#ffffff" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/hasgeek"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="hasgeek"
-                android:orientation="vertical"
-
-                >
-
-                <ImageButton
-
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/background"
-                    android:onClick="hasgeek"
-                    android:padding="10dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/hasgeek"
-                    android:text=""
-                    android:textColor="#FFFFFF"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:onClick="hasgeek"
-                    android:text="HasGeek"
-                    android:textColor="#ffffff" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="0dp"
-
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-
-            >
-
-
-            <LinearLayout
-                android:id="@+id/hasgeektv"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?android:selectableItemBackground"
-                android:clickable="true"
-                android:onClick="hasgeektv"
-                android:orientation="vertical">
-
-
-                <ImageButton
-                    android:id="@+id/imageViewhasgeektv"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/background"
-                    android:clickable="true"
-                    android:onClick="hasgeektv"
-                    android:padding="10dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/hasgeektv"
-                    android:text=""
-                    android:textColor="#FFFFFF"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:id="@+id/textViewhasgeektv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:onClick="hasgeektv"
-                    android:text="Hasgeek TV"
-                    android:textAlignment="center"
-                    android:textColor="#ffffff" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/talkfunnel"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="talkfunnel"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/background"
-                    android:onClick="talkfunnel"
-                    android:padding="10dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/talkfunnel"
-                    android:text=""
-                    android:textColor="#FFFFFF"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:onClick="talkfunnel"
-                    android:text="TalkFunnel"
-                    android:textColor="#ffffff" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-
-            android:gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:orientation="vertical">
 
             <TextView
@@ -487,6 +488,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </android.support.v4.widget.DrawerLayout>

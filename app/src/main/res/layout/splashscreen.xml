@@ -9,7 +9,7 @@
     <TextView android:text="HasGeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="45sp"
+        android:textSize="45dp"
         android:textColor="#ffffff"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

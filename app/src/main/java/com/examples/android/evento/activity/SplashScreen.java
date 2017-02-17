@@ -124,7 +124,6 @@ public class SplashScreen extends AppCompatActivity {
 
 
 
-
     }
 
     private void makeJsonObjectRequestForSession(String urlJsonObj, final String EventName ) {

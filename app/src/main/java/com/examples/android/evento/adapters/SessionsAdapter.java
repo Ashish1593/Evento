@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
         this.context = context;
       this.sessions = sessions;
     }
+    
 
     @Override
     public int getItemViewType(int position) {

@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    android:orientation="horizontal">
 
 
     <com.vipul.hp_hp.timelineview.TimelineView
         android:id="@+id/time_marker"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:marker_size="10dp"
+        android:layout_marginLeft="20dp"
+        app:line="#000000"
         app:line_size="2dp"
-        android:layout_marginLeft="20dp"
-        app:line="#000000"/>
+        app:marker_size="10dp" />
 
 
     <LinearLayout
@@ -26,133 +24,123 @@
 
         android:layout_marginLeft="20dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-      >
+        android:layout_marginTop="20dp">
 
-<android.support.v7.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="2sp"
-    android:layout_gravity="end"
-
-    >
-
-<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-
-
-
-       >
-
-    <TextView
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/date"
-        android:layout_weight="1"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-
-        android:ellipsize="end" />
-        <LinearLayout
-            android:layout_width="fill_parent"
-
+        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
-            <TextView
-                android:id="@+id/fragment_space_schedule_list_row_title"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
+            android:layout_gravity="end"
+            android:layout_margin="2sp"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Large Text"
-                android:layout_gravity="start"
-                />
+                android:orientation="vertical"
 
 
-        </LinearLayout>
+                >
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp">
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
 
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/fragment_space_schedule_list_row_speaker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Medium Text"
-                android:maxLines="1"
-                android:ellipsize="end" />
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
+                <LinearLayout
+                    android:layout_width="fill_parent"
 
-        </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp">
-        <TextView
-            android:layout_weight="1"
-            android:id="@+id/fragment_space_schedule_list_row_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:layout_marginLeft="10dp"
-            android:gravity="left"
-            android:text="2:00PM - 03:00PM"
-            />
-        <TextView
-            android:id="@+id/room"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:layout_marginRight="10dp"
-           android:text="Auditorium"/>
-        <TextView
-            android:id="@+id/fragment_space_schedule_list_row_duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-android:layout_weight="1"
-            android:gravity="end"
-            android:layout_marginRight="10dp"
-            android:textStyle="italic"
-
-            android:text="45 mins"/>
-
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/fragment_space_schedule_list_row_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_weight="1"
+                        android:text="Large Text"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
+                </LinearLayout>
 
-</LinearLayout>
-    <!--<LinearLayout-->
-        <!--android:id="@+id/fragment_space_schedule_list_row_color_indicator"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_weight="1">-->
-    <!--</LinearLayout>-->
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/fragment_space_schedule_list_row_speaker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Medium Text"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 
+                </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="0dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/fragment_space_schedule_list_row_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="2:00PM - 03:00PM"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/room"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="Auditorium" />
+
+                    <TextView
+                        android:id="@+id/fragment_space_schedule_list_row_duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="45 mins"
+
+                        android:textStyle="italic" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 </LinearLayout>

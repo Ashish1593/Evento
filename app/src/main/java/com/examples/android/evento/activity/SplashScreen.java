@@ -18,17 +18,21 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.examples.android.evento.R;
-import com.examples.android.evento.activity.MainActivity;
-import com.examples.android.evento.adapters.GridViewAdapter;
-import com.examples.android.evento.adapters.SessionsAdapter;
+
+import com.examples.android.evento.adapters.FoodCourtVendorPagerAdapter;
+
 import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.controller.DataBaseController;
 import com.examples.android.evento.model.EventDetails;
+import com.examples.android.evento.model.Metadata;
 import com.examples.android.evento.model.Session;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,6 +58,13 @@ public class SplashScreen extends AppCompatActivity {
     private String urlJsonObjRootConf="https://rootconf.talkfunnel.com/2017/json";
     private String urlJsonObjJsfoo=    "https://jsfoo.talkfunnel.com/2017/json";
     private String urlJsonObjEventList ="https://talkfunnel.com/json";
+    private String urlMetadataPycon="http://hasgeek.github.io/api/space/104/metadata";
+    private String urlMetadataFossMeet="http://hasgeek.github.io/api/space/103/metadata";
+    private String urlMetadataRootConf="http://hasgeek.github.io/api/space/102/metadata";
+    private String urlMetadataJsfoo="http://hasgeek.github.io/api/space/106/metadata";
+
+
+    public static FoodCourtVendorPagerAdapter foodCourtVendorPagerAdapter;
 
     private DataBaseController db;
     @Override
@@ -72,7 +83,10 @@ public class SplashScreen extends AppCompatActivity {
         makeJsonObjectRequestForSession(urlJsonObjRootConf,"EventRootConf");
         makeJsonObjectRequestForSession(urlJsonObjJsfoo,"EventJsfoo");
         makeJsonObjectRequestForEventDetails(urlJsonObjEventList,"EventDetails");
-
+       requestJsonObject(urlMetadataPycon,"MetadataEventPycon");
+       requestJsonObject(urlMetadataFossMeet,"MetadataEventFossMeet");
+       requestJsonObject(urlMetadataRootConf,"MetadataEventRootConf");
+      requestJsonObject(urlMetadataJsfoo,"MetadataEventJsfoo");
 
         final ImageView imageView = (ImageView) findViewById(R.id.imageView);
         final Animation animation_1 = AnimationUtils.loadAnimation(getBaseContext(),R.anim.rotate);
@@ -186,7 +200,7 @@ public class SplashScreen extends AppCompatActivity {
             }
         });
 
-// Adding request to request queue
+
         AppController.getInstance().addToRequestQueue(jsonObjReq);
     }
 
@@ -194,7 +208,7 @@ public class SplashScreen extends AppCompatActivity {
 
     private void makeJsonObjectRequestForEventDetails(String urlJsonObj, final String EventDetails) {
 
-        //  showpDialog();
+
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 urlJsonObj, null, new Response.Listener<JSONObject>() {
@@ -203,8 +217,7 @@ public class SplashScreen extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 Log.d(ContentValues.TAG, response.toString());
                 try {
-                    //  Parsing json object response
-                    //response will be a json object
+
                     JSONArray eventsArray = response.getJSONArray("spaces");
                     List<EventDetails> details = new ArrayList<>();
 
@@ -282,6 +295,39 @@ public class SplashScreen extends AppCompatActivity {
 
 
 
+    private void requestJsonObject(String urlJsonObj, final String MetadataEventName ) {
+        RequestQueue queue = Volley.newRequestQueue(this);
+       // String url = "http://hasgeek.github.io/api/space/97/metadata";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlJsonObj, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                GsonBuilder builder = new GsonBuilder();
+                Gson gson = builder.create();
+
+             Metadata metadata = gson.fromJson(response, Metadata.class);
+             //foodCourtVendorPagerAdapter = new FoodCourtVendorPagerAdapter(SplashScreen.this, metadata.getFoodCourtVendors());
+int count = db.getAllContacts();
+                String eventName= gson.toJson(metadata, new TypeToken<Metadata>(){}.getType());
+                if(db.getCount(MetadataEventName)==0)
+                    db.addScheduleAndEventData(eventName ,MetadataEventName);
+                else
+                    db.updateScheduleAndEventData( eventName , MetadataEventName);
+
+            }
+
+
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        queue.add(stringRequest);
+
+
+    }
 
 
 }

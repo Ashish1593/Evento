@@ -4,18 +4,8 @@ package com.examples.android.evento.controller;
  * Created by ankit on 23/1/17.
  */
 
-
-//import com.examples.android.evento.schedule.ScheduleHelper;
-////import com.examples.android.evento.schedule.Space;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-//import com.examples.android.evento.activity.ScheduleActivity;
-import com.examples.android.evento.adapters.SessionsAdapter;
-import com.examples.android.evento.model.Session;
 import com.examples.android.evento.utils.AuthWrapper;
 import com.examples.android.evento.interfacelistener.TalkfunnelAPI;
 import com.google.gson.ExclusionStrategy;
@@ -23,79 +13,29 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 import rx.Observable;
 import rx.Subscriber;
-
-import static android.content.ContentValues.TAG;
-import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
-
 
 public class APIController {
 
     public static APIController apiController;
     public static TalkfunnelAPI api;
+    public RecyclerView mRecyclerView;
 
     public static APIController getService() {
         if (apiController == null) {
             apiController = new APIController();
-            apiController.api = apiController.createController();
+            //  apiController.api = apiController.createController();
         }
         return apiController;
     }
 
-   public RecyclerView mRecyclerView;
-
-
-    public  String getAuthHeaderFromToken(String token) {
-        return "Bearer "+token;
-    }
-
-
-
-    public TalkfunnelAPI createController() {
-        return createController(null);
-    }
-
-    public TalkfunnelAPI createController(String spaceUrl) {
-
-        Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
-            @Override
-            public boolean shouldSkipField(FieldAttributes f) {
-                // return f.getDeclaringClass() == RealmObject.class;
-                return false;
-            }
-
-            @Override
-            public boolean shouldSkipClass(Class<?> clazz) {
-                return false;
-            }
-        }).create();
-
-
-        String baseUrl;
-        if (spaceUrl != null)
-            baseUrl = spaceUrl;
-        else
-            baseUrl = "https://talkfunnel.com/";
-        Retrofit.Builder builder = new Retrofit.Builder().addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl(baseUrl);
-
-        return builder.build().create(TalkfunnelAPI.class);
+    public String getAuthHeaderFromToken(String token) {
+        return "Bearer " + token;
     }
 
 
@@ -136,12 +76,4 @@ public class APIController {
             }
         });
     }
-
-
-
-
-
-
-
-
 }

@@ -13,10 +13,15 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.examples.android.evento.controller.DataBaseController;
 import com.examples.android.evento.model.Announcements;
 import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
 import com.examples.android.evento.adapters.RecyclerViewAdapterAnnouncements;
+import com.examples.android.evento.model.Metadata;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +34,7 @@ import java.util.ArrayList;
  **/
 
 public class AnnouncementsActivity extends AppCompatActivity {
+    private DataBaseController db;
     private static String TAG = AnnouncementsActivity.class.getSimpleName();
 public String announcementsURL = "http://hasgeek.github.io/api/space/97/metadata";
    private RecyclerView announcementRecyclerView;
@@ -44,7 +50,7 @@ protected void onCreate(Bundle savedInstanceState)
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
     setContentView(R.layout.announcements);
-
+    db = DataBaseController.getInstance(this);
 
 
 
@@ -53,7 +59,16 @@ protected void onCreate(Bundle savedInstanceState)
     myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
     announcementRecyclerView.setLayoutManager(myLayoutManager);
 
-    makeJsonObjectRequest();
+
+    String data = this.getIntent().getStringExtra("EventNameMetadata");
+    GsonBuilder gsonBuilder = new GsonBuilder();
+    Gson gson = gsonBuilder.create();
+    Metadata metadata = gson.fromJson(db.getScheduleAndEventData(data), new TypeToken<Metadata>() {
+    }.getType());
+
+
+    announcementRecyclerView.setAdapter(new RecyclerViewAdapterAnnouncements(AnnouncementsActivity.this,metadata.getAnnouncements()));
+   // makeJsonObjectRequest();
 
 }
 

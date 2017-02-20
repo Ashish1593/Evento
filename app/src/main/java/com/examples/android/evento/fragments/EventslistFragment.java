@@ -55,28 +55,8 @@ public class EventslistFragment extends Fragment {
 
     private String urlJsonObj = "https://talkfunnel.com/json";
 
-   // public ArrayList<EventDetails> details ;
-//    private ProgressDialog pDialog;
-//    private int Position;
-//    private String name;
-//    private String date;
-//    private String place;
-//    private String url;
-
    private RecyclerView evRecyclerView;
 private DataBaseController db;
-
-  //  }
-
-//  @Override
-//    public void onCreate(Bundle savedInstanceState){
-//        super.onCreate(savedInstanceState);
-//
-//
-//    }
-//
-
-
 
     @Nullable
     @Override

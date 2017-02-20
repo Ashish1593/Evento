@@ -13,6 +13,7 @@ import com.examples.android.evento.model.Announcements;
 import com.examples.android.evento.viewHolder.AnnouncementsViewHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ankit on 26/12/16.
@@ -20,10 +21,10 @@ import java.util.ArrayList;
 
 public class RecyclerViewAdapterAnnouncements extends RecyclerView.Adapter<AnnouncementsViewHolder> {
     Activity mContext;
-    private ArrayList<Announcements> detailsAnnouncements;
+    private List<Announcements> detailsAnnouncements;
 
 
-    public RecyclerViewAdapterAnnouncements(Activity c, ArrayList<Announcements> detailsAnnouncements) {
+    public RecyclerViewAdapterAnnouncements(Activity c, List<Announcements> detailsAnnouncements) {
         this.detailsAnnouncements = detailsAnnouncements;
         this.mContext = c;
 

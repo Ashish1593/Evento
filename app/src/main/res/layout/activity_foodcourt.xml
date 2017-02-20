@@ -14,26 +14,20 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/activity_foodcourt_toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="?attr/actionBarSize"-->
-            <!--android:background="?attr/colorPrimary"-->
-            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
         <android.support.design.widget.TabLayout
             android:id="@+id/activity_foodcourt_tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="scrollable"
-            app:tabGravity="fill"
             android:background="#000000"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+            app:tabGravity="fill"
+            app:tabMode="scrollable"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/activity_foodcourt_viewpager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"/>
+            android:background="@android:color/white" />
 
 
     </android.support.design.widget.AppBarLayout>

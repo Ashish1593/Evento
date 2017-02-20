@@ -26,7 +26,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * Created by ankit on 8/12/16.
  */
 
-public class WorkshoponDNSandDNSSEC extends Fragment{
+public class WorkshoponDNSandDNSSEC extends Fragment {
     MapView mMapView;
     private GoogleMap googleMap;
 
@@ -34,7 +34,7 @@ public class WorkshoponDNSandDNSSEC extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 
     {
-        View view =inflater.inflate(R.layout.workshopondnsanddnssecfragment,container,false);
+        View view = inflater.inflate(R.layout.workshopondnsanddnssecfragment, container, false);
 
         mMapView = (MapView) view.findViewById(R.id.mapViewDns);
 
@@ -55,12 +55,12 @@ public class WorkshoponDNSandDNSSEC extends Fragment{
                 googleMap = mMap;
 
                 // For showing a move to my location button
-            //  googleMap.setMyLocationEnabled(true);
+                //  googleMap.setMyLocationEnabled(true);
                 // create marker
                 googleMap.getUiSettings().setZoomGesturesEnabled(true);
 
                 MarkerOptions marker = new MarkerOptions().position(
-                        new LatLng(12.9615,77.6443)).title("Hello Maps");
+                        new LatLng(12.9615, 77.6443)).title("Hello Maps");
 
 //
 
@@ -68,7 +68,7 @@ public class WorkshoponDNSandDNSSEC extends Fragment{
                 marker.icon(BitmapDescriptorFactory
                         .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
                 // For dropping a marker at a point on the Map
-                LatLng hasgeek= new LatLng(12.9615, 77.6443);
+                LatLng hasgeek = new LatLng(12.9615, 77.6443);
                 googleMap.addMarker(new MarkerOptions().position(hasgeek).title("HasGeek").snippet("2699, 19th Main Rd, HAL 2nd Stage, Indiranagar, Bengaluru, Karnataka 560008"));
 
                 // For zooming automatically to the location of the marker
@@ -78,7 +78,7 @@ public class WorkshoponDNSandDNSSEC extends Fragment{
         });
 
 
-        Button  buyDnsTIckets = (Button) view.findViewById(R.id.BuyDNSTicket);
+        Button buyDnsTIckets = (Button) view.findViewById(R.id.BuyDNSTicket);
         buyDnsTIckets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +91,7 @@ public class WorkshoponDNSandDNSSEC extends Fragment{
 
         return view;
     }
+
     @Override
     public void onResume() {
         super.onResume();

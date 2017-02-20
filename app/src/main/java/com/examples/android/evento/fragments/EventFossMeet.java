@@ -2,18 +2,23 @@ package com.examples.android.evento.fragments;
 
 //import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -21,10 +26,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.examples.android.evento.activity.AnnouncementsActivity;
+import com.examples.android.evento.activity.FoodCourtActivity;
+import com.examples.android.evento.activity.MainActivity;
 import com.examples.android.evento.adapters.SessionsAdapter;
 import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
 import com.examples.android.evento.controller.DataBaseController;
+import com.examples.android.evento.model.Metadata;
 import com.examples.android.evento.model.Session;
 import com.examples.android.evento.model.TalkDetails;
 import com.examples.android.evento.adapters.RecylerViewadapter;
@@ -49,6 +58,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.examples.android.evento.activity.MainActivity.SLACK_ANDROID_PACKAGE_NAME;
 import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 //import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
@@ -198,10 +208,146 @@ private DataBaseController db;
 
         }
 
+        final Metadata metadata;
+        if(db.getCount("MetadataEventFossMeet")!=0) {
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
+            metadata = gson.fromJson(db.getScheduleAndEventData("MetadataEventFossMeet"), new TypeToken<Metadata>() {
+            }.getType());
+        }
+        else
+            metadata = null;
 
 
 
-      //  makeJsonObjectRequest();
+        LinearLayout liveStreamButton = (LinearLayout) view.findViewById(R.id.livestreamFossmeet);
+        liveStreamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(metadata!=null) {
+                    final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+                    // final String URI = "https://pune.pycon.org/registration/";
+                    final String URI = metadata.getLivestreamUrl();
+
+                    intent.launchUrl(getActivity(), Uri.parse(URI));
+                }
+                else
+                {
+                    new android.app.AlertDialog.Builder(getActivity())
+                            .setTitle("")
+                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setCancelable(true)
+                            .setPositiveButton("Ok", null)
+                            .create().show();
+                }
+            }
+        });
+
+
+
+        LinearLayout foodcourtButton = (LinearLayout) view.findViewById(R.id.foodcourtFossmeet);
+        foodcourtButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(metadata!=null) {
+                    Intent intent = new Intent(getActivity(),FoodCourtActivity.class);
+                    intent.putExtra("EventNameMetadata","MetadataEventFossMeet");
+                    startActivity(intent);
+                }
+                else
+                {
+                    new android.app.AlertDialog.Builder(getActivity())
+                            .setTitle("")
+                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setCancelable(true)
+                            .setPositiveButton("Ok", null)
+                            .create().show();
+                }
+            }
+        });
+
+
+        LinearLayout discussionButton = (LinearLayout) view.findViewById(R.id.discussionsFossmeet);
+        discussionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(metadata!=null) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Join the discussion!")
+                            .setMessage("Are you on the Friends of HasGeek Slack team? Follow the discussion on the our channel")
+                            .setCancelable(true)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String uri;
+                                    if (MainActivity.isPackageInstalled(SLACK_ANDROID_PACKAGE_NAME, getActivity().getPackageManager()))
+                                        uri = metadata.getDiscussionSlackDeeplink();
+                                    else
+                                        // uri = "https://friendsofhasgeek.slack.com/messages/droidcon/";
+                                        uri = metadata.getDiscussionSlackWeb();
+                                    Intent i = new Intent(Intent.ACTION_VIEW);
+                                    i.setData(Uri.parse(uri));
+                                    startActivity(i);
+                                }
+                            })
+                            .setNegativeButton("No, send me an invite", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder()
+                                            .setToolbarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+
+                                    CustomTabsIntent customTabsIntent = builder.build();
+                                    customTabsIntent.launchUrl(getActivity(), Uri.parse("https://friends.hasgeek.com/"));
+                                }
+                            })
+                            .create().show();
+                }
+                else
+                {
+                    new android.app.AlertDialog.Builder(getActivity())
+                            .setTitle("")
+                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setCancelable(true)
+                            .setPositiveButton("Ok", null)
+                            .create().show();
+                }
+            }
+        });
+
+
+
+
+
+        LinearLayout announcementButton = (LinearLayout) view.findViewById(R.id.announcementsFossmeet);
+        announcementButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(metadata!=null) {
+                    Intent intent = new Intent(getActivity(),AnnouncementsActivity.class);
+                    intent.putExtra("EventNameMetadata","MetadataEventFossMeet");
+                    startActivity(intent);
+                }
+                else
+                {
+                    new android.app.AlertDialog.Builder(getActivity())
+                            .setTitle("")
+                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setCancelable(true)
+                            .setPositiveButton("Ok", null)
+                            .create().show();
+                }
+            }
+        });
+
+
+
+
+
+        //  makeJsonObjectRequest();
 
 
 

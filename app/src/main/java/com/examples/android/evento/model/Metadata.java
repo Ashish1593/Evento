@@ -67,7 +67,7 @@ public  class Metadata {
         this.discussionSlackWeb = discussionSlackWeb;
     }
 
-    public List<FoodCourtVendor> getFoodCourtVendors() {
+    public  List<FoodCourtVendor> getFoodCourtVendors() {
         return foodCourtVendors;
     }
 

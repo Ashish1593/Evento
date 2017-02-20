@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="https://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashScreen">
 
-    <TextView android:text="HasGeek"
+    <TextView
+        android:id="@+id/txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="45dp"
-        android:textColor="#ffffff"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/txt" />
+        android:text="HasGeek"
+        android:textColor="#ffffff"
+        android:textSize="45dp" />
 
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="60dp"
         android:layout_height="70dp"
-        android:id="@+id/imageView"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:src="@drawable/talkfunnel" />
 
 </RelativeLayout>

@@ -12,13 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-//import com.hasgeek.funnel.R;
-//import com.hasgeek.funnel.data.DeviceController;
-//import com.hasgeek.funnel.helpers.interactions.ItemInteractionListener;
-//import com.hasgeek.funnel.helpers.utils.TimeUtils;
-//import com.hasgeek.funnel.model.FoodCourtVendorItem;
-//import com.hasgeek.funnel.model.Session;
-
 import com.examples.android.evento.interfacelistener.ItemInteractionListener;
 import com.examples.android.evento.R;
 import com.examples.android.evento.model.FoodCourtVendorItem;

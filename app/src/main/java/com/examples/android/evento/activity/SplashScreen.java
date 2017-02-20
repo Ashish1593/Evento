@@ -248,20 +248,6 @@ public class SplashScreen extends AppCompatActivity {
 
                     int num =db.getAllContacts();
 
-                   // db.addScheduleAndEventData(eventdetails ,EventDetails);
-                    //Log.v(ContentValues.TAG, db.getScheduleAndEventData(EventDetails));
-
-
-                    //  JSONArray jsonArray = new JSONArray(db.getScheduleAndEventData("EventPycon"));
-
-
-                 //   ArrayList<EventDetails> eventDetailsModel = new ArrayList<>();
-                  //  eventDetailsModel =gson.fromJson(db.getScheduleAndEventData("EventDetails"), new TypeToken<List<EventDetails>>(){}.getType());
-
-
-                    //  GridViewAdapter adapter = new GridViewAdapter(getActivity(), details);
-
-                   // evRecyclerView.setAdapter(new GridViewAdapter(getActivity(), eventDetailsModel));
 
 
 

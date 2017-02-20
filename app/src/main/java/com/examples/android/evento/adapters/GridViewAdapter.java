@@ -1,7 +1,7 @@
 package com.examples.android.evento.adapters;
 
 import android.app.Activity;
-import android.content.Context;
+
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
@@ -10,24 +10,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
 
 import com.examples.android.evento.model.EventDetails;
 import com.examples.android.evento.R;
-import com.examples.android.evento.viewHolder.AnnouncementsViewHolder;
-import com.examples.android.evento.viewHolder.EventListViewHolder;
-import com.examples.android.evento.viewHolder.ViewHolder;
 
-import java.text.DateFormat;
+import com.examples.android.evento.viewHolder.EventListViewHolder;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+
 import java.util.Random;
 
 /**

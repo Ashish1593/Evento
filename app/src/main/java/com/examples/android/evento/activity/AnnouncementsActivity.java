@@ -34,77 +34,76 @@ import java.util.ArrayList;
  **/
 
 public class AnnouncementsActivity extends AppCompatActivity {
-    private DataBaseController db;
     private static String TAG = AnnouncementsActivity.class.getSimpleName();
-public String announcementsURL = "http://hasgeek.github.io/api/space/97/metadata";
-   private RecyclerView announcementRecyclerView;
-    public ArrayList<Announcements> announcementsArraylist ;
-@Override
-protected void onCreate(Bundle savedInstanceState)
-{
-    super.onCreate(savedInstanceState);
+    public String announcementsURL = "http://hasgeek.github.io/api/space/97/metadata";
+    public ArrayList<Announcements> announcementsArraylist;
+    private DataBaseController db;
+    private RecyclerView announcementRecyclerView;
 
-    this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-    setContentView(R.layout.announcements);
-    db = DataBaseController.getInstance(this);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
-
-     announcementRecyclerView =(RecyclerView) findViewById(R.id.announcements);
-    LinearLayoutManager myLayoutManager =new LinearLayoutManager(this);
-    myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-    announcementRecyclerView.setLayoutManager(myLayoutManager);
+        setContentView(R.layout.announcements);
+        db = DataBaseController.getInstance(this);
 
 
-    String data = this.getIntent().getStringExtra("EventNameMetadata");
-    GsonBuilder gsonBuilder = new GsonBuilder();
-    Gson gson = gsonBuilder.create();
-    Metadata metadata = gson.fromJson(db.getScheduleAndEventData(data), new TypeToken<Metadata>() {
-    }.getType());
+        announcementRecyclerView = (RecyclerView) findViewById(R.id.announcements);
+        LinearLayoutManager myLayoutManager = new LinearLayoutManager(this);
+        myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        announcementRecyclerView.setLayoutManager(myLayoutManager);
 
 
-    announcementRecyclerView.setAdapter(new RecyclerViewAdapterAnnouncements(AnnouncementsActivity.this,metadata.getAnnouncements()));
-   // makeJsonObjectRequest();
+        String data = this.getIntent().getStringExtra("EventNameMetadata");
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.create();
+        Metadata metadata = gson.fromJson(db.getScheduleAndEventData(data), new TypeToken<Metadata>() {
+        }.getType());
 
-}
+
+        announcementRecyclerView.setAdapter(new RecyclerViewAdapterAnnouncements(AnnouncementsActivity.this, metadata.getAnnouncements()));
+        // makeJsonObjectRequest();
+
+    }
 
     private void makeJsonObjectRequest() {
 
-      //  showpDialog();
+        //  showpDialog();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 announcementsURL, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
-            Log.d(TAG, response.toString());
+                Log.d(TAG, response.toString());
                 try {
                     //  Parsing json object response
                     //response will be a json object
                     JSONArray AnnouncementsArray = response.getJSONArray("announcements");
                     announcementsArraylist = new ArrayList<Announcements>();
-                    for(int i=0;i<AnnouncementsArray.length();i++) {
+                    for (int i = 0; i < AnnouncementsArray.length(); i++) {
                         JSONObject announcementsJsonContent = AnnouncementsArray.getJSONObject(i);
                         String title = announcementsJsonContent.getString("title");
                         String description = announcementsJsonContent.getString("description");
 
                         String url = announcementsJsonContent.getString("url");
 
-                        if(url!=null) {
+                        if (url != null) {
                             Announcements announcementsdetails = new Announcements(title, description, url);
                             announcementsArraylist.add(announcementsdetails);
-                        }
-else{
+                        } else {
                             Announcements announcementsdetails = new Announcements(title, description);
-                        announcementsArraylist.add(announcementsdetails);}
+                            announcementsArraylist.add(announcementsdetails);
+                        }
 
- }
+                    }
 
-  } catch (JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(),
                             "Error: " + e.getMessage(),
@@ -112,7 +111,7 @@ else{
                 }
 
 
-                announcementRecyclerView.setAdapter(new RecyclerViewAdapterAnnouncements(AnnouncementsActivity.this,announcementsArraylist));
+                announcementRecyclerView.setAdapter(new RecyclerViewAdapterAnnouncements(AnnouncementsActivity.this, announcementsArraylist));
 
             }
 
@@ -120,11 +119,11 @@ else{
 
             @Override
             public void onErrorResponse(VolleyError error) {
-              //  VolleyLog.d(TAG, "Error: " + error.getMessage());
+                //  VolleyLog.d(TAG, "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_SHORT).show();
-                 // hide the progress dialog
-                     //   hidepDialog();
+                // hide the progress dialog
+                //   hidepDialog();
 
             }
         });
@@ -132,9 +131,6 @@ else{
 // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq);
     }
-
-
-
 
 
 }

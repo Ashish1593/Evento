@@ -14,24 +14,23 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
+
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.examples.android.evento.activity.AnnouncementsActivity;
 import com.examples.android.evento.activity.FoodCourtActivity;
 import com.examples.android.evento.activity.MainActivity;
-import com.examples.android.evento.activity.OpenWifi;
+
 import com.examples.android.evento.adapters.SessionsAdapter;
 import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
@@ -39,8 +38,7 @@ import com.examples.android.evento.controller.DataBaseController;
 import com.examples.android.evento.model.Metadata;
 import com.examples.android.evento.model.Session;
 import com.examples.android.evento.model.TalkDetails;
-import com.examples.android.evento.adapters.RecylerViewadapter;
-//import com.examples.android.evento.activity.ScheduleActivity;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -54,17 +52,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import net.cachapa.expandablelayout.ExpandableLayout;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 
 import static com.examples.android.evento.activity.MainActivity.SLACK_ANDROID_PACKAGE_NAME;
-import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 
 /**
  * Created by ankit on 11/12/16.
@@ -81,13 +80,15 @@ public class EventPycon extends Fragment {
   private   DataBaseController db;
     private static final String TAG = EventPycon.class.getSimpleName();
 
-
+    private ExpandableLayout expandableLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pycon2017, container, false);
 
         db = DataBaseController.getInstance(getActivity());
+
+
 
         mMapView = (MapView) view.findViewById(R.id.mapViewPycon);
         mMapView.onCreate(null);
@@ -122,6 +123,7 @@ public class EventPycon extends Fragment {
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });
+
 
 
         Button buyPyconTicket = (Button) view.findViewById(R.id.BuyPyconTickets);
@@ -188,14 +190,12 @@ public class EventPycon extends Fragment {
         } else {
             new android.app.AlertDialog.Builder(getActivity())
                     .setTitle("")
-                    .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                    .setMessage(Html.fromHtml("  Available during Conference"))
                     .setCancelable(true)
                     .setPositiveButton("Ok", null)
                     .create().show();
         }
-
-
-                }
+         }
        });
 
 
@@ -214,7 +214,7 @@ public class EventPycon extends Fragment {
                 {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
-                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setMessage(Html.fromHtml("  Available during Conference"))
                             .setCancelable(true)
                             .setPositiveButton("Ok", null)
                             .create().show();
@@ -263,7 +263,7 @@ public class EventPycon extends Fragment {
                 {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
-                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setMessage(Html.fromHtml("Available during Conference"))
                             .setCancelable(true)
                             .setPositiveButton("Ok", null)
                             .create().show();
@@ -289,7 +289,7 @@ public class EventPycon extends Fragment {
                 {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
-                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setMessage(Html.fromHtml("Available during Conference"))
                             .setCancelable(true)
                             .setPositiveButton("Ok", null)
                             .create().show();

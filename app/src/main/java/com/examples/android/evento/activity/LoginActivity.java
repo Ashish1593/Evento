@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-
 import com.examples.android.evento.controller.APIController;
 import com.examples.android.evento.controller.AuthController;
 import com.examples.android.evento.utils.AuthWrapper;
@@ -26,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        // check if this intent is started via custom scheme link
+
         if (intent.getAction().equals(Intent.ACTION_VIEW)) {
             Uri uri = Uri.parse("talkfunnel://login?" + intent.getData().getFragment());
             final String access_token = uri.getQueryParameter("access_token");
@@ -76,14 +75,5 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-
-    public void initViews(Bundle savedInstanceState) {
-
-    }
-
-
-    public void notFoundError() {
-
-    }
 
 }

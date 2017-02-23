@@ -6,7 +6,9 @@ package com.examples.android.evento.activity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -77,6 +79,7 @@ public class SplashScreen extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.splashscreen);
+
 
         makeJsonObjectRequestForSession(urlJsonObjPycon,"EventPycon");
         makeJsonObjectRequestForSession(urlJsonUbjFossMeet,"EventFossMeet");
@@ -184,7 +187,6 @@ public class SplashScreen extends AppCompatActivity {
                 }
 
 
-                //   announcementRecyclerView.setAdapter(new RecyclerViewAdapterAnnouncements(com.examples.android.evento.activity.AnnouncementsActivity.this,announcementsArraylist));
 
             }
 
@@ -192,9 +194,6 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-
-//                Toast.makeText(SplashScreen.this,
-//                        "no network", Toast.LENGTH_SHORT).show();
 
 
             }

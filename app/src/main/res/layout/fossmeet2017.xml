@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="?android:selectableItemBackground"
-                        android:id="@+id/discussionsFossmeet"
+
                         android:orientation="vertical">
 
 
@@ -68,7 +68,7 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background1"
-
+                            android:id="@+id/discussionsFossmeet"
                             android:padding="10dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/discussion1"
@@ -95,7 +95,7 @@
                     android:foreground="#20000000">
 
                     <LinearLayout
-                        android:id="@+id/announcementsFossmeet"
+
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -107,7 +107,7 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background1"
-
+                            android:id="@+id/announcementsFossmeet"
                             android:padding="10dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/announcement1"
@@ -137,7 +137,7 @@
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:id="@+id/livestreamFossmeet"
+
                         android:orientation="vertical">
 
                         <ImageButton
@@ -147,7 +147,7 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background1"
-
+                            android:id="@+id/livestreamFossmeet"
                             android:padding="10dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/livestream2"
@@ -173,7 +173,7 @@
                     android:foreground="#20000000">
 
                     <LinearLayout
-                        android:id="@+id/foodcourtFossmeet"
+
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -185,7 +185,7 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background1"
-
+                            android:id="@+id/foodcourtFossmeet"
                             android:padding="10dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/foodcourt4"
@@ -214,6 +214,7 @@
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
                 >
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -222,12 +223,11 @@
 
 
                     <LinearLayout
-                        android:id="@+id/connecttonetwork"
+
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="?android:selectableItemBackground"
-                        android:onClick="connecttonetwork"
                         android:orientation="vertical">
 
 
@@ -238,10 +238,8 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background1"
-                            android:clickable="true"
-                            android:onClick="connecttonetwork"
+                            android:id="@+id/connecttonetworkFossmeet"
                             android:padding="10dp"
-
                             android:scaleType="fitXY"
                             android:src="@drawable/wifi2"
                             android:text=""
@@ -253,8 +251,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:textAlignment="center"
-                            android:onClick="connecttonetwork"
-
                             android:text="Hasgeek  Wi-Fi"
                             />
 
@@ -270,12 +266,12 @@
                     android:foreground="#20000000">
 
                     <LinearLayout
-                        android:id="@+id/scanBadges"
+
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="?android:selectableItemBackground"
-                        android:onClick="qrcodescanner"
+
                         android:orientation="vertical">
 
                         <ImageButton
@@ -283,7 +279,7 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background1"
-                            android:onClick="qrcodescanner"
+                            android:id="@+id/scanBadgesFossmeet"
                             android:padding="10dp"
 
                             android:scaleType="fitXY"
@@ -296,8 +292,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-
-                            android:onClick="qrcodescanner"
                             android:text="Scan Badge"
 
                             />
@@ -327,13 +321,25 @@
 
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp">
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
             <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/schedule_recyclerviewfossmeet"
                 android:layout_width="match_parent"
-
+                android:paddingBottom="50dp"
                 android:layout_height="match_parent"
                 android:background="#20000000" />
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/viewlessmorefossmeet"
+                    android:src="@drawable/arrowdown"
+                    android:tag="arrowdown"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    />
 
 
             <TextView
@@ -346,7 +352,7 @@
                 android:text="Schedule not yet decided"
                 android:textColor="#ff0000"
                 android:visibility="gone" />
-
+</RelativeLayout>
 
         </android.support.v7.widget.CardView>
 

@@ -2,6 +2,8 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/scrollViewPycon"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -62,13 +64,13 @@
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="?android:selectableItemBackground"
-                        android:id="@+id/discussionsPycon"
+
+
                         android:orientation="vertical">
 
 
                         <ImageButton
-
+                            android:id="@+id/discussionsPycon"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
@@ -98,7 +100,7 @@
                     android:foreground="#20000000">
 
                     <LinearLayout
-                        android:id="@+id/announcementsPycon"
+
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -111,6 +113,7 @@
                             android:background="@drawable/background1"
                             android:padding="10dp"
                             android:scaleType="fitXY"
+                            android:id="@+id/announcementsPycon"
                             android:src="@drawable/announcement1"
                             android:text=""
                             android:textColor="#FFFFFF"
@@ -137,7 +140,7 @@
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:id="@+id/livestreamPycon"
+
                         android:orientation="vertical">
 
                         <ImageButton
@@ -147,7 +150,7 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background1"
-
+                            android:id="@+id/livestreamPycon"
                             android:padding="10dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/livestream2"
@@ -173,7 +176,7 @@
                     android:foreground="#20000000">
 
                     <LinearLayout
-                        android:id="@+id/foodcourtPycon"
+
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -185,7 +188,7 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background1"
-
+                            android:id="@+id/foodcourtPycon"
                             android:padding="10dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/foodcourt4"
@@ -219,16 +222,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
+
                     android:foreground="#20000000">
 
 
                 <LinearLayout
-                    android:id="@+id/connecttonetwork"
+
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="?android:selectableItemBackground"
-                    android:onClick="connecttonetwork"
+
                     android:orientation="vertical">
 
 
@@ -240,7 +244,7 @@
                         android:layout_gravity="center"
                         android:background="@drawable/background1"
                         android:clickable="true"
-                        android:onClick="connecttonetwork"
+                        android:id="@+id/connecttonetworkPycon"
                         android:padding="10dp"
 
                         android:scaleType="fitXY"
@@ -254,7 +258,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:textAlignment="center"
-                        android:onClick="connecttonetwork"
+
 
                         android:text="Hasgeek  Wi-Fi"
                        />
@@ -271,12 +275,12 @@
                     android:foreground="#20000000">
 
                 <LinearLayout
-                    android:id="@+id/scanBadges"
+
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="?android:selectableItemBackground"
-                    android:onClick="qrcodescanner"
+
                     android:orientation="vertical">
 
                     <ImageButton
@@ -284,7 +288,7 @@
                         android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:background="@drawable/background1"
-                        android:onClick="qrcodescanner"
+                        android:id="@+id/scanBadgesPycon"
                         android:padding="10dp"
 
                         android:scaleType="fitXY"
@@ -298,7 +302,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
 
-                        android:onClick="qrcodescanner"
                         android:text="Scan Badge"
 
                          />
@@ -327,15 +330,15 @@
             android:layout_height="wrap_content"
 
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="10dp"
 
-            <net.cachapa.expandablelayout.ExpandableLayout
-                android:id="@+id/expandable_layout"
+            >
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:el_duration="1000"
-                app:el_expanded="true"
-                app:el_parallax="1">
+                >
+
 
             <android.support.v7.widget.RecyclerView
 
@@ -343,8 +346,18 @@
                 android:layout_width="match_parent"
 
                 android:layout_height="wrap_content"
-                android:background="#20000000" />
-            </net.cachapa.expandablelayout.ExpandableLayout>
+                android:background="#20000000"
+                android:paddingBottom="50dp"/>
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/viewlessmorepycon"
+                android:src="@drawable/arrowdown"
+                android:tag="arrowdown"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                />
+
 
             <TextView
                 android:id="@+id/empty_view"
@@ -356,8 +369,10 @@
                 android:text="Schedule not yet decided"
                 android:textColor="#ff0000"
                 android:visibility="gone" />
-
+            </RelativeLayout>
         </android.support.v7.widget.CardView>
+
+
 
         <android.support.v7.widget.CardView
             android:layout_width="wrap_content"
@@ -365,15 +380,30 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="50dp"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="50dp"
+            android:paddingBottom="40dp">
+            <RelativeLayout
+                android:id="@+id/map_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             <com.google.android.gms.maps.MapView
 
                 android:id="@+id/mapViewPycon"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
+                <ImageView
+                    android:id="@+id/transparent_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="#00000000" />
 
-        </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+     </android.support.v7.widget.CardView>
+
+
 
 
         <LinearLayout

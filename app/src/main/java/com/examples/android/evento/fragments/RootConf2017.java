@@ -18,27 +18,25 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.examples.android.evento.R;
 import com.examples.android.evento.activity.AnnouncementsActivity;
 import com.examples.android.evento.activity.FoodCourtActivity;
 import com.examples.android.evento.activity.MainActivity;
-import com.examples.android.evento.adapters.RecylerViewadapter;
+import com.examples.android.evento.activity.OpenWifi;
+import com.examples.android.evento.activity.QRcodeScanner;
+
 import com.examples.android.evento.adapters.SessionsAdapter;
-import com.examples.android.evento.controller.AppController;
+
 import com.examples.android.evento.controller.DataBaseController;
 import com.examples.android.evento.model.Metadata;
 import com.examples.android.evento.model.Session;
 import com.examples.android.evento.model.TalkDetails;
-//import com.examples.android.evento.activity.ScheduleActivity;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -52,16 +50,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static com.examples.android.evento.activity.MainActivity.SLACK_ANDROID_PACKAGE_NAME;
-import static com.google.android.gms.plus.PlusOneDummyView.TAG;
+
 
 /**
  * Created by ankit on 1/2/17.
@@ -71,11 +69,9 @@ public class RootConf2017 extends Fragment{
 
     MapView mMapView;
     private GoogleMap googleMap;
-    private String urlJsonObj = "https://rootconf.talkfunnel.com/2017/json";
-    private ArrayList<TalkDetails> detailsRootConf;
-    private ProgressDialog pDialog;
-    private RecyclerView mRecyclerView;
 
+    private RecyclerView mRecyclerView;
+    String eventDate ="2017-05-11";
     private TextView emptyView;
     private DataBaseController db;
     @Override
@@ -147,28 +143,6 @@ db = DataBaseController.getInstance(getActivity());
         });
 
 
-//        Button proposeRootConfession = (Button) view.findViewById(R.id.proposeRootConfSession);
-//        proposeRootConfession.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-//                final String URI = "https://rootconf.talkfunnel.com/2017/new";
-//                intent.launchUrl(getActivity(), Uri.parse(URI));
-//
-//            }
-//        });
-
-
-//        Button  ViewSchedule = (Button) view.findViewById(R.id.viewschedulerootconf);
-//        ViewSchedule.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(v.getContext(), ScheduleActivity.class);
-//                intent.putExtra("jsonurl","https://rootconf.talkfunnel.com/2017/json");
-//                startActivity(intent);
-//            }
-//        });
-
         Button buyRootConfTicket = (Button) view.findViewById(R.id.BuyrootconfTickets);
         buyRootConfTicket.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,41 +155,16 @@ db = DataBaseController.getInstance(getActivity());
         });
 
 
-//        myRecyclerView =(RecyclerView) view.findViewById(R.id.CardViewRootConf);
-//        LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
-//        // myRecyclerView =(RecyclerView) view.findViewById(R.id.card_recycler_view);
-//        // RecyclerView.LayoutManager myLayoutManager = new GridLayoutManager(getActivity(),2);
-//        myLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//
-//        myRecyclerView.setLayoutManager(myLayoutManager);
-
-
         emptyView = (TextView) view.findViewById(R.id.empty_viewrootconf);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.schedule_recyclerviewrootconf);
         mRecyclerView.setNestedScrollingEnabled(false);
-        //  mRecyclerView.setHasFixedSize(true);
+
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
 
 
-
-//        final TextView clickToSeeAllEvents = (TextView) view.findViewById(R.id.clicktoseefossmeetproposedtalks);
-//
-//
-//        clickToSeeAllEvents.setOnClickListener(new View.OnClickListener(){
-//
-//            public  void onClick (View view){
-//                Fragment fragment = new EventslistFragment();
-//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.proposedTalksFossMeet,fragment);
-//                fragmentTransaction.addToBackStack(null);
-//                fragmentTransaction.commit();
-//                clickToSeeAllEvents.setVisibility(View.GONE);
-//
-//            }
-//        });
+        final ImageView imageView = (ImageView) view.findViewById(R.id.viewlessmorerootconf);
 
         if( db.getCount("EventRootConf") !=0) {
             List<Session> sessionModel1 = new ArrayList<>();
@@ -225,16 +174,123 @@ db = DataBaseController.getInstance(getActivity());
             sessionModel1 = gson.fromJson(db.getScheduleAndEventData("EventRootConf"), new TypeToken<List<Session>>() {
             }.getType());
 
-
             if (sessionModel1.size() != 0) {
-                mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel1));
+
+                final List<Session>  sessionModel2 = sessionModel1.subList(0,2);
+                final List<Session> sessionModel3 = sessionModel1;
+
+                mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String backgroundImageName = String.valueOf(v.getTag());
+                        if (backgroundImageName.equals("arrowdown")){
+
+                            mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel3));
+
+                            imageView.setImageResource(R.drawable.arrowup);
+                            imageView.setTag("arrowup");
+                        }
+
+                        else {
+                            mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
+
+                            imageView.setImageResource(R.drawable.arrowdown);
+                            imageView.setTag("arrowdown");
+
+                        }
+                    }
+                });
+
+
+
             } else {
                 //     makeJsonObjectRequest();
 
                 mRecyclerView.setVisibility(View.GONE);
                 emptyView.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.GONE);
             }
         }
+
+
+        ImageButton scanBadgeRootconf = ( ImageButton) view.findViewById(R.id.scanBadgesRootconf);
+        scanBadgeRootconf.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+
+
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String td= formatter.format(Calendar.getInstance().getTime());
+
+                try {
+
+                    Date date = formatter.parse(eventDate);
+                    Date todaysdate = formatter.parse(td);
+
+                    if (date.after(todaysdate)) {
+                        new android.app.AlertDialog.Builder(getActivity())
+                                .setTitle("")
+                                .setMessage(Html.fromHtml("  Available during Conference"))
+                                .setCancelable(true)
+                                .setPositiveButton("Ok", null)
+                                .create().show();
+
+
+                    } else {
+                        Intent intent = new Intent(getActivity(), QRcodeScanner.class);
+                        startActivity(intent);
+
+
+                    }
+
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        ImageButton connectToNetworkRootconf = ( ImageButton) view.findViewById(R.id.connecttonetworkRootconf);
+        connectToNetworkRootconf.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+
+
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String td= formatter.format(Calendar.getInstance().getTime());
+
+                try {
+
+                    Date date = formatter.parse(eventDate);
+                    Date todaysdate = formatter.parse(td);
+                    if (date.after(todaysdate)) {
+                        new android.app.AlertDialog.Builder(getActivity())
+                                .setTitle("")
+                                .setMessage(Html.fromHtml("  Available during Conference"))
+                                .setCancelable(true)
+                                .setPositiveButton("Ok", null)
+                                .create().show();
+
+
+                    } else {
+                        Intent intent = new Intent(getActivity(), OpenWifi.class);
+                        startActivity(intent);
+
+
+                    }
+
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
 
         final Metadata metadata;
@@ -250,7 +306,7 @@ db = DataBaseController.getInstance(getActivity());
 
 
 
-        LinearLayout liveStreamButton = (LinearLayout) view.findViewById(R.id.livestreamRootconf);
+        ImageButton liveStreamButton = ( ImageButton) view.findViewById(R.id.livestreamRootconf);
         liveStreamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -266,7 +322,7 @@ db = DataBaseController.getInstance(getActivity());
                 {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
-                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setMessage(Html.fromHtml(" Available during Conference"))
                             .setCancelable(true)
                             .setPositiveButton("Ok", null)
                             .create().show();
@@ -276,7 +332,7 @@ db = DataBaseController.getInstance(getActivity());
 
 
 
-        LinearLayout foodcourtButton = (LinearLayout) view.findViewById(R.id.foodcourtRootconf);
+        ImageButton foodcourtButton = ( ImageButton) view.findViewById(R.id.foodcourtRootconf);
         foodcourtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -290,7 +346,7 @@ db = DataBaseController.getInstance(getActivity());
                 {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
-                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setMessage(Html.fromHtml("  Available during Conference"))
                             .setCancelable(true)
                             .setPositiveButton("Ok", null)
                             .create().show();
@@ -299,7 +355,7 @@ db = DataBaseController.getInstance(getActivity());
         });
 
 
-        LinearLayout discussionButton = (LinearLayout) view.findViewById(R.id.discussionsRootconf);
+        ImageButton discussionButton = ( ImageButton) view.findViewById(R.id.discussionsRootconf);
         discussionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -339,7 +395,7 @@ db = DataBaseController.getInstance(getActivity());
                 {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
-                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setMessage(Html.fromHtml(" Available during Conference"))
                             .setCancelable(true)
                             .setPositiveButton("Ok", null)
                             .create().show();
@@ -351,7 +407,7 @@ db = DataBaseController.getInstance(getActivity());
 
 
 
-        LinearLayout announcementButton = (LinearLayout) view.findViewById(R.id.announcementsRootconf);
+        ImageButton announcementButton = ( ImageButton) view.findViewById(R.id.announcementsRootconf);
         announcementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -365,7 +421,7 @@ db = DataBaseController.getInstance(getActivity());
                 {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
-                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setMessage(Html.fromHtml(" Available during Conference"))
                             .setCancelable(true)
                             .setPositiveButton("Ok", null)
                             .create().show();
@@ -404,84 +460,6 @@ db = DataBaseController.getInstance(getActivity());
         super.onLowMemory();
         mMapView.onLowMemory();
     }
-
-    private void makeJsonObjectRequest() {
-
-        //  showpDialog();
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                urlJsonObj , null, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d(TAG, response.toString());
-                try {          //  Parsing json object response
-                    //response will be a json object
-                    GsonBuilder gsonBuilder = new GsonBuilder();
-                    Gson gson = gsonBuilder.create();
-                    // JSONObject obj = null;
-
-                    List<Session> sessions = new ArrayList<>();
-                    JSONArray schedule = new JSONArray(response.optString("schedule", "[]"));
-
-                    for(int i=0; i<schedule.length(); i++) {
-                        JSONArray slots = schedule.getJSONObject(i).getJSONArray("slots");
-                        for(int k=0; k<slots.length();k++) {
-                            sessions.addAll(Arrays.asList(gson.fromJson(slots.getJSONObject(k).optString("sessions", "[]"), Session[].class)));
-                        }
-                    }
-
-                    if (sessions.isEmpty()) {
-                        mRecyclerView.setVisibility(View.GONE);
-                        emptyView.setVisibility(View.VISIBLE);
-                    }
-                    else {
-                        mRecyclerView.setVisibility(View.VISIBLE);
-                        emptyView.setVisibility(View.GONE);
-                    }
-
-
-                    mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessions));
-
-
-
-//                    for(Session s: sessions) {
-//                       mRecyclerView.setAdapter(new SessionsAdapter(ScheduleActivity.this, sessions));
-//                    }
-
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getContext(),
-                            "Error: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                }
-
-
-                //   announcementRecyclerView.setAdapter(new RecyclerViewAdapterAnnouncements(com.examples.android.evento.activity.AnnouncementsActivity.this,announcementsArraylist));
-
-            }
-
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //  VolleyLog.d(TAG, "Error: " + error.getMessage());
-//                Toast.makeText(getApplicationContext(),
-//                        error.getMessage(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getContext(),
-                        "no network", Toast.LENGTH_SHORT).show();
-                // hide the progress dialog
-                //   hidepDialog();
-
-            }
-        });
-
-// Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq);
-    }
-
 
 
 

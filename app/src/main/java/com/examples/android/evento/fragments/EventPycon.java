@@ -3,11 +3,13 @@ package com.examples.android.evento.fragments;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,9 +17,12 @@ import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +36,8 @@ import com.examples.android.evento.activity.AnnouncementsActivity;
 import com.examples.android.evento.activity.FoodCourtActivity;
 import com.examples.android.evento.activity.MainActivity;
 
+import com.examples.android.evento.activity.OpenWifi;
+import com.examples.android.evento.activity.QRcodeScanner;
 import com.examples.android.evento.adapters.SessionsAdapter;
 import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.R;
@@ -58,9 +65,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static com.examples.android.evento.activity.MainActivity.SLACK_ANDROID_PACKAGE_NAME;
@@ -77,27 +88,82 @@ public class EventPycon extends Fragment {
     private String urlJsonObj = "https://pyconpune.talkfunnel.com/2017/json";
     private ArrayList<TalkDetails> detailsPycon;
     private TextView emptyView;
-  private   DataBaseController db;
+    private   DataBaseController db;
+    String eventDate = "2017-02-16" ;
+    private NestedScrollView scrollViewpycon ;
     private static final String TAG = EventPycon.class.getSimpleName();
 
     private ExpandableLayout expandableLayout;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pycon2017, container, false);
 
         db = DataBaseController.getInstance(getActivity());
 
-
+scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
 
         mMapView = (MapView) view.findViewById(R.id.mapViewPycon);
+
         mMapView.onCreate(null);
         mMapView.onResume();
+
+        ImageView transparentImageView = (ImageView) view.findViewById(R.id.transparent_image);
+
+        transparentImageView.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow ScrollView to intercept touch events.
+                        scrollViewpycon.requestDisallowInterceptTouchEvent(true);
+                        // Disable touch on transparent view
+                        return false;
+
+                    case MotionEvent.ACTION_UP:
+                        // Allow ScrollView to intercept touch events.
+                        scrollViewpycon.requestDisallowInterceptTouchEvent(true);
+                        return true;
+
+                    case MotionEvent.ACTION_MOVE:
+                        scrollViewpycon.requestDisallowInterceptTouchEvent(true);
+                        return false;
+
+                    default:
+                        return true;
+                }
+            }
+        });
+
+//        mMapView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_MOVE:
+//                        scrollViewpycon.requestDisallowInterceptTouchEvent(true);
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        scrollViewpycon.requestDisallowInterceptTouchEvent(true);
+//                        break;
+//                    case MotionEvent.ACTION_DOWN:
+//                        scrollViewpycon.requestDisallowInterceptTouchEvent(true);
+//                        break;
+//                    case MotionEvent.ACTION_CANCEL:
+//                        scrollViewpycon.requestDisallowInterceptTouchEvent(false);
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
 
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
-        } catch (Exception e) {
+        }
+
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -124,7 +190,83 @@ public class EventPycon extends Fragment {
             }
         });
 
+        ImageButton connectToWifiPycon = (ImageButton) view.findViewById(R.id.connecttonetworkPycon);
+        connectToWifiPycon.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
 
+
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String td= formatter.format(Calendar.getInstance().getTime());
+
+                try {
+
+                    Date date = formatter.parse(eventDate);
+                    Date todaysdate = formatter.parse(td);
+
+                    if (date.after(todaysdate)) {
+                        new android.app.AlertDialog.Builder(getActivity())
+                                .setTitle("")
+                                .setMessage(Html.fromHtml("  Available during Conference"))
+                                .setCancelable(true)
+                                .setPositiveButton("Ok", null)
+                                .create().show();
+
+
+                    } else {
+                        Intent intent = new Intent(getActivity(), OpenWifi.class);
+                        startActivity(intent);
+
+
+                    }
+
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+        }
+        });
+
+        ImageButton scanBadgePycon = (ImageButton) view.findViewById(R.id.scanBadgesPycon);
+        scanBadgePycon.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+
+
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String td= formatter.format(Calendar.getInstance().getTime());
+
+                try {
+
+                    Date date = formatter.parse(eventDate);
+                    Date todaysdate = formatter.parse(td);
+
+                    if (date.after(todaysdate)) {
+                        new android.app.AlertDialog.Builder(getActivity())
+                                .setTitle("")
+                                .setMessage(Html.fromHtml("  Available during Conference"))
+                                .setCancelable(true)
+                                .setPositiveButton("Ok", null)
+                                .create().show();
+
+
+                    } else {
+                        Intent intent = new Intent(getActivity(), QRcodeScanner.class);
+                        startActivity(intent);
+
+
+                    }
+
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         Button buyPyconTicket = (Button) view.findViewById(R.id.BuyPyconTickets);
         buyPyconTicket.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +287,7 @@ public class EventPycon extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
 
-
+        final ImageView imageView = (ImageView) view.findViewById(R.id.viewlessmorepycon);
         if (db.getCount("EventPycon") != 0) {
             List<Session> sessionModel1 = new ArrayList<>();
 
@@ -155,12 +297,40 @@ public class EventPycon extends Fragment {
             }.getType());
 
             if (sessionModel1.size() != 0) {
-                mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel1));
+
+               final List<Session>  sessionModel2 = sessionModel1.subList(0,2);
+                final List<Session> sessionModel3 = sessionModel1;
+
+                mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String backgroundImageName = String.valueOf(v.getTag());
+                        if (backgroundImageName.equals("arrowdown")){
+
+                            mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel3));
+
+                            imageView.setImageResource(R.drawable.arrowup);
+                            imageView.setTag("arrowup");
+                        }
+
+                        else {
+                            mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
+
+                            imageView.setImageResource(R.drawable.arrowdown);
+                            imageView.setTag("arrowdown");
+
+                        }
+                    }
+                });
+
+
 
             } else {
                 //     makeJsonObjectRequest();
                 mRecyclerView.setVisibility(View.GONE);
                 emptyView.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.GONE);
             }
         }
 
@@ -176,7 +346,7 @@ public class EventPycon extends Fragment {
             metadata = null;
 
 
-            LinearLayout liveStreamButton = (LinearLayout) view.findViewById(R.id.livestreamPycon);
+        ImageButton liveStreamButton = (ImageButton) view.findViewById(R.id.livestreamPycon);
             liveStreamButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -200,7 +370,7 @@ public class EventPycon extends Fragment {
 
 
 
-        LinearLayout foodcourtButton = (LinearLayout) view.findViewById(R.id.foodcourtPycon);
+        ImageButton foodcourtButton = (ImageButton) view.findViewById(R.id.foodcourtPycon);
         foodcourtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,7 +393,7 @@ public class EventPycon extends Fragment {
         });
 
 
-        LinearLayout discussionButton = (LinearLayout) view.findViewById(R.id.discussionsPycon);
+        ImageButton discussionButton = (ImageButton) view.findViewById(R.id.discussionsPycon);
         discussionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -275,7 +445,7 @@ public class EventPycon extends Fragment {
 
 
 
-        LinearLayout announcementButton = (LinearLayout) view.findViewById(R.id.announcementsPycon);
+        ImageButton announcementButton = (ImageButton) view.findViewById(R.id.announcementsPycon);
         announcementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -328,81 +498,5 @@ public class EventPycon extends Fragment {
         mMapView.onLowMemory();
     }
 
-
-    private void makeJsonObjectRequest() {
-
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                urlJsonObj, null, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d(TAG, response.toString());
-                try {
-                    GsonBuilder gsonBuilder = new GsonBuilder();
-                    Gson gson = gsonBuilder.create();
-
-
-                    List<Session> sessions = new ArrayList<>();
-                    JSONArray schedule = new JSONArray(response.optString("schedule", "[]"));
-
-                    for (int i = 0; i < schedule.length(); i++) {
-                        JSONArray slots = schedule.getJSONObject(i).getJSONArray("slots");
-                        for (int k = 0; k < slots.length(); k++) {
-                            sessions.addAll(Arrays.asList(gson.fromJson(slots.getJSONObject(k).optString("sessions", "[]"), Session[].class)));
-                        }
-                    }
-
-
-
-                    String eventPycon= gson.toJson(sessions, new TypeToken<List<Session>>(){}.getType());
-
-
-
-                    db.addScheduleAndEventData(eventPycon ,"EventPycon");
-                    Log.v(TAG, db.getScheduleAndEventData("EventPycon"));
-
-
-                   //  JSONArray jsonArray = new JSONArray(db.getScheduleAndEventData("EventPycon"));
-
-
-                    List<Session> sessionModel = new ArrayList<>();
-                    sessionModel =gson.fromJson(db.getScheduleAndEventData("EventPycon"), new TypeToken<List<Session>>(){}.getType());
-
-
-                    if (sessions.isEmpty()) {
-                        mRecyclerView.setVisibility(View.GONE);
-                        emptyView.setVisibility(View.VISIBLE);
-                    } else {
-                        mRecyclerView.setVisibility(View.VISIBLE);
-                        emptyView.setVisibility(View.GONE);
-                    }
-
-                     mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel));
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getContext(),
-                            "Error: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                }
-
-
-            }
-
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(getContext(),
-                        "no network", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        AppController.getInstance().addToRequestQueue(jsonObjReq);
-    }
 
 }

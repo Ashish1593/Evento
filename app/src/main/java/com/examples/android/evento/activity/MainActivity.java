@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AccountKit.initialize(getApplicationContext());
+       // AccountKit.initialize(getApplicationContext());
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -70,18 +70,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
-        final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-
-//        ImageButton openDrawer = (ImageButton) findViewById(R.id.opendrawer);
-//
-//        openDrawer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mDrawerLayout.openDrawer(Gravity.LEFT);
-//            }
-//        });
 
 
         Fragment eventFossMeet = new EventFossMeet();
@@ -113,83 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void hasgeektv(View view) {
-
-        final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-        final String URI = "https://hasgeek.tv/";
-        intent.launchUrl(MainActivity.this, Uri.parse(URI));
-
-    }
-
-    public void talkfunnel(View view) {
-
-        final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-        final String URI = "https://talkfunnel.com/";
-        intent.launchUrl(MainActivity.this, Uri.parse(URI));
-
-    }
-
-    public void hasjob(View view) {
-
-        final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-        final String URI = "https://hasjob.co/";
-        intent.launchUrl(MainActivity.this, Uri.parse(URI));
-
-    }
-
-    public void hasgeek(View view) {
-
-        final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-        final String URI = "https://hasgeek.com/";
-        intent.launchUrl(MainActivity.this, Uri.parse(URI));
-
-    }
-
-    public void liveStream(View view) {
-
-        final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-        // final String URI = "http://www.ustream.tv/channel/hasgeek";
-        final String URI = "https://www.youtube.com/watch?v=8YZZZwcckE8";
-        intent.launchUrl(MainActivity.this, Uri.parse(URI));
-
-    }
-
-    public void qrcodescanner(View view) {
-
-        Intent intent = new Intent(view.getContext(), QRcodeScanner.class);
-        startActivity(intent);
-
-    }
-
-    public void foodcourt(View view) {
-
-        Intent intent = new Intent(view.getContext(), FoodCourtActivity.class);
-        startActivity(intent);
-
-    }
-
-    public void connecttonetwork(View view) {
 
 
-        Intent intent = new Intent(view.getContext(), OpenWifi.class);
-        startActivity(intent);
-
-    }
-
-    public void announcements(View view) {
-
-        Intent intent = new Intent(view.getContext(), AnnouncementsActivity.class);
-        startActivity(intent);
-
-    }
-
-    public void aboutGeekskool(View view) {
-
-        final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-        final String URI = "http://www.geekskool.com/";
-        intent.launchUrl(MainActivity.this, Uri.parse(URI));
-
-    }
 
 
 }

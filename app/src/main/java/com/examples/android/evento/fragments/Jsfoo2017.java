@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +32,8 @@ import com.examples.android.evento.R;
 import com.examples.android.evento.activity.AnnouncementsActivity;
 import com.examples.android.evento.activity.FoodCourtActivity;
 import com.examples.android.evento.activity.MainActivity;
+import com.examples.android.evento.activity.OpenWifi;
+import com.examples.android.evento.activity.QRcodeScanner;
 import com.examples.android.evento.adapters.RecylerViewadapter;
 import com.examples.android.evento.adapters.SessionsAdapter;
 import com.examples.android.evento.controller.AppController;
@@ -55,8 +59,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static com.examples.android.evento.activity.MainActivity.SLACK_ANDROID_PACKAGE_NAME;
@@ -75,6 +83,7 @@ public class Jsfoo2017 extends Fragment{
     private ProgressDialog pDialog;
     private RecyclerView mRecyclerView;
     private TextView emptyView;
+    String eventDate = "2017-09-08";
 private DataBaseController db;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -184,6 +193,7 @@ db = DataBaseController.getInstance(getActivity());
 //
 //            }
 //        });
+        final ImageView imageView = (ImageView) view.findViewById(R.id.viewlessmorejsfoo);
 
         if( db.getCount("EventJsfoo") !=0) {
             List<Session> sessionModel1 = new ArrayList<>();
@@ -193,8 +203,35 @@ db = DataBaseController.getInstance(getActivity());
             sessionModel1 = gson.fromJson(db.getScheduleAndEventData("EventJsfoo"), new TypeToken<List<Session>>() {
             }.getType());
 
-            if(sessionModel1.size()!=0) {
-                mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel1));
+            if (sessionModel1.size() != 0) {
+
+                final List<Session>  sessionModel2 = sessionModel1.subList(0,2);
+                final List<Session> sessionModel3 = sessionModel1;
+
+                mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String backgroundImageName = String.valueOf(v.getTag());
+                        if (backgroundImageName.equals("arrowdown")){
+
+                            mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel3));
+
+                            imageView.setImageResource(R.drawable.arrowup);
+                            imageView.setTag("arrowup");
+                        }
+
+                        else {
+                            mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
+
+                            imageView.setImageResource(R.drawable.arrowdown);
+                            imageView.setTag("arrowdown");
+
+                        }
+                    }
+                });
+
+
 
             }
 
@@ -202,8 +239,90 @@ db = DataBaseController.getInstance(getActivity());
                 //     makeJsonObjectRequest();
                 mRecyclerView.setVisibility(View.GONE);
                 emptyView.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.GONE);
             }
         }
+
+
+        ImageButton scanBadgeJsfoo = (ImageButton) view.findViewById(R.id.scanBadgesJsfoo);
+        scanBadgeJsfoo.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+
+
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String td= formatter.format(Calendar.getInstance().getTime());
+
+                try {
+
+                    Date date = formatter.parse(eventDate);
+                    Date todaysdate = formatter.parse(td);
+
+                    if (date.after(todaysdate)) {
+                        new android.app.AlertDialog.Builder(getActivity())
+                                .setTitle("")
+                                .setMessage(Html.fromHtml("  Available during Conference"))
+                                .setCancelable(true)
+                                .setPositiveButton("Ok", null)
+                                .create().show();
+
+
+                    } else {
+                        Intent intent = new Intent(getActivity(), QRcodeScanner.class);
+                        startActivity(intent);
+
+
+                    }
+
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        ImageButton connectToNetworkJsfoo = (ImageButton) view.findViewById(R.id.connecttonetworkJsfoo);
+        connectToNetworkJsfoo.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+
+
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String td= formatter.format(Calendar.getInstance().getTime());
+
+                try {
+
+                    Date date = formatter.parse(eventDate);
+                    Date todaysdate = formatter.parse(td);
+
+                    if (date.after(todaysdate)) {
+                        new android.app.AlertDialog.Builder(getActivity())
+                                .setTitle("")
+                                .setMessage(Html.fromHtml("  Available during Conference"))
+                                .setCancelable(true)
+                                .setPositiveButton("Ok", null)
+                                .create().show();
+
+
+                    } else {
+                        Intent intent = new Intent(getActivity(), OpenWifi.class);
+                        startActivity(intent);
+
+
+                    }
+
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
 
 
 
@@ -222,7 +341,7 @@ db = DataBaseController.getInstance(getActivity());
 
 
 
-        LinearLayout liveStreamButton = (LinearLayout) view.findViewById(R.id.livestreamJsfoo);
+        ImageButton liveStreamButton = (ImageButton) view.findViewById(R.id.livestreamJsfoo);
         liveStreamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -238,7 +357,7 @@ db = DataBaseController.getInstance(getActivity());
                 {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
-                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setMessage(Html.fromHtml("  Available during Conference"))
                             .setCancelable(true)
                             .setPositiveButton("Ok", null)
                             .create().show();
@@ -248,7 +367,7 @@ db = DataBaseController.getInstance(getActivity());
 
 
 
-        LinearLayout foodcourtButton = (LinearLayout) view.findViewById(R.id.foodcourtJsfoo);
+        ImageButton foodcourtButton = (ImageButton) view.findViewById(R.id.foodcourtJsfoo);
         foodcourtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -262,7 +381,7 @@ db = DataBaseController.getInstance(getActivity());
                 {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
-                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setMessage(Html.fromHtml("  Available during Conference"))
                             .setCancelable(true)
                             .setPositiveButton("Ok", null)
                             .create().show();
@@ -271,7 +390,7 @@ db = DataBaseController.getInstance(getActivity());
         });
 
 
-        LinearLayout discussionButton = (LinearLayout) view.findViewById(R.id.discussionsJsfoo);
+        ImageButton discussionButton = (ImageButton) view.findViewById(R.id.discussionsJsfoo);
         discussionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -311,7 +430,7 @@ db = DataBaseController.getInstance(getActivity());
                 {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
-                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setMessage(Html.fromHtml("Available during Conference"))
                             .setCancelable(true)
                             .setPositiveButton("Ok", null)
                             .create().show();
@@ -323,7 +442,7 @@ db = DataBaseController.getInstance(getActivity());
 
 
 
-        LinearLayout announcementButton = (LinearLayout) view.findViewById(R.id.announcementsJsfoo);
+        ImageButton announcementButton = (ImageButton) view.findViewById(R.id.announcementsJsfoo);
         announcementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -337,7 +456,7 @@ db = DataBaseController.getInstance(getActivity());
                 {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
-                            .setMessage(Html.fromHtml("  This feature  available during Conference"))
+                            .setMessage(Html.fromHtml("  Available during Conference"))
                             .setCancelable(true)
                             .setPositiveButton("Ok", null)
                             .create().show();

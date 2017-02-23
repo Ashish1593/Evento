@@ -3,29 +3,21 @@ package com.examples.android.evento.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.facebook.accountkit.AccessToken;
 import com.facebook.accountkit.Account;
 import com.facebook.accountkit.AccountKit;
 import com.facebook.accountkit.AccountKitCallback;
 import com.facebook.accountkit.AccountKitError;
-
 import com.facebook.accountkit.AccountKitLoginResult;
 import com.facebook.accountkit.PhoneNumber;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
-
-import java.util.List;
 
 
 public class OpenWifi extends AppCompatActivity {
@@ -37,7 +29,7 @@ public class OpenWifi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AccountKit.initialize(getApplicationContext());
+      //  AccountKit.initialize(getApplicationContext());
 
         AccessToken accessToken = AccountKit.getCurrentAccessToken();
 

@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/scrollViewPycon"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#20000000"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/kilter" />
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="50dp"
+            android:lineSpacingExtra="5dp"
+            android:text="@string/aboutkilter"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+
+                >
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:foreground="#20000000">
+
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+
+                        <ImageButton
+                            android:id="@+id/discussionsKilter"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/background1"
+                            android:padding="10dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/discussion1"
+                            android:text=""
+                            android:textColor="#FFFFFF"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Discussions"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:foreground="#20000000">
+
+                    <LinearLayout
+
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/background1"
+                            android:padding="10dp"
+                            android:scaleType="fitXY"
+                            android:id="@+id/announcementsKilter"
+                            android:src="@drawable/announcement1"
+                            android:text=""
+                            android:textColor="#FFFFFF"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+
+                            android:text="Announcements"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:foreground="#20000000">
+
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:orientation="vertical">
+
+                        <ImageButton
+
+
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/background1"
+                            android:id="@+id/livestreamKilter"
+                            android:padding="10dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/livestream2"
+                            android:text=""
+                            android:textColor="#FFFFFF"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+
+                            android:text="LiveStream" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:foreground="#20000000">
+
+                    <LinearLayout
+
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/background1"
+                            android:id="@+id/foodcourtKilter"
+                            android:padding="10dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/foodcourt4"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+
+                            android:text="Food Court" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                >
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+
+                    android:foreground="#20000000">
+
+
+                    <LinearLayout
+
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="?android:selectableItemBackground"
+
+                        android:orientation="vertical">
+
+
+
+
+                        <ImageButton
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/background1"
+                            android:clickable="true"
+                            android:id="@+id/connecttonetworkKilter"
+                            android:padding="10dp"
+
+                            android:scaleType="fitXY"
+                            android:src="@drawable/wifi2"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:textAlignment="center"
+
+
+                            android:text="Hasgeek  Wi-Fi"
+                            />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:foreground="#20000000">
+
+                    <LinearLayout
+
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="?android:selectableItemBackground"
+
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/background1"
+                            android:id="@+id/scanBadgesKilter"
+                            android:padding="10dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/scanqr2"
+                            android:text=""
+                            android:textColor="#000000"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+
+                            android:text="Scan Badge"
+
+                            />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="Schedule"
+            android:textSize="30sp"
+            android:textStyle="bold"
+
+            />
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+
+                <android.support.v7.widget.RecyclerView
+
+                    android:id="@+id/schedule_recyclerviewKilter"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:background="#20000000"
+                    android:paddingBottom="50dp"/>
+                <ImageView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/viewlessmorekilter"
+                    android:src="@drawable/arrowdown"
+                    android:tag="arrowdown"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    />
+
+
+                <TextView
+                    android:id="@+id/empty_viewKilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Schedule not yet decided"
+                    android:textColor="#ff0000"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="50dp"
+            android:paddingBottom="40dp">
+            <RelativeLayout
+                android:id="@+id/map_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.gms.maps.MapView
+
+                    android:id="@+id/mapViewKilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+                <ImageView
+                    android:id="@+id/transparent_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="#00000000" />
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/BuyKilterTickets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FF4500"
+                android:clickable="true"
+                android:text="Buy Tickets"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

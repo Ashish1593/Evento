@@ -1,8 +1,10 @@
 package com.examples.android.evento.activity;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -18,6 +20,9 @@ import com.facebook.accountkit.PhoneNumber;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
+
+import java.util.HashMap;
+import java.util.List;
 
 
 public class OpenWifi extends AppCompatActivity {
@@ -106,38 +111,67 @@ public class OpenWifi extends AppCompatActivity {
 
     public void connectwifi(final String phoneNumber) {
 
-        WifiConfiguration wifiConfig = new WifiConfiguration();
-        wifiConfig.SSID = String.format("\"%s\"", "HasGeek Legacy");
-        wifiConfig.preSharedKey = String.format("\"%s\"", "geeksrus");
 
-        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-        if (wifiManager.isWifiEnabled()) {
-            //wifiManager.setWifiEnabled(false);
-            int netId = wifiManager.addNetwork(wifiConfig);
-            wifiManager.disconnect();
-            wifiManager.enableNetwork(netId, true);
-            wifiManager.reconnect();
-        } else {
-            wifiManager.setWifiEnabled(true);
-            int netId = wifiManager.addNetwork(wifiConfig);
-            wifiManager.disconnect();
-            wifiManager.enableNetwork(netId, true);
-            wifiManager.reconnect();
+        WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        WifiConfiguration wc = new WifiConfiguration();
+
+        if (wifiManager.isWifiEnabled()){
+            int flag =0;
+
+            List<ScanResult> results = wifiManager.getScanResults();
+
+        for(ScanResult scanResult :  results)
+        {
+            if(scanResult.SSID.equals("allen"))
+
+                flag =1;}
+
+
+            if(flag==1)
+                {
+
+                    wc.SSID = "\"allen\"";
+                    wc.preSharedKey = "\"12345678\"";
+                    wc.status = WifiConfiguration.Status.ENABLED;
+                    wc.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
+                    wc.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
+                    wc.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
+                    wc.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
+                    wc.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
+                    wc.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
+// connect to and enable the connection
+                    int netId = wifiManager.addNetwork(wc);
+                    wifiManager.enableNetwork(netId, true);
+                    wifiManager.setWifiEnabled(true);
+
+
+                new android.app.AlertDialog.Builder(OpenWifi.this)
+                        .setTitle("Hasgeek wifi")
+                        .setMessage(Html.fromHtml(phoneNumber + "  You are now connected to Hasgeek network"))
+                        .setCancelable(true)
+                        .setPositiveButton("Ok", null)
+                        .create().show();
+                }
+
+
+            else {
+                new android.app.AlertDialog.Builder(OpenWifi.this)
+                        .setTitle("Hasgeek wifi")
+                        .setMessage(Html.fromHtml("Hasgeek network not in range"))
+                        .setCancelable(true)
+                        .setPositiveButton("Ok", null)
+                        .create().show();
+
+            }
+
+
         }
 
-//        int netId = wifiManager.addNetwork(wifiConfig);
-//        wifiManager.disconnect();
-//        wifiManager.enableNetwork(netId, true);
-//        wifiManager.reconnect();
-//
+        else {
+            wifiManager.setWifiEnabled(true);
+            connectwifi(phoneNumber);
+        }
 
-
-        new android.app.AlertDialog.Builder(OpenWifi.this)
-                .setTitle("Hasgeek wifi")
-                .setMessage(Html.fromHtml(phoneNumber + "  You are now connected to hasgeek network"))
-                .setCancelable(true)
-                .setPositiveButton("Ok", null)
-                .create().show();
     }
 
 

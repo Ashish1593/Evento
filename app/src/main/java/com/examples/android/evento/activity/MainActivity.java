@@ -1,35 +1,18 @@
 package com.examples.android.evento.activity;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
+
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-
-import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.CollapsingToolbarLayout;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-
-import android.app.ProgressDialog;
-
-import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.TextView;
-
+import com.examples.android.evento.fragments.EventKilter;
 import com.examples.android.evento.fragments.Jsfoo2017;
 import com.examples.android.evento.fragments.RootConf2017;
-
 import com.examples.android.evento.fragments.EventFossMeet;
 import com.examples.android.evento.fragments.EventPycon;
 import com.examples.android.evento.fragments.EventslistFragment;
@@ -39,15 +22,17 @@ import com.examples.android.evento.adapters.ViewPagerAdapter;
 import com.facebook.accountkit.AccountKit;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import static com.examples.android.evento.R.id.viewpager;
 
 
 public class MainActivity extends AppCompatActivity {
     public static final String SLACK_ANDROID_PACKAGE_NAME = "com.Slack";
 
-    private static String TAG = MainActivity.class.getSimpleName();
-
-    private ProgressDialog pDialog;
 
     public static boolean isPackageInstalled(String targetPackage, PackageManager packageManager) {
         try {
@@ -74,29 +59,66 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment eventFossMeet = new EventFossMeet();
         Fragment eventPycon = new EventPycon();
-
+        Fragment eventKilter = new EventKilter();
         Fragment eventslistFragment = new EventslistFragment();
         Fragment eventJsfoo2017 = new Jsfoo2017();
         Fragment eventRootconf2017 = new RootConf2017();
 
 
+
+
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        pagerAdapter.addFragment(eventPycon);
-        pagerAdapter.addFragment(eventFossMeet);
-        pagerAdapter.addFragment(eventRootconf2017);
-        pagerAdapter.addFragment(eventJsfoo2017);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String td = formatter.format(Calendar.getInstance().getTime());
+
+
+        try {
+
+
+            Date fossmeetdate = formatter.parse("2017-03-12");
+            Date kilterdate = formatter.parse("2017-04-02");
+            Date jsFoodate = formatter.parse("2017-09-09");
+            Date rootconfdate = formatter.parse("2017-05-12");
+            Date pycondate = formatter.parse("2017-02-17");
+            Date todaysdate = formatter.parse(td);
+
+
+
+             //   pagerAdapter.addFragment(eventPycon);
+
+            if (fossmeetdate.after(todaysdate)) {
+                pagerAdapter.addFragment(eventFossMeet);
+            }
+            if (kilterdate.after(todaysdate)) {
+                pagerAdapter.addFragment(eventKilter);
+            }
+            if (rootconfdate.after(todaysdate)) {
+                pagerAdapter.addFragment(eventRootconf2017);
+            }
+            if (jsFoodate.after(todaysdate)) {
+                pagerAdapter.addFragment(eventJsfoo2017);
+            }
+
+
+        }
+
+
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+//        pagerAdapter.addFragment(eventPycon);
+//        //pagerAdapter.addFragment(eventFossMeet);
+//        pagerAdapter.addFragment(eventKilter);
+//        pagerAdapter.addFragment(eventRootconf2017);
+//        pagerAdapter.addFragment(eventJsfoo2017);
         pagerAdapter.addFragment(eventslistFragment);
 
         ViewPager viewPager = (ViewPager) findViewById(viewpager);
         viewPager.setAdapter(pagerAdapter);
 
-
-        pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Please wait...");
-        pDialog.setCancelable(false);
-
-        //makeJsonObjectRequest();
 
 
     }

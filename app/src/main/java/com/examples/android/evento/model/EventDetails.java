@@ -12,12 +12,14 @@ public class EventDetails {
     private String eventplace;
     private String eventdate;
     private String eventurl;
-    public EventDetails(String eventName , String eventPlace,String eventDate,String eventURL)
+    private String enddate;
+    public EventDetails(String eventName , String eventPlace,String eventDate,String eventURL,  String endDate)
     {
-        eventname = eventName;
-        eventplace= eventPlace;
-        eventdate = eventDate;
-        eventurl = eventURL;
+        this.eventname = eventName;
+        this.eventplace= eventPlace;
+        this.eventdate = eventDate;
+        this.eventurl = eventURL;
+        this.enddate=endDate;
    }
 
 
@@ -37,4 +39,10 @@ public class EventDetails {
     public String getEventURL(){
     return  eventurl;
 }
+
+    public String getEnddate() {
+        return enddate;
+    }
+
+
 }

@@ -14,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,22 +21,27 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.examples.android.evento.R;
 import com.examples.android.evento.activity.AnnouncementsActivity;
 import com.examples.android.evento.activity.FoodCourtActivity;
 import com.examples.android.evento.activity.MainActivity;
 import com.examples.android.evento.activity.OpenWifi;
 import com.examples.android.evento.activity.QRcodeScanner;
-
+import com.examples.android.evento.adapters.RecylerViewadapter;
 import com.examples.android.evento.adapters.SessionsAdapter;
-
+import com.examples.android.evento.controller.AppController;
 import com.examples.android.evento.controller.DataBaseController;
-import com.examples.android.evento.model.EventDetails;
 import com.examples.android.evento.model.Metadata;
 import com.examples.android.evento.model.Session;
 import com.examples.android.evento.model.TalkDetails;
-
+//import com.examples.android.evento.activity.ScheduleActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -51,70 +55,49 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import static com.examples.android.evento.activity.MainActivity.SLACK_ANDROID_PACKAGE_NAME;
-
+import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 
 /**
  * Created by ankit on 1/2/17.
  */
 
-public class RootConf2017 extends Fragment{
+public class EventKilter extends Fragment {
 
     MapView mMapView;
-    private GoogleMap googleMap;
 
+    private GoogleMap googleMap;
+    private String urlJsonObj = "https://kilter.talkfunnel.com/2017/json";
+    private ArrayList<TalkDetails> detailsJSFOO;
+    private ProgressDialog pDialog;
     private RecyclerView mRecyclerView;
-    String eventDate ;
     private TextView emptyView;
     private DataBaseController db;
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view =inflater.inflate(R.layout.rootconf2017,container,false);
+    String eventDate = "2017-04-01" ;
 
-        mMapView = (MapView) view.findViewById(R.id.mapViewRootConf);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.kilter, container, false);
+
+        mMapView = (MapView) view.findViewById(R.id.mapViewKilter);
 
         mMapView.onCreate(null);
 
         mMapView.onResume();
 
-
-        final android.support.v4.widget.NestedScrollView  mainScrollView = (android.support.v4.widget.NestedScrollView ) view.findViewById(R.id.scrollView);
-        (view.findViewById(R.id.mapViewRootConf)).setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN:
-                        // Disallow ScrollView to intercept touch events.
-                        mainScrollView.requestDisallowInterceptTouchEvent(true);
-                        // Disable touch on transparent view
-                        return false;
-
-                    case MotionEvent.ACTION_UP:
-                        // Allow ScrollView to intercept touch events.
-                        mainScrollView.requestDisallowInterceptTouchEvent(false);
-                        return true;
-
-                    case MotionEvent.ACTION_MOVE:
-                        mainScrollView.requestDisallowInterceptTouchEvent(true);
-                        return false;
-
-                    default:
-                        return true;
-                }
-            }
-        });
-db = DataBaseController.getInstance(getActivity());
-
+        db = DataBaseController.getInstance(getActivity());
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
@@ -130,7 +113,7 @@ db = DataBaseController.getInstance(getActivity());
                 //googleMap.setMyLocationEnabled(true);
                 //11.3217° N, 75.9342° E
                 // For dropping a marker at a point on the Map
-                LatLng MLRConventionCenter = new LatLng(12.8917,77.5852);
+                LatLng MLRConventionCenter = new LatLng(12.8917, 77.5852);
                 googleMap.addMarker(new MarkerOptions().position(MLRConventionCenter).title("MLR CONVENTON Center").snippet("M L R CONVENTION CENtER J P NAGAR"));
 
                 MarkerOptions mo = new MarkerOptions().position(MLRConventionCenter).title("MLR CONVENTON Center").snippet("M L R CONVENTION CENtER J P NAGAR").visible(true);
@@ -144,40 +127,41 @@ db = DataBaseController.getInstance(getActivity());
         });
 
 
-        Button buyRootConfTicket = (Button) view.findViewById(R.id.BuyrootconfTickets);
-        buyRootConfTicket.setOnClickListener(new View.OnClickListener() {
+        emptyView = (TextView) view.findViewById(R.id.empty_viewKilter);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.schedule_recyclerviewKilter);
+        mRecyclerView.setNestedScrollingEnabled(false);
+        //  mRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(llm);
+
+        Button buyKilterTicket = (Button) view.findViewById(R.id.BuyKilterTickets);
+        buyKilterTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-                final String URI = "https://rootconf.in/2017/";
+                final String URI = "https://kilter.in/2017/";
                 intent.launchUrl(getActivity(), Uri.parse(URI));
 
             }
         });
 
 
-        emptyView = (TextView) view.findViewById(R.id.empty_viewrootconf);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.schedule_recyclerviewrootconf);
-        mRecyclerView.setNestedScrollingEnabled(false);
 
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(llm);
+        final ImageView imageView = (ImageView) view.findViewById(R.id.viewlessmorekilter);
 
-
-        final ImageView imageView = (ImageView) view.findViewById(R.id.viewlessmorerootconf);
-
-        if( db.getCount("EventRootConf") !=0) {
+        if (db.getCount("EventKilter") != 0) {
             List<Session> sessionModel1 = new ArrayList<>();
 
             GsonBuilder gsonBuilder = new GsonBuilder();
             Gson gson = gsonBuilder.create();
-            sessionModel1 = gson.fromJson(db.getScheduleAndEventData("EventRootConf"), new TypeToken<List<Session>>() {
+            sessionModel1 = gson.fromJson(db.getScheduleAndEventData("EventKilter"), new TypeToken<List<Session>>() {
             }.getType());
 
             if (sessionModel1.size() != 0) {
 
-                final List<Session>  sessionModel2 = sessionModel1.subList(0,2);
+                final List<Session> sessionModel2 = sessionModel1.subList(0, 2);
                 final List<Session> sessionModel3 = sessionModel1;
 
                 mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
@@ -185,15 +169,13 @@ db = DataBaseController.getInstance(getActivity());
                     @Override
                     public void onClick(View v) {
                         String backgroundImageName = String.valueOf(v.getTag());
-                        if (backgroundImageName.equals("arrowdown")){
+                        if (backgroundImageName.equals("arrowdown")) {
 
                             mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel3));
 
                             imageView.setImageResource(R.drawable.arrowup);
                             imageView.setTag("arrowup");
-                        }
-
-                        else {
+                        } else {
                             mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
 
                             imageView.setImageResource(R.drawable.arrowdown);
@@ -204,10 +186,8 @@ db = DataBaseController.getInstance(getActivity());
                 });
 
 
-
             } else {
                 //     makeJsonObjectRequest();
-
                 mRecyclerView.setVisibility(View.GONE);
                 emptyView.setVisibility(View.VISIBLE);
                 imageView.setVisibility(View.GONE);
@@ -215,16 +195,14 @@ db = DataBaseController.getInstance(getActivity());
         }
 
 
-        ImageButton scanBadgeRootconf = ( ImageButton) view.findViewById(R.id.scanBadgesRootconf);
-        scanBadgeRootconf.setOnClickListener(new View.OnClickListener()
-        {
+        ImageButton scanBadgeKilter = (ImageButton) view.findViewById(R.id.scanBadgesKilter);
+        scanBadgeKilter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-
+            public void onClick(View v) {
 
 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                String td= formatter.format(Calendar.getInstance().getTime());
+                String td = formatter.format(Calendar.getInstance().getTime());
 
                 try {
 
@@ -255,21 +233,18 @@ db = DataBaseController.getInstance(getActivity());
         });
 
 
-        ImageButton connectToNetworkRootconf = ( ImageButton) view.findViewById(R.id.connecttonetworkRootconf);
-        connectToNetworkRootconf.setOnClickListener(new View.OnClickListener()
-        {
+        ImageButton connectToNetworkKilter = (ImageButton) view.findViewById(R.id.connecttonetworkKilter);
+        connectToNetworkKilter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-
-
-
+            public void onClick(View v) {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                String td= formatter.format(Calendar.getInstance().getTime());
+                String td = formatter.format(Calendar.getInstance().getTime());
 
                 try {
 
                     Date date = formatter.parse(eventDate);
                     Date todaysdate = formatter.parse(td);
+
                     if (date.after(todaysdate)) {
                         new android.app.AlertDialog.Builder(getActivity())
                                 .setTitle("")
@@ -296,55 +271,28 @@ db = DataBaseController.getInstance(getActivity());
 
         final Metadata metadata;
 
-        if(db.getCount("MetadataEventRootConf")!=0) {
+
+        if (db.getCount("MetadataEventKilter") != 0) {
             GsonBuilder gsonBuilder = new GsonBuilder();
             Gson gson = gsonBuilder.create();
-            metadata = gson.fromJson(db.getScheduleAndEventData("MetadataEventRootConf"), new TypeToken<Metadata>() {
+            metadata = gson.fromJson(db.getScheduleAndEventData("MetadataEventKilter"), new TypeToken<Metadata>() {
             }.getType());
-        }
-        else
+        } else
             metadata = null;
 
 
-
-        ImageButton liveStreamButton = ( ImageButton) view.findViewById(R.id.livestreamRootconf);
+        ImageButton liveStreamButton = (ImageButton) view.findViewById(R.id.livestreamKilter);
         liveStreamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
+                if (metadata != null) {
                     final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-                    // final String URI = "https://pune.pycon.org/registration/";
+
                     final String URI = metadata.getLivestreamUrl();
 
                     intent.launchUrl(getActivity(), Uri.parse(URI));
-                }
-                else
-                {
-                    new android.app.AlertDialog.Builder(getActivity())
-                            .setTitle("")
-                            .setMessage(Html.fromHtml(" Available during Conference"))
-                            .setCancelable(true)
-                            .setPositiveButton("Ok", null)
-                            .create().show();
-                }
-            }
-        });
-
-
-
-        ImageButton foodcourtButton = ( ImageButton) view.findViewById(R.id.foodcourtRootconf);
-        foodcourtButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(metadata!=null) {
-                    Intent intent = new Intent(getActivity(),FoodCourtActivity.class);
-                    intent.putExtra("EventNameMetadata","MetadataEventRootConf");
-                    startActivity(intent);
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
                             .setMessage(Html.fromHtml("  Available during Conference"))
@@ -356,12 +304,33 @@ db = DataBaseController.getInstance(getActivity());
         });
 
 
-        ImageButton discussionButton = ( ImageButton) view.findViewById(R.id.discussionsRootconf);
+        ImageButton foodcourtButton = (ImageButton) view.findViewById(R.id.foodcourtKilter);
+        foodcourtButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (metadata != null) {
+                    Intent intent = new Intent(getActivity(), FoodCourtActivity.class);
+                    intent.putExtra("EventNameMetadata", "MetadataEventKilter");
+                    startActivity(intent);
+                } else {
+                    new android.app.AlertDialog.Builder(getActivity())
+                            .setTitle("")
+                            .setMessage(Html.fromHtml("  Available during Conference"))
+                            .setCancelable(true)
+                            .setPositiveButton("Ok", null)
+                            .create().show();
+                }
+            }
+        });
+
+
+        ImageButton discussionButton = (ImageButton) view.findViewById(R.id.discussionsKilter);
         discussionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
+                if (metadata != null) {
                     new AlertDialog.Builder(getActivity())
                             .setTitle("Join the discussion!")
                             .setMessage("Are you on the Friends of HasGeek Slack team? Follow the discussion on the our channel")
@@ -391,12 +360,10 @@ db = DataBaseController.getInstance(getActivity());
                                 }
                             })
                             .create().show();
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
-                            .setMessage(Html.fromHtml(" Available during Conference"))
+                            .setMessage(Html.fromHtml("Available during Conference"))
                             .setCancelable(true)
                             .setPositiveButton("Ok", null)
                             .create().show();
@@ -405,24 +372,19 @@ db = DataBaseController.getInstance(getActivity());
         });
 
 
-
-
-
-        ImageButton announcementButton = ( ImageButton) view.findViewById(R.id.announcementsRootconf);
+        ImageButton announcementButton = (ImageButton) view.findViewById(R.id.announcementsKilter);
         announcementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
-                    Intent intent = new Intent(getActivity(),AnnouncementsActivity.class);
-                    intent.putExtra("EventNameMetadata","MetadataEventRootConf");
+                if (metadata != null) {
+                    Intent intent = new Intent(getActivity(), AnnouncementsActivity.class);
+                    intent.putExtra("EventNameMetadata", "MetadataEventKilter");
                     startActivity(intent);
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
-                            .setMessage(Html.fromHtml(" Available during Conference"))
+                            .setMessage(Html.fromHtml("  Available during Conference"))
                             .setCancelable(true)
                             .setPositiveButton("Ok", null)
                             .create().show();
@@ -431,13 +393,12 @@ db = DataBaseController.getInstance(getActivity());
         });
 
 
-
-        //  makeJsonObjectRequest();
-
+        //makeJsonObjectRequest();
 
 
         return view;
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -461,7 +422,5 @@ db = DataBaseController.getInstance(getActivity());
         super.onLowMemory();
         mMapView.onLowMemory();
     }
-
-
 
 }

@@ -59,13 +59,7 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
                     })
 
                     .show();
-
-            mScannerView = new ZXingScannerView(this);
-            setContentView(mScannerView);
-            mScannerView.setResultHandler(this);
-            mScannerView.startCamera();
-
-        } else {
+    } else {
 
             Snackbar.make(findViewById(R.id.snackbar), "Hang on, we need to know who you are", Snackbar.LENGTH_INDEFINITE)
                     .setAction("Login", new View.OnClickListener() {
@@ -81,40 +75,42 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
 
                     .show();
 
-
-            mScannerView = new ZXingScannerView(this);
-            setContentView(mScannerView);
-            mScannerView.setResultHandler(this);
-            mScannerView.startCamera();
-
-
         }
 
     }
+@Override
+protected void onStart(){
+    super.onStart();
+    mScannerView = new ZXingScannerView(this);
+    setContentView(mScannerView);
+    mScannerView.setResultHandler(this);
+    mScannerView.startCamera();
 
+
+
+
+
+}
 
     @Override
     protected void onPause() {
         super.onPause();
-     //  mScannerView.resumeCameraPreview(this);
-      mScannerView.stopCamera();
+       mScannerView.resumeCameraPreview(this);
+     // mScannerView.stopCamera();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
    mScannerView.resumeCameraPreview(this);
-       // mScannerView.setResultHandler(this);
-  //     mScannerView.startCamera();
-
 
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-       //  mScannerView.stopCamera();
-       mScannerView.resumeCameraPreview(this);
+        mScannerView.stopCamera();
+      // mScannerView.resumeCameraPreview(this);
     }
 
 
@@ -157,41 +153,7 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
                                         intent.putExtra(ContactsContract.Intents.Insert.JOB_TITLE, job_title);
                                         intent.putExtra(ContactsContract.Intents.Insert.IM_HANDLE, twitter);
                                         startActivity(intent);
-
-//
-//                        new android.support.v7.app.AlertDialog.Builder(QRcodeScanner.this)
-//                                .setTitle(fullname + "")
-//                                .setMessage("Company: " + company + "\nPhone: " + phone + "\nEmail: " + email)
-//                                .setCancelable(true)
-//                                .setPositiveButton("Add to contacts", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        Intent intent = new Intent(Intent.ACTION_INSERT);
-//                                        intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
-//
-//                                        intent.putExtra(ContactsContract.Intents.Insert.NAME, fullname);
-//                                        intent.putExtra(ContactsContract.Intents.Insert.PHONE, phone);
-//                                        intent.putExtra(ContactsContract.Intents.Insert.COMPANY, company);
-//                                        intent.putExtra(ContactsContract.Intents.Insert.EMAIL, email);
-//                                        intent.putExtra(ContactsContract.Intents.Insert.JOB_TITLE, job_title);
-//                                        intent.putExtra(ContactsContract.Intents.Insert.IM_HANDLE, twitter);
-//                                        startActivity(intent);
-//                                    }
-//                                })
-//
-//                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        mScannerView.resumeCameraPreview(QRcodeScanner.this);
-////                                      mScannerView.startCamera();
-//                                        mScannerView.setResultHandler(QRcodeScanner.this);
-//                                        mScannerView.startCamera();
-//                                    }
-//                                })
-//                                .create().show();
-
-
-                    } catch (JSONException e) {
+                  } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(),
                                 "Error: " + e.getMessage(),

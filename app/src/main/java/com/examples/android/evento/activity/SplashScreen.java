@@ -59,11 +59,13 @@ public class SplashScreen extends AppCompatActivity {
     private String urlJsonUbjFossMeet="https://fossmeet-nitc.talkfunnel.com/2017/json";
     private String urlJsonObjRootConf="https://rootconf.talkfunnel.com/2017/json";
     private String urlJsonObjJsfoo=    "https://jsfoo.talkfunnel.com/2017/json";
+    private String urlJsonObjKilter=    "https://kilter.talkfunnel.com/2017/json";
     private String urlJsonObjEventList ="https://talkfunnel.com/json";
     private String urlMetadataPycon="http://hasgeek.github.io/api/space/104/metadata";
     private String urlMetadataFossMeet="http://hasgeek.github.io/api/space/103/metadata";
     private String urlMetadataRootConf="http://hasgeek.github.io/api/space/102/metadata";
     private String urlMetadataJsfoo="http://hasgeek.github.io/api/space/106/metadata";
+    private String urlMetadataKilter="http://hasgeek.github.io/api/space/110/metadata";
 
 
     public static FoodCourtVendorPagerAdapter foodCourtVendorPagerAdapter;
@@ -85,11 +87,15 @@ public class SplashScreen extends AppCompatActivity {
         makeJsonObjectRequestForSession(urlJsonUbjFossMeet,"EventFossMeet");
         makeJsonObjectRequestForSession(urlJsonObjRootConf,"EventRootConf");
         makeJsonObjectRequestForSession(urlJsonObjJsfoo,"EventJsfoo");
+        makeJsonObjectRequestForSession(urlJsonObjKilter,"EventKilter");
+
         makeJsonObjectRequestForEventDetails(urlJsonObjEventList,"EventDetails");
-       requestJsonObject(urlMetadataPycon,"MetadataEventPycon");
+
+        requestJsonObject(urlMetadataPycon,"MetadataEventPycon");
        requestJsonObject(urlMetadataFossMeet,"MetadataEventFossMeet");
        requestJsonObject(urlMetadataRootConf,"MetadataEventRootConf");
       requestJsonObject(urlMetadataJsfoo,"MetadataEventJsfoo");
+        requestJsonObject(urlMetadataKilter,"MetadataEventKilter");
 
         final ImageView imageView = (ImageView) findViewById(R.id.imageView);
         final Animation animation_1 = AnimationUtils.loadAnimation(getBaseContext(),R.anim.rotate);
@@ -226,8 +232,9 @@ public class SplashScreen extends AppCompatActivity {
                         String location = events.getString("datelocation");
                         String date = events.getString("start");
                         String URL = events.getString("url");
+                        String endDate = events.getString("end");
 
-                        EventDetails edetails = new EventDetails(name, location, date, URL);
+                        EventDetails edetails = new EventDetails(name, location, date, URL,endDate);
 
                         details.add(edetails);
 
@@ -244,8 +251,6 @@ public class SplashScreen extends AppCompatActivity {
                     else
                         db.updateScheduleAndEventData( eventdetails ,  EventDetails);
 
-
-                    int num =db.getAllContacts();
 
 
 
@@ -265,10 +270,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(ContentValues.TAG, "Error: " + error.getMessage());
-//                Toast.makeText(SplashScreen.this,
-//                        "No Network", Toast.LENGTH_SHORT).show();
-                // hide the progress dialog
-                //   hidepDialog();
+
             }
         }
 
@@ -292,7 +294,7 @@ public class SplashScreen extends AppCompatActivity {
 
              Metadata metadata = gson.fromJson(response, Metadata.class);
              //foodCourtVendorPagerAdapter = new FoodCourtVendorPagerAdapter(SplashScreen.this, metadata.getFoodCourtVendors());
-int count = db.getAllContacts();
+                int count = db.getAllContacts();
                 String eventName= gson.toJson(metadata, new TypeToken<Metadata>(){}.getType());
                 if(db.getCount(MetadataEventName)==0)
                     db.addScheduleAndEventData(eventName ,MetadataEventName);

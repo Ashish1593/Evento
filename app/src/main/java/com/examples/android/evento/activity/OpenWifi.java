@@ -10,6 +10,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+
 import com.facebook.accountkit.AccessToken;
 import com.facebook.accountkit.Account;
 import com.facebook.accountkit.AccountKit;
@@ -34,7 +35,7 @@ public class OpenWifi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-      //  AccountKit.initialize(getApplicationContext());
+        AccountKit.initialize(getApplicationContext());
 
         AccessToken accessToken = AccountKit.getCurrentAccessToken();
 
@@ -79,7 +80,6 @@ public class OpenWifi extends AppCompatActivity {
         AccountKitLoginResult loginResult = AccountKit.loginResultWithIntent(data);
 
 
-
         AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
             @Override
             public void onSuccess(final Account account) {
@@ -115,34 +115,33 @@ public class OpenWifi extends AppCompatActivity {
         WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         WifiConfiguration wc = new WifiConfiguration();
 
-        if (wifiManager.isWifiEnabled()){
-            int flag =0;
+        if (wifiManager.isWifiEnabled()) {
+            int flag = 0;
 
             List<ScanResult> results = wifiManager.getScanResults();
 
-        for(ScanResult scanResult :  results)
-        {
-            if(scanResult.SSID.equals("allen"))
+            for (ScanResult scanResult : results) {
+                if (scanResult.SSID.equals("allen"))
 
-                flag =1;}
+                    flag = 1;
+            }
 
 
-            if(flag==1)
-                {
+            if (flag == 1) {
 
-                    wc.SSID = "\"allen\"";
-                    wc.preSharedKey = "\"12345678\"";
-                    wc.status = WifiConfiguration.Status.ENABLED;
-                    wc.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
-                    wc.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
-                    wc.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
-                    wc.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
-                    wc.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
-                    wc.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
+                wc.SSID = "\"allen\"";
+                wc.preSharedKey = "\"12345678\"";
+                wc.status = WifiConfiguration.Status.ENABLED;
+                wc.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
+                wc.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
+                wc.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
+                wc.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
+                wc.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
+                wc.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
 // connect to and enable the connection
-                    int netId = wifiManager.addNetwork(wc);
-                    wifiManager.enableNetwork(netId, true);
-                    wifiManager.setWifiEnabled(true);
+                int netId = wifiManager.addNetwork(wc);
+                wifiManager.enableNetwork(netId, true);
+                wifiManager.setWifiEnabled(true);
 
 
                 new android.app.AlertDialog.Builder(OpenWifi.this)
@@ -151,10 +150,7 @@ public class OpenWifi extends AppCompatActivity {
                         .setCancelable(true)
                         .setPositiveButton("Ok", null)
                         .create().show();
-                }
-
-
-            else {
+            } else {
                 new android.app.AlertDialog.Builder(OpenWifi.this)
                         .setTitle("Hasgeek wifi")
                         .setMessage(Html.fromHtml("Hasgeek network not in range"))
@@ -165,9 +161,7 @@ public class OpenWifi extends AppCompatActivity {
             }
 
 
-        }
-
-        else {
+        } else {
             wifiManager.setWifiEnabled(true);
             connectwifi(phoneNumber);
         }

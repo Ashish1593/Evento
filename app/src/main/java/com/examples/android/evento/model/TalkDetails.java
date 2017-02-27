@@ -21,34 +21,22 @@ public class TalkDetails implements Serializable {
 
     public TalkDetails(String speakerName, String talkTitle, String talkURL) {
 
-        this.speakerName =speakerName;
-        this.talkTitle=talkTitle;
-        this.talkURL=talkURL;
+        this.speakerName = speakerName;
+        this.talkTitle = talkTitle;
+        this.talkURL = talkURL;
     }
 
-    public String getSpeakerName(){
+    public String getSpeakerName() {
         return speakerName;
     }
 
-    public String getTalkTitle(){
+    public String getTalkTitle() {
         return talkTitle;
     }
 
-    public String getTalkURL(){
+    public String getTalkURL() {
         return talkURL;
     }
 
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void writeToParcel( Parcel dest, int flags) {
-//
-//        dest.writeString(speakerName);
-//        dest.writeString(talkTitle);
-//        dest.writeString(talkURL);
-//
-//    }
+
 }

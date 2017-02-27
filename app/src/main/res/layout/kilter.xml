@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scrollViewPycon"
+    android:layout_width="match_parent"
 
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
 
     <LinearLayout
@@ -39,10 +39,10 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:orientation="vertical">
 
 
@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
+
 
                 >
 
@@ -105,13 +106,13 @@
                         android:orientation="vertical">
 
                         <ImageButton
+                            android:id="@+id/announcementsKilter"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background1"
                             android:padding="10dp"
                             android:scaleType="fitXY"
-                            android:id="@+id/announcementsKilter"
                             android:src="@drawable/announcement1"
                             android:text=""
                             android:textColor="#FFFFFF"
@@ -144,11 +145,11 @@
                         <ImageButton
 
 
+                            android:id="@+id/livestreamKilter"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background1"
-                            android:id="@+id/livestreamKilter"
                             android:padding="10dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/livestream2"
@@ -182,11 +183,11 @@
                         android:orientation="vertical">
 
                         <ImageButton
+                            android:id="@+id/foodcourtKilter"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background1"
-                            android:id="@+id/foodcourtKilter"
                             android:padding="10dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/foodcourt4"
@@ -210,12 +211,12 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
-                android:orientation="horizontal"
-                >
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -234,15 +235,13 @@
                         android:orientation="vertical">
 
 
-
-
                         <ImageButton
+                            android:id="@+id/connecttonetworkKilter"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background1"
                             android:clickable="true"
-                            android:id="@+id/connecttonetworkKilter"
                             android:padding="10dp"
 
                             android:scaleType="fitXY"
@@ -255,11 +254,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:textAlignment="center"
-
-
                             android:text="Hasgeek  Wi-Fi"
-                            />
+
+
+                            android:textAlignment="center" />
 
                     </LinearLayout>
 
@@ -282,11 +280,11 @@
                         android:orientation="vertical">
 
                         <ImageButton
+                            android:id="@+id/scanBadgesKilter"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background1"
-                            android:id="@+id/scanBadgesKilter"
                             android:padding="10dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/scanqr2"
@@ -333,8 +331,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
 
                 <android.support.v7.widget.RecyclerView
@@ -344,16 +341,16 @@
 
                     android:layout_height="wrap_content"
                     android:background="#20000000"
-                    android:paddingBottom="50dp"/>
+                    android:paddingBottom="50dp" />
+
                 <ImageView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
                     android:id="@+id/viewlessmorekilter"
-                    android:src="@drawable/arrowdown"
-                    android:tag="arrowdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    />
+                    android:src="@drawable/arrowdown"
+                    android:tag="arrowdown" />
 
 
                 <TextView
@@ -370,15 +367,15 @@
         </android.support.v7.widget.CardView>
 
 
-
         <android.support.v7.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="50dp"
             android:layout_marginTop="50dp"
             android:paddingBottom="40dp">
+
             <RelativeLayout
                 android:id="@+id/map_layout"
                 android:layout_width="match_parent"
@@ -389,6 +386,7 @@
                     android:id="@+id/mapViewKilter"
                     android:layout_width="match_parent"
                     android:layout_height="200dp" />
+
                 <ImageView
                     android:id="@+id/transparent_image"
                     android:layout_width="match_parent"
@@ -399,8 +397,6 @@
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
-
-
 
 
         <LinearLayout
@@ -420,7 +416,6 @@
                 android:textColor="#ffffff" />
 
         </LinearLayout>
-
 
 
     </LinearLayout>

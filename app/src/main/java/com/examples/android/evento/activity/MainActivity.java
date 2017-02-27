@@ -3,13 +3,13 @@ package com.examples.android.evento.activity;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+
 import com.examples.android.evento.fragments.EventKilter;
 import com.examples.android.evento.fragments.Jsfoo2017;
 import com.examples.android.evento.fragments.RootConf2017;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // AccountKit.initialize(getApplicationContext());
+        AccountKit.initialize(getApplicationContext());
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -55,16 +55,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
-
         Fragment eventFossMeet = new EventFossMeet();
         Fragment eventPycon = new EventPycon();
         Fragment eventKilter = new EventKilter();
         Fragment eventslistFragment = new EventslistFragment();
         Fragment eventJsfoo2017 = new Jsfoo2017();
         Fragment eventRootconf2017 = new RootConf2017();
-
-
 
 
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -85,8 +81,7 @@ public class MainActivity extends AppCompatActivity {
             Date todaysdate = formatter.parse(td);
 
 
-
-             //   pagerAdapter.addFragment(eventPycon);
+             pagerAdapter.addFragment(eventPycon);
 
             if (fossmeetdate.after(todaysdate)) {
                 pagerAdapter.addFragment(eventFossMeet);
@@ -102,10 +97,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-        }
-
-
-        catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -120,11 +112,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(pagerAdapter);
 
 
-
     }
-
-
-
 
 
 }

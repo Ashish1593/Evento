@@ -59,7 +59,7 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
                     })
 
                     .show();
-    } else {
+        } else {
 
             Snackbar.make(findViewById(R.id.snackbar), "Hang on, we need to know who you are", Snackbar.LENGTH_INDEFINITE)
                     .setAction("Login", new View.OnClickListener() {
@@ -78,31 +78,29 @@ public class QRcodeScanner extends AppCompatActivity implements ZXingScannerView
         }
 
     }
-@Override
-protected void onStart(){
-    super.onStart();
-    mScannerView = new ZXingScannerView(this);
-    setContentView(mScannerView);
-    mScannerView.setResultHandler(this);
-    mScannerView.startCamera();
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mScannerView = new ZXingScannerView(this);
+        setContentView(mScannerView);
+        mScannerView.setResultHandler(this);
+        mScannerView.startCamera();
 
 
-
-
-
-}
+    }
 
     @Override
     protected void onPause() {
         super.onPause();
-       mScannerView.resumeCameraPreview(this);
-     // mScannerView.stopCamera();
+        mScannerView.resumeCameraPreview(this);
+        // mScannerView.stopCamera();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-   mScannerView.resumeCameraPreview(this);
+        mScannerView.resumeCameraPreview(this);
 
     }
 
@@ -110,7 +108,7 @@ protected void onStart(){
     protected void onStop() {
         super.onStop();
         mScannerView.stopCamera();
-      // mScannerView.resumeCameraPreview(this);
+        // mScannerView.resumeCameraPreview(this);
     }
 
 
@@ -144,16 +142,16 @@ protected void onStart(){
 
 
                         Intent intent = new Intent(Intent.ACTION_INSERT);
-                                        intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+                        intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
 
-                                        intent.putExtra(ContactsContract.Intents.Insert.NAME, fullname);
-                                        intent.putExtra(ContactsContract.Intents.Insert.PHONE, phone);
-                                        intent.putExtra(ContactsContract.Intents.Insert.COMPANY, company);
-                                        intent.putExtra(ContactsContract.Intents.Insert.EMAIL, email);
-                                        intent.putExtra(ContactsContract.Intents.Insert.JOB_TITLE, job_title);
-                                        intent.putExtra(ContactsContract.Intents.Insert.IM_HANDLE, twitter);
-                                        startActivity(intent);
-                  } catch (JSONException e) {
+                        intent.putExtra(ContactsContract.Intents.Insert.NAME, fullname);
+                        intent.putExtra(ContactsContract.Intents.Insert.PHONE, phone);
+                        intent.putExtra(ContactsContract.Intents.Insert.COMPANY, company);
+                        intent.putExtra(ContactsContract.Intents.Insert.EMAIL, email);
+                        intent.putExtra(ContactsContract.Intents.Insert.JOB_TITLE, job_title);
+                        intent.putExtra(ContactsContract.Intents.Insert.IM_HANDLE, twitter);
+                        startActivity(intent);
+                    } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(),
                                 "Error: " + e.getMessage(),

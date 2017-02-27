@@ -15,14 +15,14 @@ public class AnnouncementsViewHolder extends RecyclerView.ViewHolder {
 
     public TextView title;
     public TextView Description;
-public LinearLayout announcement;
+    public LinearLayout announcement;
 
-    public AnnouncementsViewHolder(View v){
+    public AnnouncementsViewHolder(View v) {
         super(v);
 
         title = (TextView) v.findViewById(R.id.announcements_title);
-        Description= (TextView) v.findViewById(R.id.announcements_Description);
+        Description = (TextView) v.findViewById(R.id.announcements_Description);
+        announcement = (LinearLayout) v.findViewById(R.id.announcementclick);
 
-announcement=(LinearLayout)v.findViewById(R.id.announcementclick);
-
-    }}
+    }
+}

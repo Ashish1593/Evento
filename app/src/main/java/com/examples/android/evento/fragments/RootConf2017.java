@@ -66,18 +66,18 @@ import static com.examples.android.evento.activity.MainActivity.SLACK_ANDROID_PA
  * Created by ankit on 1/2/17.
  */
 
-public class RootConf2017 extends Fragment{
+public class RootConf2017 extends Fragment {
 
     MapView mMapView;
+    String eventDate;
     private GoogleMap googleMap;
-
     private RecyclerView mRecyclerView;
-    String eventDate ;
     private TextView emptyView;
     private DataBaseController db;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view =inflater.inflate(R.layout.rootconf2017,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.rootconf2017, container, false);
 
         mMapView = (MapView) view.findViewById(R.id.mapViewRootConf);
 
@@ -86,7 +86,7 @@ public class RootConf2017 extends Fragment{
         mMapView.onResume();
 
 
-        final android.support.v4.widget.NestedScrollView  mainScrollView = (android.support.v4.widget.NestedScrollView ) view.findViewById(R.id.scrollView);
+        final android.support.v4.widget.NestedScrollView mainScrollView = (android.support.v4.widget.NestedScrollView) view.findViewById(R.id.scrollView);
         (view.findViewById(R.id.mapViewRootConf)).setOnTouchListener(new View.OnTouchListener() {
 
             @Override
@@ -113,7 +113,7 @@ public class RootConf2017 extends Fragment{
                 }
             }
         });
-db = DataBaseController.getInstance(getActivity());
+        db = DataBaseController.getInstance(getActivity());
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -126,11 +126,7 @@ db = DataBaseController.getInstance(getActivity());
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
 
-                // For showing a move to my location button
-                //googleMap.setMyLocationEnabled(true);
-                //11.3217° N, 75.9342° E
-                // For dropping a marker at a point on the Map
-                LatLng MLRConventionCenter = new LatLng(12.8917,77.5852);
+                LatLng MLRConventionCenter = new LatLng(12.8917, 77.5852);
                 googleMap.addMarker(new MarkerOptions().position(MLRConventionCenter).title("MLR CONVENTON Center").snippet("M L R CONVENTION CENtER J P NAGAR"));
 
                 MarkerOptions mo = new MarkerOptions().position(MLRConventionCenter).title("MLR CONVENTON Center").snippet("M L R CONVENTION CENtER J P NAGAR").visible(true);
@@ -167,7 +163,7 @@ db = DataBaseController.getInstance(getActivity());
 
         final ImageView imageView = (ImageView) view.findViewById(R.id.viewlessmorerootconf);
 
-        if( db.getCount("EventRootConf") !=0) {
+        if (db.getCount("EventRootConf") != 0) {
             List<Session> sessionModel1 = new ArrayList<>();
 
             GsonBuilder gsonBuilder = new GsonBuilder();
@@ -177,7 +173,7 @@ db = DataBaseController.getInstance(getActivity());
 
             if (sessionModel1.size() != 0) {
 
-                final List<Session>  sessionModel2 = sessionModel1.subList(0,2);
+                final List<Session> sessionModel2 = sessionModel1.subList(0, 2);
                 final List<Session> sessionModel3 = sessionModel1;
 
                 mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
@@ -185,15 +181,13 @@ db = DataBaseController.getInstance(getActivity());
                     @Override
                     public void onClick(View v) {
                         String backgroundImageName = String.valueOf(v.getTag());
-                        if (backgroundImageName.equals("arrowdown")){
+                        if (backgroundImageName.equals("arrowdown")) {
 
                             mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel3));
 
                             imageView.setImageResource(R.drawable.arrowup);
                             imageView.setTag("arrowup");
-                        }
-
-                        else {
+                        } else {
                             mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
 
                             imageView.setImageResource(R.drawable.arrowdown);
@@ -204,9 +198,8 @@ db = DataBaseController.getInstance(getActivity());
                 });
 
 
-
             } else {
-                //     makeJsonObjectRequest();
+
 
                 mRecyclerView.setVisibility(View.GONE);
                 emptyView.setVisibility(View.VISIBLE);
@@ -215,16 +208,14 @@ db = DataBaseController.getInstance(getActivity());
         }
 
 
-        ImageButton scanBadgeRootconf = ( ImageButton) view.findViewById(R.id.scanBadgesRootconf);
-        scanBadgeRootconf.setOnClickListener(new View.OnClickListener()
-        {
+        ImageButton scanBadgeRootconf = (ImageButton) view.findViewById(R.id.scanBadgesRootconf);
+        scanBadgeRootconf.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-
+            public void onClick(View v) {
 
 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                String td= formatter.format(Calendar.getInstance().getTime());
+                String td = formatter.format(Calendar.getInstance().getTime());
 
                 try {
 
@@ -255,16 +246,14 @@ db = DataBaseController.getInstance(getActivity());
         });
 
 
-        ImageButton connectToNetworkRootconf = ( ImageButton) view.findViewById(R.id.connecttonetworkRootconf);
-        connectToNetworkRootconf.setOnClickListener(new View.OnClickListener()
-        {
+        ImageButton connectToNetworkRootconf = (ImageButton) view.findViewById(R.id.connecttonetworkRootconf);
+        connectToNetworkRootconf.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-
+            public void onClick(View v) {
 
 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                String td= formatter.format(Calendar.getInstance().getTime());
+                String td = formatter.format(Calendar.getInstance().getTime());
 
                 try {
 
@@ -296,31 +285,27 @@ db = DataBaseController.getInstance(getActivity());
 
         final Metadata metadata;
 
-        if(db.getCount("MetadataEventRootConf")!=0) {
+        if (db.getCount("MetadataEventRootConf") != 0) {
             GsonBuilder gsonBuilder = new GsonBuilder();
             Gson gson = gsonBuilder.create();
             metadata = gson.fromJson(db.getScheduleAndEventData("MetadataEventRootConf"), new TypeToken<Metadata>() {
             }.getType());
-        }
-        else
+        } else
             metadata = null;
 
 
-
-        ImageButton liveStreamButton = ( ImageButton) view.findViewById(R.id.livestreamRootconf);
+        ImageButton liveStreamButton = (ImageButton) view.findViewById(R.id.livestreamRootconf);
         liveStreamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
+                if (metadata != null) {
                     final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
                     // final String URI = "https://pune.pycon.org/registration/";
                     final String URI = metadata.getLivestreamUrl();
 
                     intent.launchUrl(getActivity(), Uri.parse(URI));
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
                             .setMessage(Html.fromHtml(" Available during Conference"))
@@ -332,19 +317,16 @@ db = DataBaseController.getInstance(getActivity());
         });
 
 
-
-        ImageButton foodcourtButton = ( ImageButton) view.findViewById(R.id.foodcourtRootconf);
+        ImageButton foodcourtButton = (ImageButton) view.findViewById(R.id.foodcourtRootconf);
         foodcourtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
-                    Intent intent = new Intent(getActivity(),FoodCourtActivity.class);
-                    intent.putExtra("EventNameMetadata","MetadataEventRootConf");
+                if (metadata != null) {
+                    Intent intent = new Intent(getActivity(), FoodCourtActivity.class);
+                    intent.putExtra("EventNameMetadata", "MetadataEventRootConf");
                     startActivity(intent);
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
                             .setMessage(Html.fromHtml("  Available during Conference"))
@@ -356,12 +338,12 @@ db = DataBaseController.getInstance(getActivity());
         });
 
 
-        ImageButton discussionButton = ( ImageButton) view.findViewById(R.id.discussionsRootconf);
+        ImageButton discussionButton = (ImageButton) view.findViewById(R.id.discussionsRootconf);
         discussionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
+                if (metadata != null) {
                     new AlertDialog.Builder(getActivity())
                             .setTitle("Join the discussion!")
                             .setMessage("Are you on the Friends of HasGeek Slack team? Follow the discussion on the our channel")
@@ -391,9 +373,7 @@ db = DataBaseController.getInstance(getActivity());
                                 }
                             })
                             .create().show();
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
                             .setMessage(Html.fromHtml(" Available during Conference"))
@@ -405,21 +385,16 @@ db = DataBaseController.getInstance(getActivity());
         });
 
 
-
-
-
-        ImageButton announcementButton = ( ImageButton) view.findViewById(R.id.announcementsRootconf);
+        ImageButton announcementButton = (ImageButton) view.findViewById(R.id.announcementsRootconf);
         announcementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
-                    Intent intent = new Intent(getActivity(),AnnouncementsActivity.class);
-                    intent.putExtra("EventNameMetadata","MetadataEventRootConf");
+                if (metadata != null) {
+                    Intent intent = new Intent(getActivity(), AnnouncementsActivity.class);
+                    intent.putExtra("EventNameMetadata", "MetadataEventRootConf");
                     startActivity(intent);
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
                             .setMessage(Html.fromHtml(" Available during Conference"))
@@ -429,15 +404,14 @@ db = DataBaseController.getInstance(getActivity());
                 }
             }
         });
-
 
 
         //  makeJsonObjectRequest();
 
 
-
         return view;
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -461,7 +435,6 @@ db = DataBaseController.getInstance(getActivity());
         super.onLowMemory();
         mMapView.onLowMemory();
     }
-
 
 
 }

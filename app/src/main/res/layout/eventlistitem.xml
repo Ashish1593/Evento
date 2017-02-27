@@ -69,8 +69,7 @@
                 android:textColor="#000000"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                tools:text="Event Place"
-                />
+                tools:text="Event Place" />
 
         </LinearLayout>
     </FrameLayout>

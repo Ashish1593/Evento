@@ -36,20 +36,20 @@ import java.util.concurrent.TimeUnit;
 import static com.facebook.accountkit.internal.AccountKitController.getApplicationContext;
 
 
-public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListItemViewHolder>{
+public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListItemViewHolder> {
 
     private final Context context;
     private final List<Session> sessions;
 
     public SessionsAdapter(Context context, List<Session> sessions) {
         this.context = context;
-      this.sessions = sessions;
+        this.sessions = sessions;
     }
-    
+
 
     @Override
     public int getItemViewType(int position) {
-        return TimelineView.getTimeLineViewType(position,getItemCount());
+        return TimelineView.getTimeLineViewType(position, getItemCount());
     }
 
     @Override
@@ -60,7 +60,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
                         viewGroup,
                         false);
 
-        return new ListItemViewHolder(itemView,viewType);
+        return new ListItemViewHolder(itemView, viewType);
     }
 
     @Override
@@ -70,15 +70,14 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
         viewHolder.speaker.setText(s.getSpeaker());
 
 
-        if(s.getRoom()==null) {
+        if (s.getRoom() == null) {
             //background.setBackgroundColor(inflater.getContext().getResources().getColor(R.color.colorPrimary));
             viewHolder.location.setText("Main Auditorium");
-        } else if(s.getRoom().contains("audi")) {
-           // background.setBackgroundColor(inflater.getContext().getResources().getColor(R.color.colorPrimary));
+        } else if (s.getRoom().contains("audi")) {
+            // background.setBackgroundColor(inflater.getContext().getResources().getColor(R.color.colorPrimary));
             viewHolder.location.setText("Main Auditorium");
-        }
-        else {
-          //  background.setBackgroundColor(inflater.getContext().getResources().getColor(R.color.colorAccent));
+        } else {
+            //  background.setBackgroundColor(inflater.getContext().getResources().getColor(R.color.colorAccent));
             viewHolder.location.setText("Banquet Hall");
         }
 
@@ -94,20 +93,20 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
             e.printStackTrace();
         }
 
-        String duration = String.format("%d min", TimeUnit.MILLISECONDS.toMinutes(end.getTimeInMillis()-start.getTimeInMillis()));
+        String duration = String.format("%d min", TimeUnit.MILLISECONDS.toMinutes(end.getTimeInMillis() - start.getTimeInMillis()));
 
-        viewHolder.duration.setText(duration+"");
+        viewHolder.duration.setText(duration + "");
 
         SimpleDateFormat sdfs = new SimpleDateFormat("hh:mm a");
         sdfs.setTimeZone(TimeZone.getDefault());
 
-        String session_time = sdfs.format(start.getTime()) + "-"+  sdfs.format(end.getTime());
+        String session_time = sdfs.format(start.getTime()) + "-" + sdfs.format(end.getTime());
 
         viewHolder.time.setText(session_time);
 
 
         SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-         viewHolder.date.setText(sd.format(start.getTime()));
+        viewHolder.date.setText(sd.format(start.getTime()));
 
 
         viewHolder.mListener = new ListItemViewHolder.ViewHolderClick() {
@@ -118,29 +117,19 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
                         .setTitle(s.getTitle())
                         .setMessage(Html.fromHtml(s.getDescription()))
                         .setCancelable(true)
-                        .setPositiveButton("Ok",null)
+                        .setPositiveButton("Ok", null)
                         .create().show();
             }
         };
 
-//        if(s.getIsBreak()) {
-//            viewHolder.colorIndicator.setBackgroundColor(Color.DKGRAY);
-//        }
-//        else {
-//            viewHolder.colorIndicator.setBackgroundColor(Color.LTGRAY);
-//        }
 
     }
-
 
 
     @Override
     public int getItemCount() {
 
-        if(sessions.size()==0){
-//            Toast.makeText(getApplicationContext(),
-//                    "Schedule is not prepared", Toast.LENGTH_SHORT).show();
-
+        if (sessions.size() == 0) {
         }
         return sessions.size();
     }
@@ -152,12 +141,12 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
         public TextView speaker;
         public TextView time;
         public TextView duration;
-        public  TextView location;
+        public TextView location;
         public LinearLayout colorIndicator;
         public ViewHolderClick mListener;
-        public  TimelineView mTimelineView;
+        public TimelineView mTimelineView;
 
-        public ListItemViewHolder(View itemView , int viewType) {
+        public ListItemViewHolder(View itemView, int viewType) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.fragment_space_schedule_list_row_title);
             speaker = (TextView) itemView.findViewById(R.id.fragment_space_schedule_list_row_speaker);
@@ -165,8 +154,8 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ListIt
             duration = (TextView) itemView.findViewById(R.id.fragment_space_schedule_list_row_duration);
             //colorIndicator = (LinearLayout) itemView.findViewById(R.id.fragment_space_schedule_list_row_color_indicator);
             mTimelineView = (TimelineView) itemView.findViewById(R.id.time_marker);
-             location = (TextView)itemView.findViewById(R.id.room);
-            date = (TextView)itemView.findViewById(R.id.date);
+            location = (TextView) itemView.findViewById(R.id.room);
+            date = (TextView) itemView.findViewById(R.id.date);
             mTimelineView.initLine(viewType);
             itemView.setOnClickListener(this);
         }

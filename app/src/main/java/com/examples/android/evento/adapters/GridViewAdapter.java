@@ -31,8 +31,8 @@ import java.util.Random;
  */
 
 public class GridViewAdapter extends RecyclerView.Adapter<EventListViewHolder> {
-    private Activity mcontext;
     private final List<Fragment> mFragments = new ArrayList<Fragment>();
+    private Activity mcontext;
     private ArrayList<EventDetails> details;
 
     public GridViewAdapter(Activity c, ArrayList<EventDetails> details) {
@@ -56,8 +56,8 @@ public class GridViewAdapter extends RecyclerView.Adapter<EventListViewHolder> {
 
         holder.evName.setText(details.get(position).getEventname());
         holder.evPlace.setText(details.get(position).getEventplace());
-      //  holder.evDate.setText(details.get(position).getEventdate());
-     //   holder.evURL.setText(details.get(position).getEventURL());
+        //  holder.evDate.setText(details.get(position).getEventdate());
+        //   holder.evURL.setText(details.get(position).getEventURL());
 
 
         String d = details.get(position).getEventdate();

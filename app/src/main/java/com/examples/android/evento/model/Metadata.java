@@ -3,12 +3,13 @@ package com.examples.android.evento.model;
 /**
  * Created by ankit on 27/12/16.
  */
+
 import com.examples.android.evento.model.FoodCourtVendor;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public  class Metadata {
+public class Metadata {
     @SerializedName("livestream_url")
     public String livestreamUrl;
 
@@ -67,7 +68,7 @@ public  class Metadata {
         this.discussionSlackWeb = discussionSlackWeb;
     }
 
-    public  List<FoodCourtVendor> getFoodCourtVendors() {
+    public List<FoodCourtVendor> getFoodCourtVendors() {
         return foodCourtVendors;
     }
 

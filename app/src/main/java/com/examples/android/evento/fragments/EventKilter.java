@@ -12,36 +12,30 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
+import android.widget.TextView;
+
 import com.examples.android.evento.R;
 import com.examples.android.evento.activity.AnnouncementsActivity;
 import com.examples.android.evento.activity.FoodCourtActivity;
 import com.examples.android.evento.activity.MainActivity;
 import com.examples.android.evento.activity.OpenWifi;
 import com.examples.android.evento.activity.QRcodeScanner;
-import com.examples.android.evento.adapters.RecylerViewadapter;
+
 import com.examples.android.evento.adapters.SessionsAdapter;
-import com.examples.android.evento.controller.AppController;
+
 import com.examples.android.evento.controller.DataBaseController;
 import com.examples.android.evento.model.Metadata;
 import com.examples.android.evento.model.Session;
 import com.examples.android.evento.model.TalkDetails;
-//import com.examples.android.evento.activity.ScheduleActivity;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -55,20 +49,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import static com.examples.android.evento.activity.MainActivity.SLACK_ANDROID_PACKAGE_NAME;
-import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 
 /**
  * Created by ankit on 1/2/17.
@@ -77,7 +66,7 @@ import static com.google.android.gms.plus.PlusOneDummyView.TAG;
 public class EventKilter extends Fragment {
 
     MapView mMapView;
-
+    String eventDate = "2017-04-01";
     private GoogleMap googleMap;
     private String urlJsonObj = "https://kilter.talkfunnel.com/2017/json";
     private ArrayList<TalkDetails> detailsJSFOO;
@@ -85,7 +74,6 @@ public class EventKilter extends Fragment {
     private RecyclerView mRecyclerView;
     private TextView emptyView;
     private DataBaseController db;
-    String eventDate = "2017-04-01" ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -146,7 +134,6 @@ public class EventKilter extends Fragment {
 
             }
         });
-
 
 
         final ImageView imageView = (ImageView) view.findViewById(R.id.viewlessmorekilter);
@@ -342,7 +329,7 @@ public class EventKilter extends Fragment {
                                     if (MainActivity.isPackageInstalled(SLACK_ANDROID_PACKAGE_NAME, getActivity().getPackageManager()))
                                         uri = metadata.getDiscussionSlackDeeplink();
                                     else
-                                        // uri = "https://friendsofhasgeek.slack.com/messages/droidcon/";
+
                                         uri = metadata.getDiscussionSlackWeb();
                                     Intent i = new Intent(Intent.ACTION_VIEW);
                                     i.setData(Uri.parse(uri));
@@ -391,10 +378,6 @@ public class EventKilter extends Fragment {
                 }
             }
         });
-
-
-        //makeJsonObjectRequest();
-
 
         return view;
     }

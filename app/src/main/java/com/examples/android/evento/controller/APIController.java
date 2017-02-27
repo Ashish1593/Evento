@@ -7,7 +7,7 @@ package com.examples.android.evento.controller;
 import android.support.v7.widget.RecyclerView;
 
 import com.examples.android.evento.utils.AuthWrapper;
-import com.examples.android.evento.interfacelistener.TalkfunnelAPI;
+//import com.examples.android.evento.interfacelistener.TalkfunnelAPI;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -23,13 +23,12 @@ import rx.Subscriber;
 public class APIController {
 
     public static APIController apiController;
-    public static TalkfunnelAPI api;
-    public RecyclerView mRecyclerView;
+   // public static TalkfunnelAPI api;
 
     public static APIController getService() {
         if (apiController == null) {
             apiController = new APIController();
-            //  apiController.api = apiController.createController();
+
         }
         return apiController;
     }
@@ -48,7 +47,7 @@ public class APIController {
                     final Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
                         @Override
                         public boolean shouldSkipField(FieldAttributes f) {
-                            // return f.getDeclaringClass() == RealmObject.class;
+
                             return false;
                         }
 

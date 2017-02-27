@@ -1,6 +1,7 @@
 package com.examples.android.evento.fragments;
 
 //import android.app.Fragment;
+
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -68,17 +69,15 @@ import static com.examples.android.evento.activity.MainActivity.SLACK_ANDROID_PA
 
 public class EventFossMeet extends Fragment {
     MapView mMapView;
-    private GoogleMap googleMap;
-    private String urlJsonObj = "https://fossmeet-nitc.talkfunnel.com/2017/json";
-    private ArrayList<TalkDetails> detailsFossMeet;
-    private ProgressDialog pDialog;
-    private RecyclerView mRecyclerView;
-private DataBaseController db;
-    private TextView emptyView;
     String eventDate = "2017-03-10";
+    private GoogleMap googleMap;
+    private RecyclerView mRecyclerView;
+    private DataBaseController db;
+    private TextView emptyView;
+
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState){
-        View view =inflater.inflate(R.layout.fossmeet2017,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fossmeet2017, container, false);
         db = DataBaseController.getInstance(getActivity());
 
         mMapView = (MapView) view.findViewById(R.id.mapViewFossMeet);
@@ -113,7 +112,6 @@ private DataBaseController db;
         });
 
 
-
         Button buyFossmeetTickets = (Button) view.findViewById(R.id.BuyfossmeetTickets);
         buyFossmeetTickets.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,13 +127,13 @@ private DataBaseController db;
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.schedule_recyclerviewfossmeet);
         mRecyclerView.setNestedScrollingEnabled(false);
-        //  mRecyclerView.setHasFixedSize(true);
+
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
 
         final ImageView imageView = (ImageView) view.findViewById(R.id.viewlessmorefossmeet);
-        if( db.getCount("EventFossMeet") !=0) {
+        if (db.getCount("EventFossMeet") != 0) {
             List<Session> sessionModel1 = new ArrayList<>();
 
             GsonBuilder gsonBuilder = new GsonBuilder();
@@ -145,7 +143,7 @@ private DataBaseController db;
 
             if (sessionModel1.size() != 0) {
 
-                final List<Session>  sessionModel2 = sessionModel1.subList(0,2);
+                final List<Session> sessionModel2 = sessionModel1.subList(0, 2);
                 final List<Session> sessionModel3 = sessionModel1;
 
                 mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
@@ -153,15 +151,13 @@ private DataBaseController db;
                     @Override
                     public void onClick(View v) {
                         String backgroundImageName = String.valueOf(v.getTag());
-                        if (backgroundImageName.equals("arrowdown")){
+                        if (backgroundImageName.equals("arrowdown")) {
 
                             mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel3));
 
                             imageView.setImageResource(R.drawable.arrowup);
                             imageView.setTag("arrowup");
-                        }
-
-                        else {
+                        } else {
                             mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
 
                             imageView.setImageResource(R.drawable.arrowdown);
@@ -172,26 +168,23 @@ private DataBaseController db;
                 });
 
 
-
             } else {
-                //     makeJsonObjectRequest();
+
                 mRecyclerView.setVisibility(View.GONE);
                 emptyView.setVisibility(View.VISIBLE);
                 imageView.setVisibility(View.GONE);
-            }// makeJsonObjectRequest();
+            }
 
         }
 
         ImageButton scanBadgeFossmeet = (ImageButton) view.findViewById(R.id.scanBadgesFossmeet);
-        scanBadgeFossmeet.setOnClickListener(new View.OnClickListener()
-        {
+        scanBadgeFossmeet.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-
+            public void onClick(View v) {
 
 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                String td= formatter.format(Calendar.getInstance().getTime());
+                String td = formatter.format(Calendar.getInstance().getTime());
 
                 try {
 
@@ -223,15 +216,13 @@ private DataBaseController db;
 
 
         ImageButton connectToNetworkFossmeet = (ImageButton) view.findViewById(R.id.connecttonetworkFossmeet);
-        connectToNetworkFossmeet.setOnClickListener(new View.OnClickListener()
-        {
+        connectToNetworkFossmeet.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-
+            public void onClick(View v) {
 
 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                String td= formatter.format(Calendar.getInstance().getTime());
+                String td = formatter.format(Calendar.getInstance().getTime());
 
                 try {
 
@@ -261,15 +252,13 @@ private DataBaseController db;
         });
 
         final Metadata metadata;
-        if(db.getCount("MetadataEventFossMeet")!=0) {
+        if (db.getCount("MetadataEventFossMeet") != 0) {
             GsonBuilder gsonBuilder = new GsonBuilder();
             Gson gson = gsonBuilder.create();
             metadata = gson.fromJson(db.getScheduleAndEventData("MetadataEventFossMeet"), new TypeToken<Metadata>() {
             }.getType());
-        }
-        else
+        } else
             metadata = null;
-
 
 
         ImageButton liveStreamButton = (ImageButton) view.findViewById(R.id.livestreamFossmeet);
@@ -277,15 +266,13 @@ private DataBaseController db;
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
+                if (metadata != null) {
                     final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-                    // final String URI = "https://pune.pycon.org/registration/";
+
                     final String URI = metadata.getLivestreamUrl();
 
                     intent.launchUrl(getActivity(), Uri.parse(URI));
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
                             .setMessage(Html.fromHtml("  Available during Conference"))
@@ -297,19 +284,16 @@ private DataBaseController db;
         });
 
 
-
         ImageButton foodcourtButton = (ImageButton) view.findViewById(R.id.foodcourtFossmeet);
         foodcourtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
-                    Intent intent = new Intent(getActivity(),FoodCourtActivity.class);
-                    intent.putExtra("EventNameMetadata","MetadataEventFossMeet");
+                if (metadata != null) {
+                    Intent intent = new Intent(getActivity(), FoodCourtActivity.class);
+                    intent.putExtra("EventNameMetadata", "MetadataEventFossMeet");
                     startActivity(intent);
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
                             .setMessage(Html.fromHtml("Available during Conference"))
@@ -326,7 +310,7 @@ private DataBaseController db;
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
+                if (metadata != null) {
                     new AlertDialog.Builder(getActivity())
                             .setTitle("Join the discussion!")
                             .setMessage("Are you on the Friends of HasGeek Slack team? Follow the discussion on the our channel")
@@ -356,9 +340,7 @@ private DataBaseController db;
                                 }
                             })
                             .create().show();
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
                             .setMessage(Html.fromHtml(" Available during Conference"))
@@ -370,21 +352,16 @@ private DataBaseController db;
         });
 
 
-
-
-
         ImageButton announcementButton = (ImageButton) view.findViewById(R.id.announcementsFossmeet);
         announcementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
-                    Intent intent = new Intent(getActivity(),AnnouncementsActivity.class);
-                    intent.putExtra("EventNameMetadata","MetadataEventFossMeet");
+                if (metadata != null) {
+                    Intent intent = new Intent(getActivity(), AnnouncementsActivity.class);
+                    intent.putExtra("EventNameMetadata", "MetadataEventFossMeet");
                     startActivity(intent);
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
                             .setMessage(Html.fromHtml("  Available during Conference"))
@@ -396,15 +373,9 @@ private DataBaseController db;
         });
 
 
-
-
-
-        //  makeJsonObjectRequest();
-
-
-
         return view;
     }
+
     @Override
     public void onResume() {
         super.onResume();

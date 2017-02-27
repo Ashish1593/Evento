@@ -60,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
     void loginSuccessful(String access_token) {
         AuthController.saveAuthToken(access_token);
 

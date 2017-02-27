@@ -25,7 +25,6 @@ public class FoodCourtActivity extends AppCompatActivity {
     public TabLayout tabLayout;
     private DataBaseController db;
 
-    // FoodCourtVendorPagerAdapter foodCourtVendorPagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

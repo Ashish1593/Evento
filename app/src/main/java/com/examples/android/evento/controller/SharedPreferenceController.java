@@ -9,11 +9,10 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 
-
 public class SharedPreferenceController {
     private static SharedPreferences sharedPreferences;
 
-    public static void init(Context context){
+    public static void init(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 

@@ -59,7 +59,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import net.cachapa.expandablelayout.ExpandableLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,19 +80,17 @@ import static com.examples.android.evento.activity.MainActivity.SLACK_ANDROID_PA
  */
 
 public class EventPycon extends Fragment {
+    private static final String TAG = EventPycon.class.getSimpleName();
     MapView mMapView;
+    String eventDate = "2017-02-16";
     private RecyclerView mRecyclerView;
     private GoogleMap googleMap;
     private ProgressDialog pDialog;
     private String urlJsonObj = "https://pyconpune.talkfunnel.com/2017/json";
     private ArrayList<TalkDetails> detailsPycon;
     private TextView emptyView;
-    private   DataBaseController db;
-    String eventDate = "2017-02-16" ;
-    private NestedScrollView scrollViewpycon ;
-    private static final String TAG = EventPycon.class.getSimpleName();
-
-    private ExpandableLayout expandableLayout;
+    private DataBaseController db;
+    private NestedScrollView scrollViewpycon;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
@@ -101,7 +98,7 @@ public class EventPycon extends Fragment {
 
         db = DataBaseController.getInstance(getActivity());
 
-scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
+        scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
 
         mMapView = (MapView) view.findViewById(R.id.mapViewPycon);
 
@@ -137,33 +134,10 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
             }
         });
 
-//        mMapView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_MOVE:
-//                        scrollViewpycon.requestDisallowInterceptTouchEvent(true);
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        scrollViewpycon.requestDisallowInterceptTouchEvent(true);
-//                        break;
-//                    case MotionEvent.ACTION_DOWN:
-//                        scrollViewpycon.requestDisallowInterceptTouchEvent(true);
-//                        break;
-//                    case MotionEvent.ACTION_CANCEL:
-//                        scrollViewpycon.requestDisallowInterceptTouchEvent(false);
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
-
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -173,10 +147,6 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
 
-                // For showing a move to my location button
-                //   googleMap.setMyLocationEnabled(true);
-                // 18.5312° N, 73.8557° E
-                // For dropping a marker at a point on the Map
                 LatLng collegeofEngPune = new LatLng(18.5312, 73.8557);
                 googleMap.addMarker(new MarkerOptions().position(collegeofEngPune).title("College Of Engineering Pune").snippet("College Of Engoneering Pune"));
 
@@ -191,15 +161,13 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
         });
 
         ImageButton connectToWifiPycon = (ImageButton) view.findViewById(R.id.connecttonetworkPycon);
-        connectToWifiPycon.setOnClickListener(new View.OnClickListener()
-        {
+        connectToWifiPycon.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-
+            public void onClick(View v) {
 
 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                String td= formatter.format(Calendar.getInstance().getTime());
+                String td = formatter.format(Calendar.getInstance().getTime());
 
                 try {
 
@@ -226,19 +194,17 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-        }
+            }
         });
 
         ImageButton scanBadgePycon = (ImageButton) view.findViewById(R.id.scanBadgesPycon);
-        scanBadgePycon.setOnClickListener(new View.OnClickListener()
-        {
+        scanBadgePycon.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-
+            public void onClick(View v) {
 
 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                String td= formatter.format(Calendar.getInstance().getTime());
+                String td = formatter.format(Calendar.getInstance().getTime());
 
                 try {
 
@@ -298,7 +264,7 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
 
             if (sessionModel1.size() != 0) {
 
-               final List<Session>  sessionModel2 = sessionModel1.subList(0,2);
+                final List<Session> sessionModel2 = sessionModel1.subList(0, 2);
                 final List<Session> sessionModel3 = sessionModel1;
 
                 mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
@@ -306,15 +272,13 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
                     @Override
                     public void onClick(View v) {
                         String backgroundImageName = String.valueOf(v.getTag());
-                        if (backgroundImageName.equals("arrowdown")){
+                        if (backgroundImageName.equals("arrowdown")) {
 
                             mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel3));
 
                             imageView.setImageResource(R.drawable.arrowup);
                             imageView.setTag("arrowup");
-                        }
-
-                        else {
+                        } else {
                             mRecyclerView.setAdapter(new SessionsAdapter(getActivity(), sessionModel2));
 
                             imageView.setImageResource(R.drawable.arrowdown);
@@ -323,7 +287,6 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
                         }
                     }
                 });
-
 
 
             } else {
@@ -347,27 +310,26 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
 
 
         ImageButton liveStreamButton = (ImageButton) view.findViewById(R.id.livestreamPycon);
-            liveStreamButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        liveStreamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-             if (metadata != null) {
-            final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
-            // final String URI = "https://pune.pycon.org/registration/";
-            final String URI = metadata.getLivestreamUrl();
+                if (metadata != null) {
+                    final CustomTabsIntent intent = new CustomTabsIntent.Builder().build();
+                    // final String URI = "https://pune.pycon.org/registration/";
+                    final String URI = metadata.getLivestreamUrl();
 
-            intent.launchUrl(getActivity(), Uri.parse(URI));
-        } else {
-            new android.app.AlertDialog.Builder(getActivity())
-                    .setTitle("")
-                    .setMessage(Html.fromHtml("  Available during Conference"))
-                    .setCancelable(true)
-                    .setPositiveButton("Ok", null)
-                    .create().show();
-        }
-         }
-       });
-
+                    intent.launchUrl(getActivity(), Uri.parse(URI));
+                } else {
+                    new android.app.AlertDialog.Builder(getActivity())
+                            .setTitle("")
+                            .setMessage(Html.fromHtml("  Available during Conference"))
+                            .setCancelable(true)
+                            .setPositiveButton("Ok", null)
+                            .create().show();
+                }
+            }
+        });
 
 
         ImageButton foodcourtButton = (ImageButton) view.findViewById(R.id.foodcourtPycon);
@@ -375,13 +337,11 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
-                    Intent intent = new Intent(getActivity(),FoodCourtActivity.class);
-                    intent.putExtra("EventNameMetadata","MetadataEventPycon");
+                if (metadata != null) {
+                    Intent intent = new Intent(getActivity(), FoodCourtActivity.class);
+                    intent.putExtra("EventNameMetadata", "MetadataEventPycon");
                     startActivity(intent);
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
                             .setMessage(Html.fromHtml("  Available during Conference"))
@@ -398,7 +358,7 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
+                if (metadata != null) {
                     new AlertDialog.Builder(getActivity())
                             .setTitle("Join the discussion!")
                             .setMessage("Are you on the Friends of HasGeek Slack team? Follow the discussion on the our channel")
@@ -428,9 +388,7 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
                                 }
                             })
                             .create().show();
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
                             .setMessage(Html.fromHtml("Available during Conference"))
@@ -440,9 +398,6 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
                 }
             }
         });
-
-
-
 
 
         ImageButton announcementButton = (ImageButton) view.findViewById(R.id.announcementsPycon);
@@ -450,13 +405,11 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
             @Override
             public void onClick(View v) {
 
-                if(metadata!=null) {
-                    Intent intent = new Intent(getActivity(),AnnouncementsActivity.class);
-                    intent.putExtra("EventNameMetadata","MetadataEventPycon");
+                if (metadata != null) {
+                    Intent intent = new Intent(getActivity(), AnnouncementsActivity.class);
+                    intent.putExtra("EventNameMetadata", "MetadataEventPycon");
                     startActivity(intent);
-                }
-                else
-                {
+                } else {
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("")
                             .setMessage(Html.fromHtml("Available during Conference"))
@@ -466,7 +419,6 @@ scrollViewpycon = (NestedScrollView) view.findViewById(R.id.scrollViewPycon);
                 }
             }
         });
-
 
 
         return view;

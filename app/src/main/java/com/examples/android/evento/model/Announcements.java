@@ -1,31 +1,32 @@
- package com.examples.android.evento.model;
+package com.examples.android.evento.model;
 
- public class Announcements {
+public class Announcements {
 
-     private String title;
-     private String Description;
-     private String URL;
+    private String title;
+    private String Description;
+    private String URL;
 
-     public Announcements(String title,String Description,String URL)
-     {
-         this.title = title;
-         this.Description=Description;
-        this.URL= URL;
-     }
-     public Announcements(String title,String Description)
-    {
+    public Announcements(String title, String Description, String URL) {
         this.title = title;
-        this.Description=Description;}
+        this.Description = Description;
+        this.URL = URL;
+    }
+
+    public Announcements(String title, String Description) {
+        this.title = title;
+        this.Description = Description;
+    }
 
 
-     public String  getTitle(){
+    public String getTitle() {
         return title;
     }
 
-     public String getDescription(){
+    public String getDescription() {
         return Description;
     }
-     public String getURL(){
-         return URL;
+
+    public String getURL() {
+        return URL;
     }
 }

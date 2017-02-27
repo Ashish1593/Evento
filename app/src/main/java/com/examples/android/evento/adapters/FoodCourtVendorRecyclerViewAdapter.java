@@ -23,6 +23,8 @@ import java.util.List;
 
 public class FoodCourtVendorRecyclerViewAdapter extends SimpleSectionedAdapter<FoodCourtVendorRecyclerViewAdapter.FoodCourtVendorViewHolder> {
 
+
+
     private final ItemInteractionListener mListener;
 
     private HashMap<String, List<FoodCourtVendorItem>> data;
@@ -85,8 +87,7 @@ public class FoodCourtVendorRecyclerViewAdapter extends SimpleSectionedAdapter<F
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
+
                     mListener.onItemClick(v, holder.mItem);
                 }
             }

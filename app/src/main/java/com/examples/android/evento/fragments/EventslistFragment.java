@@ -2,6 +2,7 @@ package com.examples.android.evento.fragments;
 
 
 //import android.app.Fragment;
+
 import android.content.Context;
 import android.support.v4.app.Fragment;
 //import android.app.Fragment;
@@ -48,31 +49,22 @@ import static android.content.ContentValues.TAG;
  */
 
 public class EventslistFragment extends Fragment {
-    //private ArrayList<EventDetails> details;
-
-
-
-
     private String urlJsonObj = "https://talkfunnel.com/json";
-
-   private RecyclerView evRecyclerView;
-private DataBaseController db;
+    private RecyclerView evRecyclerView;
+    private DataBaseController db;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.eventlist_fragment, container, false);
-        evRecyclerView=(RecyclerView) rootView.findViewById(R.id.gridView);
+        evRecyclerView = (RecyclerView) rootView.findViewById(R.id.gridView);
 
         db = DataBaseController.getInstance(getActivity());
-        LinearLayoutManager myLayoutManager =new LinearLayoutManager(getActivity());
+        LinearLayoutManager myLayoutManager = new LinearLayoutManager(getActivity());
         myLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         evRecyclerView.setLayoutManager(myLayoutManager);
-//            GridViewAdapter adapter = new GridViewAdapter(getActivity(), details);
-//
-//            grid.setAdapter(adapter);
 
-        if( db.getCount("EventDetails") !=0) {
+        if (db.getCount("EventDetails") != 0) {
             ArrayList<EventDetails> eventDetailsModel1 = new ArrayList<>();
 
             GsonBuilder gsonBuilder = new GsonBuilder();
@@ -83,18 +75,8 @@ private DataBaseController db;
             evRecyclerView.setAdapter(new GridViewAdapter(getActivity(), eventDetailsModel1));
         }
 
-            //makeJsonObjectRequest();
-
-
-
-        //  makeJsonObjectRequest();
-
         return rootView;
     }
-
-
-
-
 
 
 }

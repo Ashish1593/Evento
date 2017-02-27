@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-
 /**
  * Created by karthikbalakrishnan on 30/03/15.
  */
@@ -57,7 +56,7 @@ public class Session {
     @Expose
     public String url;
 
-   // private Space space;
+    // private Space space;
 
     private int marginTop;
 
